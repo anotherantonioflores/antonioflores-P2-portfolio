@@ -20,7 +20,7 @@ website:
             file: tidytuesday-exercise/tidytuesday-exercise.qmd
     right:
       - icon: github 
-        href: https://github.com/anotherantonioflores/antonioflores-P2-portfolio        
+        href: https://github.com/anotherantonioflores/antonioflores-P2-portfolio
 
 format:
   html:

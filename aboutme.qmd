@@ -31,10 +31,7 @@ title: "About me"
 
 # Random facts about me
 
--   Broke a Guinness World Record (Longest Selfie Chain, May 2015. I was the person who actually broke the old record), but it was broken again before the next book came out. ![2015 World Record](WR.PNG)   
-
-
-
+-   Broke a Guinness World Record (Longest Selfie Chain, May 2015. I was the person who actually broke the old record), but it was broken again before the next book came out. ![2015 World Record](WR.PNG)
 
 -   I was voted the TLU 2022 Student of the Year by the student body, staff, & faculty and delivered the [commencement address](https://youtu.be/9IoTcrgbzjQ).
 
