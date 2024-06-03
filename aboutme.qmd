@@ -2,6 +2,44 @@
 title: "About me"
 ---
 
-Add some text and a figure describing myself.
+![](most_recent_profile.jpg)
 
-For details, see the exercise instructions. 
+# Education
+
+-   Graduated from Texas Lutheran University in 2022 with a B.S. in Information Systems and a minor in Business
+
+-   Started UTSA MSDA in Fall 2023
+
+# Career
+
+-   Hired as an IT intern for WellMed Medical Management in 2021
+-   Promoted to Senior IT project Coordinator in 2022 upon graduation from undergraduate program.
+
+# Technical Experience
+
+#### Some familiarity
+
+-   R, Rstudio, Quarto
+-   SAS
+-   Gretl
+
+#### More Experienced
+
+-   Excel
+-   Python
+-   Tableau
+
+# Random facts about me
+
+-   Broke a Guinness World Record (Longest Selfie Chain, May 2015. I was the person who actually broke the old record), but it was broken again before the next book came out. ![2015 World Record](WR.PNG)   
+
+
+
+
+-   I was voted the TLU 2022 Student of the Year by the student body, staff, & faculty and delivered the [commencement address](https://youtu.be/9IoTcrgbzjQ).
+
+# Research Interest:
+
+[NHTSA Drunk Driving Statistics](https://www.nhtsa.gov/risky-driving/drunk-driving)
+
+This is a public health issue that has been on my mind most of my life, especially since it's such a large issue in San Antonio. I'm interested in researching more effective solutions for targeting this societal harm.
