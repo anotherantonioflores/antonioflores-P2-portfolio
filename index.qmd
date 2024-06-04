@@ -1,10 +1,10 @@
 ---
-title: "My Antonio Flores website and data analysis portfolio"
+title: "Antonio Flores - Data Analysis Portfolio"
 ---
 
 # Hello there!
 
-Welcome to **my website** and *data analysis portfolio.*
+Welcome to **my website** and **data analysis portfolio.**
 
 -   Please use the `Menu Bar` above to look around.
 -   Have fun!
