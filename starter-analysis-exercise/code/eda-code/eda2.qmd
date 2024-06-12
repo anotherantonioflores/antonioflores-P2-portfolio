@@ -111,13 +111,19 @@ Boxplot - Hair_Color x Height
 p5 <- ggplot(mydata, aes(x=Hair_Color, y=Height)) + 
   geom_boxplot()
 p5
+figure_file = here("starter-analysis-exercise","results","figures","height-hair-boxplot.png")
+ggsave(filename = figure_file, plot=p5) 
+
 ```
 
-Scatterpot - Weight x Age
+Scatterplot - Weight x Age
 
 ```{r}
-ggplot(mydata, aes(x = Weight, y = Age)) +                 
-  geom_point()
+p6 = ggplot(mydata, aes(x = Weight, y = Age)) +      geom_point()
+
+figure_file = here("starter-analysis-exercise","results","figures","age-weight-scatterplot.png")
+ggsave(filename = figure_file, plot=p6) 
+
 ```
 
 
