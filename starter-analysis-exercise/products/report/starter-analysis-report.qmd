@@ -102,20 +102,19 @@ knitr::include_graphics(here("starter-analysis-exercise","results","figures","he
 ```
 
 
-@fig-result1 shows a boxplot figure produced by one of the R scripts.
+@fig-result1 shows a boxplot figure measuring height, grouped by hair color.
 
 ```{r}
 #| label: fig-result1
-#| fig-cap: "Height and weight stratified by gender."
+#| fig-cap: "Height and hair color displayed on boxplot."
 #| echo: FALSE
 knitr::include_graphics(here("starter-analysis-exercise","results","figures","height-hair-boxplot.png"))
 ```
 
-@fig-result2 shows a scatterplot figure produced by one of the R scripts.
-
+@fig-result2 shows a scatterplot measuring Age by Weight. 
 ```{r}
 #| label: fig-result2
-#| fig-cap: "Height and weight stratified by gender."
+#| fig-cap: "Age and weight displayed on a scatterplot."
 #| echo: FALSE
 knitr::include_graphics(here("starter-analysis-exercise","results","figures","age-weight-scatterplot.png"))
 ```
@@ -136,11 +135,11 @@ knitr::kable(resulttable2)
 ```
 
  @tbl-resulttable3 shows another summary of a linear model fit.
-
+This model uses height as the outcome and age and hair color as the predictors.
 
 ```{r}
 #| label: tbl-resulttable3
-#| tbl-cap: "Linear model fit table."
+#| tbl-cap: "Linear model fit table 2."
 #| echo: FALSE
 resulttable3 = readRDS(here("starter-analysis-exercise","results","tables-files","resulttable3.rds"))
 knitr::kable(resulttable3)
