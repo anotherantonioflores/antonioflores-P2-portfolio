@@ -2,4 +2,182 @@
 title: "R Coding Exercise"
 ---
 
-Placeholder file for the future R coding exercise.
+## Analyzing Life Expectancy in Africa 
+
+We will be using data from the Gapminder package in R
+
+```{r}
+#| output: false
+#Please install all packages not already installed using
+#a command similar to one below
+#install.packages("dslabs")
+
+library(dslabs) #How we will access the dataset
+library(tidyr) #For cleaning and analyzing the data
+library(dplyr) #For creating pipes to sort, filter data
+library(ggplot2) # For creating nice visuals
+library(scales) # For scaling data 
+```
+
+
+Taking a look at the structure of the data
+
+```{r}
+# This will give us dimensions and column details
+str(gapminder)
+```
+
+Assessing the quartiles for each column
+
+```{r}
+#This will give us an idea of how each column's data is spread out, and give us some insight about outliers
+summary(gapminder)
+```
+
+Verifying the type of object that we will be accesssing 
+```{r}
+class(gapminder)
+# Tells us that R is viewing this as a data frame which will help us with maintaining column types and cleaning the dataset
+```
+
+## Processing data
+
+First we will segment only data from African countries into a new data frame.
+
+```{r}
+# Using pipes from dplyr
+africadata = gapminder |>
+  filter(continent == 'Africa') # Using two == signifies comparison operator vs assignment operator
+```
+
+Next we will create two new objects from this Africa data set, one with both Life Expectancy and Infant Mortality, and one with both Life Expectancy and Population.
+
+
+```{r}
+africa_IM_LE = africadata[3:4] #Slicing only two columns of interest
+africa_POP_LE = africadata[4:6] #Slicing three columns since we want both 4 and 6
+africa_POP_LE = africa_POP_LE[-2] #Removing middle unneeded columns
+```
+
+
+Lets take a look at the structure and summary of the two new data objects.
+
+```{r}
+str(africa_POP_LE)
+str(africa_IM_LE)
+summary(africa_POP_LE)
+summary(africa_IM_LE)
+```
+
+## Plotting
+
+
+Plotting Life Expectancy as function of Infant Mortality.
+```{r}
+africa_IM_LE |> # Using pipes again
+  ggplot(aes(x=infant_mortality, y=life_expectancy))+ #Using GGplot for better visualizations
+  geom_point() #geom_point is ggplots method for scatterplots
+```
+
+We can clearly see a negative correlation between our variables of interest, implying as infant mortality increases, life expectancy decreases.
+
+
+Next plotting Life Expectancy as a function of Population
+```{r}
+africa_POP_LE |>
+  ggplot(aes(x = population, y =life_expectancy))+
+  geom_point()+
+  scale_x_log10(labels = label_comma()) #Using the scales library to scale the x axis with log10
+```
+We generally see a positive correlation between these two variables. As in the previous plot we can note several 'lines' of data made up of datapoints very close to each other. These represent the data of distinct countries, year after year, increasing or decreasing. 
+
+
+
+## Additional Data Processing
+
+We need find a a singular year to explore.\
+In order to do that, we need to identify which years are not missing data for the Infant Mortality variable.
+
+```{r}
+#We start by counting the number of NAs per country, per year
+CountNAs = africadata |>
+  group_by(year) |> # When we group, we need to summarize
+  summarise(sum(is.na(infant_mortality)))#so we use the total number of NA values in this column to group on
+
+CountNAs #Generating table
+#Clicking through the table will show when the number of NAs drop to 0 for many years
+plot(CountNAs) # Plotting our findings
+
+```
+
+As both the table and plot show, around 1981, the number of NAs for the Infant Mortality variable dropped to 0 until 2016, when the number of NAs jumped. So we need to choose a year between that year range.We will choose 2000 for this exercise.
+
+```{r}
+# Creating a new data object
+africa2000 = africadata |> 
+  filter(year == 2000)# We only want rows where the year column is 2000
+
+
+# Checking both the structure and summary of our new data object
+
+str(africa2000)
+summary(africa2000)
+```
+## Additional Plotting
+Now, lets generate the same plots from before, with just data from Africa in the year 2000.
+
+Plotting Life Expectancy as function of Infant Mortality 
+
+```{r}
+africa2000 |> # Our new data object
+  ggplot(aes(x=infant_mortality, y=life_expectancy))+
+  geom_point()
+```
+We still see the same negative correlation as before, albeit less strong.
+
+Next plotting Life Expectancy as a function of Population
+
+```{r}
+africa2000 |>
+  ggplot(aes(x = population, y =life_expectancy))+
+  geom_point()+
+  scale_x_log10(labels = label_comma()) #Using Scales again
+```
+We do not see a real trend in this plot, which differs from the initial plot with all the data from African.
+
+## Modeling
+
+We will fit two models using two different predictors (infant mortality and population) to predict life expectancy.
+
+```{r}
+fit1 = lm(life_expectancy ~ infant_mortality, data=africa2000) # Initializing model using infant_mortality as predictor
+
+fit2 =lm(life_expectancy ~ population, data=africa2000)
+#Model using Population as predictor
+```
+
+
+Now we run summary() to display the results of our two model runs.
+
+```{r}
+summary(fit1) #Summary will show us all the important info of our two models
+```
+
+```{r}
+summary(fit2) 
+```
+
+
+
+## Model Conclusions
+
+As expected model 1 (Predictor: Infant Mortality) has a significant effect (p-value is far below .05), and that effect is negative (intercept is -.1891).
+
+Also as expected, model 2 (Predictor: Population) did not have a substantial effect (p-value .6 > .05).
+
+
+
+
+
+
+
