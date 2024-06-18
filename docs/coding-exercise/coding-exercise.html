@@ -564,18 +564,17 @@ F-statistic: 0.2549 on 1 and 49 DF,  p-value: 0.6159</code></pre>
 <p>Now that we have a clearer understanding of the data, let’s create two objects for our analysis and include only the variables of interest.</p>
 <p><strong>Bone Weight and Bone Density</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>weight_density <span class="ot">&lt;-</span> mice_weights <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>weight_density <span class="ot">=</span> mice_weights <span class="sc">%&gt;%</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_weight, bone_density) <span class="sc">%&gt;%</span> <span class="co">#selecting only two variables</span></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(bone_density)) <span class="co">#removing na (only 4)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>Body Weight and Sex</strong></p>
+<p><strong>Body_weight and Sex</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>weight_sex <span class="ot">=</span> mice_weights <span class="sc">%&gt;%</span> </span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_weight, sex) <span class="co">#no na's in this one</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_weight, sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="objects-structure" class="level2">
 <h2 class="anchored" data-anchor-id="objects-structure">Objects Structure</h2>
-<p>This object now has 776 observations instead of 780.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(weight_density)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -584,7 +583,6 @@ F-statistic: 0.2549 on 1 and 49 DF,  p-value: 0.6159</code></pre>
  $ bone_density: num  0.616 0.769 0.684 0.644 0.53 ...</code></pre>
 </div>
 </div>
-<p>This object still has the 780 observations.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(weight_sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -629,20 +627,20 @@ F-statistic: 0.2549 on 1 and 49 DF,  p-value: 0.6159</code></pre>
 <p>I included a scatterplot to visually examine the relationship between these two variables. It appears there is a positive relationship, and I will now proceed to create a linear model to explore this further.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(weight_density, <span class="fu">aes</span>(<span class="at">x =</span> bone_density, <span class="at">y =</span> body_weight)) <span class="sc">+</span> </span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co">#scatterplot</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Bone Density"</span>, <span class="at">y =</span> <span class="st">"Body Weight"</span>) <span class="sc">+</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Boxplot of Body Weight by Bone Density"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Scatterplot of Body Weight by Bone Density"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="coding-exercise_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="bone-density-vs-body-weight-1" class="level2">
-<h2 class="anchored" data-anchor-id="bone-density-vs-body-weight-1">Bone Density vs Body Weight</h2>
-<p>Males generally weigh more, but females exhibit more outliers in weight distribution.</p>
+<section id="bone-density-vs-sex" class="level2">
+<h2 class="anchored" data-anchor-id="bone-density-vs-sex">Bone Density vs Sex</h2>
+<p>Males generally weigh more, and females have more outliers in weight distribution.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mice_weights, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> body_weight)) <span class="sc">+</span> </span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="co">#boxplot</span></span>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(weight_sex, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> body_weight)) <span class="sc">+</span> </span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Sex"</span>, <span class="at">y =</span> <span class="st">"Body Weight"</span>) <span class="sc">+</span></span>
 <span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Boxplot of Body Weight by Sex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -653,7 +651,8 @@ F-statistic: 0.2549 on 1 and 49 DF,  p-value: 0.6159</code></pre>
 </section>
 <section id="linear-models" class="level1">
 <h1>Linear Models</h1>
-<p><strong>Body Weight ~ Bone Density</strong></p>
+<section id="body-weight-bone-density" class="level2">
+<h2 class="anchored" data-anchor-id="body-weight-bone-density">Body Weight ~ Bone Density</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>lmBD <span class="ot">=</span> <span class="fu">lm</span>(body_weight<span class="sc">~</span>bone_density, <span class="at">data =</span> weight_density)</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmBD)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -678,10 +677,12 @@ Multiple R-squared:  0.1316,    Adjusted R-squared:  0.1305
 F-statistic: 117.3 on 1 and 774 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p><strong>Body Weight ~ Sex</strong></p>
+</section>
+<section id="body-weight-sex" class="level2">
+<h2 class="anchored" data-anchor-id="body-weight-sex">Body Weight ~ Sex</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>lmS <span class="ot">=</span> <span class="fu">lm</span>(body_weight<span class="sc">~</span>sex, <span class="at">data =</span> weight_sex)</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>lmBD <span class="ot">=</span> <span class="fu">lm</span>(body_weight<span class="sc">~</span>sex, <span class="at">data =</span> weight_sex)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmBD)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -704,10 +705,11 @@ F-statistic: 331.4 on 1 and 778 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
+</section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
-<p><strong>lmBD: After running the linear model, we observe a highly significant p-value (p &lt; 2.2e-16), indicating a strong linear relationship between body weight and bone density. For every unit increase in bone density, body weight is expected to increase by 26.139 units. This model explains 13.05% of the variability in body weight.</strong></p>
-<p><strong>lmS: The p-value is 2.2e-16, significantly smaller than our 0.05 significance level, allowing us to reject the null hypothesis and confirm a strong relationship between body weight and sex. On average, males weigh approximately 8.8207 units more than females. This model explains 29.87% of the variability in body weight.</strong></p>
+<p><strong>lmBD: After running the linear model, we observe a highly significant p-value (p &lt; 2.2e-16), indicating a strong linear relationship between body weight and bone density. For every unit increase in bone density, body weight is expected to increase by 26.139 units. This model explains 13.16% of the variability in body weight.</strong></p>
+<p><strong>lmS: The p-value is 2.2e-16, significantly smaller than our 0.05 significance level, allowing us to reject the null hypothesis and confirms a trong relationship between body weight and sex. On average, males weigh approximately 8.8207 units more than females. This model explains 29.87% of the variability in body weight.</strong></p>
 
 
 </section>
