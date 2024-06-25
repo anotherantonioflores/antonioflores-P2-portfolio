@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Antonio Flores">
 
 <title>Antonio Flores - Data Analysis Portfolio - Synthetic Data Project</title>
 <style>
@@ -185,12 +184,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Antonio Flores </p>
-          </div>
-  </div>
     
   
     
@@ -201,52 +194,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="synthetic-data-project" class="level1">
-<h1>Synthetic Data Project</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>here() starts at C:/Users/Client/Documents/antonioflores-P2-portfolio</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(synthpop) <span class="co"># Primary library needed for creating Synthetic Data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'synthpop' was built under R version 4.3.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Find out more at https://www.synthpop.org.uk/</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># Using this to test models and compare models</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'performance' was built under R version 4.3.3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(see) <span class="co">#Needed to supplement the above library</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'see' was built under R version 4.3.3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot) <span class="co"># Used for Correlation Plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>corrplot 0.92 loaded</code></pre>
-</div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(synthpop) <span class="co"># Primary library needed for creating Synthetic Data</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance) <span class="co"># Using this to test models and compare models</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(see) <span class="co">#Needed to supplement the above library</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot) <span class="co"># Used for Correlation Plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="reading-in-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="reading-in-the-data">Reading in the Data</h2>
 <p>I chose a health data set with different bio variables like BMI and Blood Pressure.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data_location <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"synthetic-data-exercise"</span>,<span class="st">"Healthcare-Diabetes.csv"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>rawdata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(data_location, <span class="at">sep =</span> <span class="st">","</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_location <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"synthetic-data-exercise"</span>,<span class="st">"Healthcare-Diabetes.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>rawdata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(data_location, <span class="at">sep =</span> <span class="st">","</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="before-generating-new-data-set" class="level2">
 <h2 class="anchored" data-anchor-id="before-generating-new-data-set">Before generating new data set</h2>
 <p>We want to create some models to test with both data sets. Even thought the synthetic data will have different data than our original dataset, the results from the models should remain close to the same.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using BMI as outcome with Glucose, BP, and Age as predictors</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">=</span> <span class="fu">lm</span>(BMI <span class="sc">~</span>  Glucose <span class="sc">+</span> BloodPressure <span class="sc">+</span> Age,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>rawdata)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>(<span class="at">results =</span> <span class="fu">summary</span>(fit1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using BMI as outcome with Glucose, BP, and Age as predictors</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">=</span> <span class="fu">lm</span>(BMI <span class="sc">~</span>  Glucose <span class="sc">+</span> BloodPressure <span class="sc">+</span> Age,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>rawdata)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>(<span class="at">results =</span> <span class="fu">summary</span>(fit1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -271,10 +244,10 @@ F-statistic: 125.6 on 3 and 2764 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">=</span> <span class="fu">lm</span>(BMI <span class="sc">~</span>  Glucose <span class="sc">+</span> BloodPressure <span class="sc">+</span> Age,</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>rawdata)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>(<span class="fu">summary</span>(fit2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">=</span> <span class="fu">lm</span>(BMI <span class="sc">~</span>  Glucose <span class="sc">+</span> BloodPressure <span class="sc">+</span> Age,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>rawdata)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>(<span class="fu">summary</span>(fit2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -300,7 +273,7 @@ F-statistic: 125.6 on 3 and 2764 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Discovered this <strong>incredibly</strong> useful took for visually assessing your model.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(fit1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(fit1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -310,7 +283,7 @@ F-statistic: 125.6 on 3 and 2764 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -321,11 +294,11 @@ F-statistic: 125.6 on 3 and 2764 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Both of our models look visually solid. Our prediction lines follows the observed data lines, and our residuals roughly fall long the normality line.</p>
 </section>
-<section id="modifying-data-slightly-before-we-generate-new-data-set" class="level2">
-<h2 class="anchored" data-anchor-id="modifying-data-slightly-before-we-generate-new-data-set">Modifying data slightly before we generate new data set</h2>
+<section id="modifying-data-slightly" class="level2">
+<h2 class="anchored" data-anchor-id="modifying-data-slightly">Modifying data slightly</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>rawdata<span class="sc">$</span>Outcome <span class="ot">=</span> <span class="fu">as.factor</span>(rawdata<span class="sc">$</span>Outcome)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">codebook.syn</span>(rawdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rawdata<span class="sc">$</span>Outcome <span class="ot">=</span> <span class="fu">as.factor</span>(rawdata<span class="sc">$</span>Outcome)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">codebook.syn</span>(rawdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$tab
                    variable   class nmiss perctmiss ndistinct
@@ -359,9 +332,9 @@ NULL</code></pre>
 <section id="creating-synthetic-data" class="level2">
 <h2 class="anchored" data-anchor-id="creating-synthetic-data">Creating Synthetic Data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>new_seed <span class="ot">=</span> <span class="dv">21</span> <span class="co"># Setting our seed at a random value</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>synthetic_data <span class="ot">=</span> <span class="fu">syn</span>(rawdata, </span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">seed =</span> new_seed) <span class="co">#This will give us our synthetic dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>new_seed <span class="ot">=</span> <span class="dv">21</span> <span class="co"># Setting our seed at a random value</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>synthetic_data <span class="ot">=</span> <span class="fu">syn</span>(rawdata, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">seed =</span> new_seed) <span class="co">#This will give us our synthetic dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Synthesis
@@ -370,16 +343,16 @@ Synthesis
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#cleaning the synthetic dataset</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>synth_data_clean <span class="ot">=</span> <span class="fu">sdc</span>(synthetic_data, rawdata, </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">label =</span> <span class="st">"FAKE DATA"</span>,</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">rm.replicated.uniques =</span> <span class="cn">TRUE</span>)  <span class="co">#This is important! Sometimes, when we create "fake" synthetic data, we happen to recreate an actual observation in the original data set. So, in the name of privacy, we remove those observations.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#cleaning the synthetic dataset</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>synth_data_clean <span class="ot">=</span> <span class="fu">sdc</span>(synthetic_data, rawdata, </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">label =</span> <span class="st">"FAKE DATA"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">rm.replicated.uniques =</span> <span class="cn">TRUE</span>)  <span class="co">#This is important! Sometimes, when we create "fake" synthetic data, we happen to recreate an actual observation in the original data set. So, in the name of privacy, we remove those observations.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>no. of replicated uniques: 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.syn</span>(synth_data_clean, </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">filename =</span> <span class="st">"synthetic_diabetes_data"</span>,</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">filetype =</span> <span class="st">"csv"</span>) <span class="co">#Outputting our synthetic data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.syn</span>(synth_data_clean, </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">filename =</span> <span class="st">"synthetic_diabetes_data"</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">filetype =</span> <span class="st">"csv"</span>) <span class="co">#Outputting our synthetic data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Synthetic data exported as csv file(s).
 Information on synthetic data written to
@@ -390,7 +363,7 @@ Information on synthetic data written to
 <section id="comparing-the-data-sets" class="level2">
 <h2 class="anchored" data-anchor-id="comparing-the-data-sets">Comparing the Data Sets</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compare</span>(synthetic_data, rawdata, <span class="at">stat =</span> <span class="st">"counts"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compare</span>(synthetic_data, rawdata, <span class="at">stat =</span> <span class="st">"counts"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Comparing counts observed with synthetic</code></pre>
@@ -443,10 +416,10 @@ Outcome                  0.000001 0.039977  1</code></pre>
 <section id="testing-associations" class="level2">
 <h2 class="anchored" data-anchor-id="testing-associations">Testing associations</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>synth_fit <span class="ot">=</span> <span class="fu">lm.synds</span>(BMI <span class="sc">~</span>  Glucose <span class="sc">+</span> BloodPressure <span class="sc">+</span> Age,</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>synthetic_data)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">compare</span>(synth_fit, rawdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>synth_fit <span class="ot">=</span> <span class="fu">lm.synds</span>(BMI <span class="sc">~</span>  Glucose <span class="sc">+</span> BloodPressure <span class="sc">+</span> Age,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>synthetic_data)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">compare</span>(synth_fit, rawdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call used to fit models to the data:
@@ -479,10 +452,10 @@ Confidence interval plot:</code></pre>
 </div>
 <p>There are some differences between both data sets, but they are not significant. The P-value of this test is above .05 which in this case tells us there is not a substantial difference between the two model’s results. Assessing the visual chart we also see a fairly close similarity.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>synth_fit2 <span class="ot">=</span> <span class="fu">lm.synds</span>(DiabetesPedigreeFunction <span class="sc">~</span>  SkinThickness <span class="sc">+</span> Insulin <span class="sc">+</span> Pregnancies,</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>synthetic_data)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">compare</span>(synth_fit2, rawdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>synth_fit2 <span class="ot">=</span> <span class="fu">lm.synds</span>(DiabetesPedigreeFunction <span class="sc">~</span>  SkinThickness <span class="sc">+</span> Insulin <span class="sc">+</span> Pregnancies,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>synthetic_data)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">compare</span>(synth_fit2, rawdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call used to fit models to the data:
@@ -522,9 +495,9 @@ Confidence interval plot:</code></pre>
 <p>Fairly similar results, but there appears to be more variation than the previous comparison</p>
 <p>Next, we can assess correlation as a whole.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>rawdatacor <span class="ot">=</span> <span class="fu">cor</span>(rawdata[<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>]) <span class="co"># Original dataset correlation between variables</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>synthdatacor <span class="ot">=</span> <span class="fu">cor</span>(synthetic_data<span class="sc">$</span>syn[<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>]) <span class="co"># Synthetic dataset correlation </span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(rawdatacor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>rawdatacor <span class="ot">=</span> <span class="fu">cor</span>(rawdata[<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>]) <span class="co"># Original dataset correlation between variables</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>synthdatacor <span class="ot">=</span> <span class="fu">cor</span>(synthetic_data<span class="sc">$</span>syn[<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>]) <span class="co"># Synthetic dataset correlation </span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(rawdatacor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -532,7 +505,7 @@ Confidence interval plot:</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(synthdatacor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(synthdatacor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -548,7 +521,6 @@ Confidence interval plot:</code></pre>
 <p>Overall, we can conclude that our new synthetic data set maintains the same shape and spread as our original data set while maintaining key associations between variables. If the original data set were a true data from real patients, we have now created an anonymized dataset that can now be used for further analysis.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

@@ -1,13 +1,9 @@
 ---
 title: "Synthetic Data Project"
-author: "Antonio Flores"
 ---
 
-
-# Synthetic Data Project
-
-
 ```{r}
+#| output: false
 library(tidyr)
 library(here)
 library(synthpop) # Primary library needed for creating Synthetic Data
@@ -61,7 +57,7 @@ Both of our models look visually solid. Our prediction lines follows the observe
 
 
 
-## Modifying data slightly before we generate new data set
+## Modifying data slightly 
 ```{r}
 rawdata$Outcome = as.factor(rawdata$Outcome)
 codebook.syn(rawdata)
