@@ -1,0 +1,15 @@
+Date saved: 24 Jun 2024, 19:46 
+Data frame with original data: rawdata 
+Number of synthetic data sets: 1 
+Output file(s):(csv) synthetic_diabetes_data.csv
+Additional file: synobject_synthetic_diabetes_data.RData
+Methods used:
+                      Id              Pregnancies                  Glucose 
+                "sample"                   "cart"                   "cart" 
+           BloodPressure            SkinThickness                  Insulin 
+                  "cart"                   "cart"                   "cart" 
+                     BMI DiabetesPedigreeFunction                      Age 
+                  "cart"                   "cart"                   "cart" 
+                 Outcome 
+                  "cart" 
+Seed used: 21 

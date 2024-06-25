@@ -1,0 +1,141 @@
+---
+title: "Synthetic Data Project"
+author: "Antonio Flores"
+---
+
+
+# Synthetic Data Project
+
+
+```{r}
+library(tidyr)
+library(here)
+library(synthpop) # Primary library needed for creating Synthetic Data
+library(performance) # Using this to test models and compare models
+library(see) #Needed to supplement the above library
+library(corrplot) # Used for Correlation Plot
+```
+
+## Reading in the Data
+
+I chose a health data set with different bio variables like BMI and Blood Pressure.
+```{r}
+data_location <- here("synthetic-data-exercise","Healthcare-Diabetes.csv")
+
+rawdata <- read.csv(data_location, sep = ",")
+```
+
+
+
+## Before generating new data set
+
+We want to create some models to test with both data sets. Even thought the synthetic data will have different data than our original dataset, the results from the models should remain close to the same.
+```{r}
+#Using BMI as outcome with Glucose, BP, and Age as predictors
+fit1 = lm(BMI ~  Glucose + BloodPressure + Age,
+          data=rawdata)
+
+(results = summary(fit1))
+```
+
+
+```{r}
+fit2 = lm(BMI ~  Glucose + BloodPressure + Age,
+          data=rawdata)
+
+(summary(fit2))
+
+```
+
+
+
+Discovered this **incredibly** useful took for visually assessing your model.
+```{r}
+check_model(fit1)
+```
+```{r}
+check_model(fit2)
+```
+
+Both of our models look visually solid. Our prediction lines follows the observed data lines, and our residuals roughly fall long the normality line. 
+
+
+
+## Modifying data slightly before we generate new data set
+```{r}
+rawdata$Outcome = as.factor(rawdata$Outcome)
+codebook.syn(rawdata)
+```
+
+
+## Creating Synthetic Data
+
+```{r}
+new_seed = 21 # Setting our seed at a random value
+synthetic_data = syn(rawdata, 
+                     seed = new_seed) #This will give us our synthetic dataset
+```
+
+
+
+```{r}
+#cleaning the synthetic dataset
+synth_data_clean = sdc(synthetic_data, rawdata, 
+                       label = "FAKE DATA",
+                       rm.replicated.uniques = TRUE)  #This is important! Sometimes, when we create "fake" synthetic data, we happen to recreate an actual observation in the original data set. So, in the name of privacy, we remove those observations.
+
+
+write.syn(synth_data_clean, 
+          filename = "synthetic_diabetes_data",
+          filetype = "csv") #Outputting our synthetic data
+```
+
+
+
+## Comparing the Data Sets
+
+```{r}
+compare(synthetic_data, rawdata, stat = "counts")
+```
+We can easily see that the synthetic dataset (light blue) closely resembles our original data set (dark blue)
+
+
+
+## Testing associations
+```{r}
+synth_fit = lm.synds(BMI ~  Glucose + BloodPressure + Age,
+          data=synthetic_data)
+
+compare(synth_fit, rawdata)
+```
+
+There are some differences between both data sets, but they are not significant. The P-value of this test is above .05 which in this case tells us there is not a substantial difference between the two model's results. Assessing the visual chart we also see a fairly close similarity. 
+
+
+
+```{r}
+synth_fit2 = lm.synds(DiabetesPedigreeFunction ~  SkinThickness + Insulin + Pregnancies,
+          data=synthetic_data)
+
+compare(synth_fit2, rawdata)
+```
+
+Fairly similar results, but there appears to be more variation than the previous comparison
+
+
+Next, we can assess correlation as a whole.
+
+
+```{r}
+rawdatacor = cor(rawdata[1:9]) # Original dataset correlation between variables
+synthdatacor = cor(synthetic_data$syn[1:9]) # Synthetic dataset correlation 
+corrplot(rawdatacor)
+corrplot(synthdatacor)
+```
+We can see that these two correlation plots are virtual identical, indicating that the associations between variables stayed the same across the new data set. 
+
+
+## Conclusions
+
+Overall, we can conclude that our new synthetic data set maintains the same shape and spread as our original data set while maintaining key associations between variables. If the original data set were a true data from real patients, we have now created an anonymized dataset that can now be used for further analysis. 
+

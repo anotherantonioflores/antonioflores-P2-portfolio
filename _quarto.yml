@@ -18,6 +18,8 @@ website:
             file: presentation-exercise/presentation-exercise.qmd
           - text: "Tidy Tuesday Exercise"
             file: tidytuesday-exercise/tidytuesday-exercise.qmd
+          - text: "Synthetic Data Exercise"
+            file: synthetic-data-exercise/Synthetic_Data.qmd
     right:
       - icon: github 
         href: https://github.com/anotherantonioflores/antonioflores-P2-portfolio
