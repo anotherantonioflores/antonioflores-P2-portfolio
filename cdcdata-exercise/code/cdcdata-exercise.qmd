@@ -1,0 +1,288 @@
+---
+title: "Data Processing & Cleaning"
+author: "Antonio Flores"
+date: "2024-07-02"
+output: html_document
+---
+
+```{r}
+library(tidyr)# For simplifying data cleaning
+library(here) #For reading in data from absolute path
+library(dplyr)# For Piping data
+library(ggplot2) # EDA Charts/Graphs
+```
+
+
+
+```{r} 
+#Reading in the Data
+datalocation = here("cdcdata-exercise", "data", "Center_for_Medicare___Medicaid_Services__CMS____Medicare_Claims_data_20240701.csv")
+data = read.csv(datalocation)
+```
+
+The dataset comes from the CDC's data repository and can be accessed with this link. Options exist for exporting via CSV or through the use of an API.
+
+[Heart Disease Stroke Prevention](https://data.cdc.gov/Heart-Disease-Stroke-Prevention/Center-for-Medicare-Medicaid-Services-CMS-Medicare/iw6q-r3ja/about_data)
+
+The Center for Medicare & Medicaid Services (CMS) gathers large amounts of health data from Medicare/Medicaid patients. From this data source, indicators have been computed by the CDC's Division of Heart Disease and Stroke Prevention (DHDSP), and that is the dataset that will be used for this activity.
+
+Before Cleaning: 
+Each row contains a single data value for a particular category of a demographic (which is one of Race, Gender, Age) for each topic (Heart Failure, Stroke, etc), for each state, for each year(2016-2021). 
+
+In other words, for each year, there is a row for each state, for each state there is a row for each topic (5), for every topic there is a row for either percentage or rate, for each of these rows, there is a row for either gender, age, or race, and for each demographic there is one row per option (Male, Female, over75, etc.) 
+
+
+
+
+
+```{r}
+str(data)
+```
+
+```{r}
+summary(data)
+```
+
+```{r}
+head(data)
+```
+
+## Data Cleaning
+
+
+First, we're just changing some fields that were mislabeled (e.g., Arizona Abbreviation was AR), converting categorical variables to factors, and removing useless columns)
+
+```{r}
+cleaned_data = data %>% 
+  mutate(LocationAbbr =replace(LocationAbbr, LocationDesc=="Arizona", "AZ")) %>% 
+  mutate(LocationAbbr =replace(LocationAbbr, LocationDesc=="Maryland", "MD")) %>% 
+  mutate(LocationAbbr = as.factor(LocationAbbr)) %>% 
+  mutate(LocationDesc = as.factor(LocationDesc)) %>% 
+  mutate(DataSource = as.factor(DataSource)) %>% 
+  mutate(Class = as.factor(Class)) %>% 
+  mutate(Topic = as.factor(Topic)) %>% 
+  mutate(Question = as.factor(Question)) %>% 
+  mutate(Data_Value_Type = as.factor(Data_Value_Type)) %>%
+  mutate(Data_Value_Unit = as.factor(Data_Value_Unit)) %>% 
+  mutate(Data_Value_Unit = as.factor(Data_Value_Unit)) %>% 
+  mutate(Break_Out_Category = as.factor(Break_Out_Category)) %>% 
+  mutate(Break_Out = as.factor(Break_Out)) %>% 
+  select(!DataSource) %>% 
+  select(!RowId) %>% 
+  select(!Class) %>% 
+  select(!Data_Value_Type) %>% 
+  select(!Data_Value_Footnote_Symbol) %>% 
+  select(!Data_Value_Footnote) %>% 
+  select(!ClassId:GeoLocation) %>% 
+  select(!PriorityArea1:PriorityArea4)
+```
+
+
+Next, in order to better assess the data, I tried to widen out the data so there would only be one line for every topic per state per year.
+
+(There was probably a way more efficient way to do this, but I couldn't find it)
+
+```{r}
+#Breaking into three data frames for each main social demographic
+#Using pivot wider to turn demographic options into individual columns
+
+###Race
+racedata = cleaned_data %>% 
+  filter(Break_Out_Category=="Race") %>% 
+  select(YearStart, LocationAbbr, Data_Value_Unit, Topic, Data_Value, Break_Out_Category, Break_Out)
+
+longer_race = racedata %>% 
+  pivot_wider(names_from = Break_Out, values_from = Data_Value) %>% 
+  arrange(LocationAbbr,YearStart, Topic, Data_Value_Unit) 
+  
+longer_race$ID = seq.int(nrow(longer_race))
+
+####Gender
+genderdata = cleaned_data %>% 
+  filter(Break_Out_Category=="Gender") %>% 
+  select(YearStart, LocationAbbr, Data_Value_Unit, Topic, Data_Value, Break_Out_Category, Break_Out)
+
+longer_gender = genderdata %>% 
+  pivot_wider(names_from = Break_Out, values_from = Data_Value) %>% 
+  arrange(LocationAbbr,YearStart, Topic, Data_Value_Unit) 
+
+longer_gender$ID = seq.int(nrow(longer_gender))
+
+###Age
+
+agedata = cleaned_data %>% 
+  filter(Break_Out_Category=="Age") %>% 
+  select(YearStart, LocationAbbr, Data_Value_Unit, Topic, Data_Value, Break_Out_Category, Break_Out)
+
+longer_age = agedata %>% 
+  pivot_wider(names_from = Break_Out, values_from = Data_Value) %>% 
+  arrange(LocationAbbr,YearStart, Topic, Data_Value_Unit) 
+
+longer_age$ID = seq.int(nrow(longer_age))
+
+
+###Need to join these data frames together
+all_long1 = left_join(longer_race, longer_gender, by = 'ID')
+
+all_long = left_join(all_long1, longer_age, by = 'ID')
+```
+
+
+Just removing deuplicate columns
+
+```{r}
+#selecting only non-duplicate columns
+clean_all = all_long %>% 
+  select(YearStart.x:Topic.x,Unknown:ID, Male:Female,`75+`)
+```
+
+Trying to widen out the data some more with percent and rate data 
+
+```{r}
+percent_date = clean_all %>% 
+  filter(Data_Value_Unit.x =="Percent (%)")
+  
+percent_date$Second_ID = seq.int(nrow(percent_date))
+
+rate_data = clean_all %>% 
+  filter(Data_Value_Unit.x=="Rate per 100,000")
+  
+rate_data$Second_ID = seq.int(nrow(rate_data))
+
+rate_percent_data = left_join(percent_date, rate_data, by = "Second_ID")
+  
+#again removing uneeded columns
+rate_percent_data1 = rate_percent_data %>%   
+  select(YearStart.x.x:LocationAbbr.x.x, Topic.x.x:`Non-Hispanic Black.x`, Male.x:Second_ID, Unknown.y:`Non-Hispanic Black.y`, Male.y:`75+.y`)
+```
+
+Finally, renaming all remaining columns
+
+```{r}
+good_data = rate_percent_data1 %>% 
+  rename(Year = YearStart.x.x,
+         Location = LocationAbbr.x.x,
+         Topic = Topic.x.x,
+         Unknown_pct = Unknown.x,
+         Non_Hispanic_Asian_pct = `Non-Hispanic Asian.x`,
+         Non_Hispanic_White_pct= `Non-Hispanic White.x`,
+         Hispanic_pct = Hispanic.x,
+         Other_pct = Other.x,
+         Non_Hispanic_Black_pct = `Non-Hispanic Black.x`,
+         Male_pct = Male.x,
+         Female_pct = Female.x,
+         Is75plus_pct = `75+.x`,
+         RowID = Second_ID,
+         Unknown_rate = Unknown.y,
+         Non_Hispanic_Asian_rate = `Non-Hispanic Asian.y`,
+         Non_Hispanic_White_rate= `Non-Hispanic White.y`,
+         Hispanic_rate = Hispanic.y,
+         Other_rate = Other.y,
+         Non_Hispanic_Black_rate = `Non-Hispanic Black.y`,
+         Male_rate = Male.y,
+         Female_rate = Female.y,
+         Is75plus_rate = `75+.y`
+         )
+```
+
+
+At this time, our data now has the following structure:
+
+There 36 rows for each state/territory (52), consisting of 6 rows per year (6 years), one for each topic.
+
+```{r}
+summary(good_data)
+```
+
+
+
+
+## Exploratory Data Analysis
+
+The main variables I am exploring here are 
+1) Location
+2) Year
+3) Topic
+4) Hispanic_pct
+5) Hispanic_rate (Rate per 100,000)
+
+
+### Hispanic Rate Over Time, colored by Topic
+
+```{r}
+  good_data %>% ggplot(aes(x=Year, y=Hispanic_rate, color = Topic)) + geom_point()
+```
+
+
+#### Hispanic Rate Boxplot
+
+```{r}
+boxplot(good_data$Hispanic_rate)
+```
+
+### Exploring the Quartiles for Hispanic Rate/Percentage
+
+```{r}
+summary(good_data$Hispanic_rate)
+summary(good_data$Hispanic_pct)
+```
+
+
+### Hispanic Rate Distributions across Different Topics
+
+```{r}
+ggplot(good_data, aes(Hispanic_rate))+
+  geom_boxplot()+
+  facet_wrap(.~Topic)+
+  coord_flip()
+```
+### Hispanic Rate Distributions across Years
+
+```{r}
+
+ggplot(data=good_data)+
+  geom_boxplot(mapping =aes(Hispanic_rate))+
+  facet_wrap(.~Year)+
+  coord_flip()
+```
+
+
+### Mean Hispanic Rate across Topic
+
+```{r}
+good_data %>% 
+  group_by(Topic) %>% 
+  summarise(Mean = mean(Hispanic_rate, na.rm=TRUE)) %>% 
+  ggplot(aes(x=reorder(Topic, Mean), y=Mean))+
+    geom_bar(stat = "identity")+
+  coord_flip()
+```
+
+### Mean Hispanic Percent across the Topic
+
+```{r}
+good_data %>% 
+  group_by(Topic) %>% 
+  summarise(Mean = mean(Hispanic_pct, na.rm=TRUE)) %>% 
+  ggplot(aes(x=reorder(Topic, Mean), y=Mean))+
+    geom_bar(stat = "identity")+
+  coord_flip()
+```
+
+### Hispanic Rate across Location, colored by Topic
+
+```{r}
+good_data %>% 
+  group_by(Location, Topic) %>% 
+  summarise(Mean = mean(Hispanic_rate, na.rm=TRUE)) %>% 
+  ggplot(aes(x=reorder(Location, Mean), y=Mean, fill=Topic))+
+    geom_bar(stat = "identity")+
+  coord_flip()
+
+```
+
+
+
+
+
+
