@@ -288,7 +288,7 @@ To create synthetic data for this project, I first reviewed the data cleaning pr
 
 *Generate a synthetic dataset in R that mimics health data across U.S. states from 2016 to 2021. Include variables such as Year, Location, Topic (with options like 'Heart Attack', 'Coronary Heart Disease', 'Heart Disease', 'Heart Failure', 'Cardiovascular Disease'), Unknown_pct, Non_Hispanic_Asian_pct, Non_Hispanic_White_pct, Hispanic_pct, Other_pct, Non_Hispanic_Black_pct, Male_pct, Female_pct, Is75plus_pct, RowID, Unknown_rate, Non_Hispanic_Asian_rate, Non_Hispanic_White_rate, Hispanic_rate, Other_rate, Non_Hispanic_Black_rate, Male_rate, Female_rate, and Is75plus_rate. Ensure variability in percentages and rates, introduce missing values, and simulate realistic distributions.*
 
-### Conclusion
+## Conclusion
 
 The code above was used as the foundation for creating the dataset structure. While it successfully created a good dataset, aligning the data in the variables with Antonio's cleaned dataset was a challenge. At first, all data followed a normal distribution, but after several updates, I managed to update the distributions slightly, but it was a complex task. I think it's quite challenging to gather all the required data in a single prompt. I also had to specify the exact variables I needed in the dataset, as it was the most straightforward way to ensure the dataset matched the original requirements.
 
