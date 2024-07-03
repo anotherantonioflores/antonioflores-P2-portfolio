@@ -282,7 +282,142 @@ good_data %>%
 ```
 
 
+# This Section Contributed by Guillermo Gallardo
+
+To create synthetic data for this project, I first reviewed the data cleaning process from my teammate to understand the desired structure of the dataset. After gaining a clear understanding of the necessary attributes and their relationships, I created the following prompt to guide the generation of the synthetic data:
+
+*Generate a synthetic dataset in R that mimics health data across U.S. states from 2016 to 2021. Include variables such as Year, Location, Topic (with options like 'Heart Attack', 'Coronary Heart Disease', 'Heart Disease', 'Heart Failure', 'Cardiovascular Disease'), Unknown_pct, Non_Hispanic_Asian_pct, Non_Hispanic_White_pct, Hispanic_pct, Other_pct, Non_Hispanic_Black_pct, Male_pct, Female_pct, Is75plus_pct, RowID, Unknown_rate, Non_Hispanic_Asian_rate, Non_Hispanic_White_rate, Hispanic_rate, Other_rate, Non_Hispanic_Black_rate, Male_rate, Female_rate, and Is75plus_rate. Ensure variability in percentages and rates, introduce missing values, and simulate realistic distributions.*
+
+### Conclusion
+
+The code above was used as the foundation for creating the dataset structure. While it successfully created a good dataset, aligning the data in the variables with Antonio's cleaned dataset was a challenge. At first, all data followed a normal distribution, but after several updates, I managed to update the distributions slightly, but it was a complex task. I think it's quite challenging to gather all the required data in a single prompt. I also had to specify the exact variables I needed in the dataset, as it was the most straightforward way to ensure the dataset matched the original requirements.
 
 
 
+## Synthetic Data
+
+```{r}
+
+library(dplyr)
+library(stringi)
+
+set.seed(123) # For reproducibility
+
+# Function to introduce missing values randomly
+introduce_na <- function(x, na_rate = 0.05) {
+  na_indices <- sample(1:length(x), size = floor(na_rate * length(x)))
+  x[na_indices] <- NA
+  return(x)
+}
+
+# Function to generate synthetic data with variability
+generate_synthetic_data = function(n) {
+  synthetic_data = data.frame(
+    Year = sample(2016:2021, n, replace = TRUE),
+    Location = sample(state.abb, n, replace = TRUE),
+    Topic = sample(c("Heart Attack", "Coronary Heart Disease", "Heart Disease",
+                     "Heart Failure", "Cardiovascular Disease"), n, replace = TRUE),
+    Unknown_pct = introduce_na(rbeta(n, 2.5, 1)),
+    Non_Hispanic_Asian_pct = introduce_na(rnorm(n, 7, 2)),
+    Non_Hispanic_White_pct = introduce_na(runif(n, 0, 13)),
+    Hispanic_pct = introduce_na(rnorm(n, 5, 3)),
+    Other_pct = introduce_na(rbeta(n, 3, 2)),
+    Non_Hispanic_Black_pct = introduce_na(runif(n, 0, 10)),
+    Male_pct = introduce_na(rnorm(n, 5.5, 2)),
+    Female_pct = introduce_na(rnorm(n, 5.8, 2)),
+    Is75plus_pct = introduce_na(rnorm(n, 6, 2)),
+    RowID = 1:n,
+    Unknown_rate = introduce_na(rnorm(n, 1000, 500)),
+    Non_Hispanic_Asian_rate = introduce_na(rnorm(n, 2000, 1000)),
+    Non_Hispanic_White_rate = introduce_na(rnorm(n, 4000, 2000)),
+    Hispanic_rate = introduce_na(rnorm(n, 3000, 1500)),
+    Other_rate = introduce_na(rnorm(n, 2000, 1000)),
+    Non_Hispanic_Black_rate = introduce_na(rnorm(n, 2000, 1000)),
+    Male_rate = introduce_na(rnorm(n, 2000, 1000)),
+    Female_rate = introduce_na(rnorm(n, 2000, 1000)),
+    Is75plus_rate = introduce_na(rnorm(n, 3000, 1500))
+  )
+  
+  return(synthetic_data)
+}
+
+# Generate synthetic data
+synthetic_data = generate_synthetic_data(1872)
+
+
+```
+
+### Data Summary
+
+```{r}
+summary(synthetic_data)
+```
+
+
+### Hispanic Rate Over Time, colored by Topic
+
+```{r}
+synthetic_data %>% ggplot(aes(x=Year, y=Hispanic_rate, color = Topic)) + 
+  geom_point() +
+  scale_x_continuous(breaks = unique(synthetic_data$Year))
+```
+
+### Hispanic Rate Boxplot
+
+```{r}
+boxplot(synthetic_data$Hispanic_rate)
+```
+### Exploring the Quartiles for Hispanic Rate/Percentage
+
+```{r}
+summary(synthetic_data$Hispanic_rate)
+summary(synthetic_data$Hispanic_pct)
+```
+
+
+### Hispanic Rate Distributions across Different Topics
+
+```{r}
+ggplot(synthetic_data, aes(Hispanic_rate))+
+  geom_boxplot()+
+  facet_wrap(.~Topic)+
+  coord_flip()
+```
+
+### Mean Hispanic Rate across Topic
+
+```{r}
+synthetic_data %>% 
+  group_by(Topic) %>% 
+  summarise(Mean = mean(Hispanic_rate, na.rm=TRUE)) %>% 
+  ggplot(aes(x=reorder(Topic, Mean), y=Mean))+
+    geom_bar(stat = "identity")+
+  coord_flip()
+```
+
+
+
+### Mean Hispanic Percent across the Topic
+
+```{r}
+synthetic_data %>% 
+  group_by(Topic) %>% 
+  summarise(Mean = mean(Hispanic_pct, na.rm=TRUE)) %>% 
+  ggplot(aes(x=reorder(Topic, Mean), y=Mean))+
+    geom_bar(stat = "identity")+
+  coord_flip()
+```
+
+
+### Hispanic Rate across Location, colored by Topic
+
+```{r}
+synthetic_data %>% 
+  group_by(Location, Topic) %>% 
+  summarise(Mean = mean(Hispanic_rate, na.rm=TRUE)) %>% 
+  ggplot(aes(x=reorder(Location, Mean), y=Mean, fill=Topic))+
+    geom_bar(stat = "identity")+
+  coord_flip()
+
+```
 
