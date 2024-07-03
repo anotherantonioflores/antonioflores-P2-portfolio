@@ -695,8 +695,8 @@ Attaching package: 'dplyr'</code></pre>
 <h1>This Section Contributed by Guillermo Gallardo</h1>
 <p>To create synthetic data for this project, I first reviewed the data cleaning process from my teammate to understand the desired structure of the dataset. After gaining a clear understanding of the necessary attributes and their relationships, I created the following prompt to guide the generation of the synthetic data:</p>
 <p><em>Generate a synthetic dataset in R that mimics health data across U.S. states from 2016 to 2021. Include variables such as Year, Location, Topic (with options like ‘Heart Attack’, ‘Coronary Heart Disease’, ‘Heart Disease’, ‘Heart Failure’, ‘Cardiovascular Disease’), Unknown_pct, Non_Hispanic_Asian_pct, Non_Hispanic_White_pct, Hispanic_pct, Other_pct, Non_Hispanic_Black_pct, Male_pct, Female_pct, Is75plus_pct, RowID, Unknown_rate, Non_Hispanic_Asian_rate, Non_Hispanic_White_rate, Hispanic_rate, Other_rate, Non_Hispanic_Black_rate, Male_rate, Female_rate, and Is75plus_rate. Ensure variability in percentages and rates, introduce missing values, and simulate realistic distributions.</em></p>
-<section id="conclusion" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>The code above was used as the foundation for creating the dataset structure. While it successfully created a good dataset, aligning the data in the variables with Antonio’s cleaned dataset was a challenge. At first, all data followed a normal distribution, but after several updates, I managed to update the distributions slightly, but it was a complex task. I think it’s quite challenging to gather all the required data in a single prompt. I also had to specify the exact variables I needed in the dataset, as it was the most straightforward way to ensure the dataset matched the original requirements.</p>
 </section>
 <section id="synthetic-data" class="level2">
@@ -904,13 +904,9 @@ Attaching package: 'dplyr'</code></pre>
 <p><img src="cdcdata-exercise_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-</section>
-<section id="conclusion-1" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion-1">Conclusion</h2>
-<p>The data variables and observations are the exact amount as my teammate’s file but the actual content is not close to what Antonio found in the CDC’s website. Fro me</p>
 
 
+</section>
 </section>
 </section>
 

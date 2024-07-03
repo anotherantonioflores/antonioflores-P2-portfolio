@@ -432,5 +432,12 @@
     "title": "Data Processing & Cleaning",
     "section": "Conclusion",
     "text": "Conclusion\nThe data variables and observations are the exact amount as my teammate’s file but the actual content is not close to what Antonio found in the CDC’s website. Fro me"
+  },
+  {
+    "objectID": "cdcdata-exercise/code/cdcdata-exercise.html#conclusion",
+    "href": "cdcdata-exercise/code/cdcdata-exercise.html#conclusion",
+    "title": "Data Processing & Cleaning",
+    "section": "Conclusion",
+    "text": "Conclusion\nThe code above was used as the foundation for creating the dataset structure. While it successfully created a good dataset, aligning the data in the variables with Antonio’s cleaned dataset was a challenge. At first, all data followed a normal distribution, but after several updates, I managed to update the distributions slightly, but it was a complex task. I think it’s quite challenging to gather all the required data in a single prompt. I also had to specify the exact variables I needed in the dataset, as it was the most straightforward way to ensure the dataset matched the original requirements."
   }
 ]
