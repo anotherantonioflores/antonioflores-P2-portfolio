@@ -1,5 +1,215 @@
 ---
 title: "Presentation Exercise"
+author: "Antonio Flores"
 ---
 
-Placeholder file for the future data/results presentation exercise.
+# Recreating Chart with AI Prompts
+
+This is the chart we will attempt to recreate. It comes from a Gapminder article regarding [Life Expectancy](https://www.gapminder.org/topics/life-expectancy/)
+
+![](Life_expectancy.png)
+
+The data for this chart was easily found on their site.
+
+# Prompts for generating chart/code from AI
+
+I will be using ChatGPT-4 for this exercise.
+
+![](chart-chat1.png) ![](chart-chat2.png) ![](chart-chat3.png) Unfortunately I hit some kind of wall here. Apparently there's a limit to the amount of Data Analysis prompts you can issue on the free version of ChatGPT.
+
+![](chart-chat4.png) ![](chart-chat5.png) ![](chart-chat6.png)
+
+# Code from Chatgpt
+
+This will not run because of incorrect y variable name
+
+```{r}
+# Load necessary library
+#library(ggplot2)
+
+# Load the data
+#data <- read.csv('Life_expectancy.csv')
+
+# Create the plot
+#ggplot(data, aes(x = time, y = Life.expectancy.)) +
+ # geom_line(color = 'black') +
+  #geom_ribbon(aes(ymin = 0, ymax = Life.expectancy.), fill = 'black', alpha = 0.1) +
+  #labs(title = 'AVERAGE LIFE EXPECTANCY FROM 1800 TO TODAY', x = 'Year', y = 'Life Expectancy') +
+  #annotate("text", x = 1845, y = 30, label = "Famine", size = 4, hjust = 0) +
+  #annotate("text", x = 1918, y = 26, label = "Spanish flu", size = 4, hjust = 0) +
+  #annotate("text", x = 1945, y = 47, label = "World War II", size = 4, hjust = 0) +
+  #geom_point(aes(x = 1800, y = 31), color = 'black', size = 3) +
+  #geom_point(aes(x = 2017, y = 72), color = 'black', size = 3) +
+  #annotate("text", x = 1800, y = 31, label = "1800\n31 years", hjust = -0.2, vjust = 1.5, size = 4) +
+  #annotate("text", x = 2017, y = 72, label = "2017\n72 years", hjust = 1.2, vjust = -0.5, size = 4) +
+  #theme_minimal()
+
+```
+
+If we correct the variable name and verify that the data will be read in correctly, we get the below plot.
+
+```{r}
+ #Load necessary library
+library(here)
+library(ggplot2)
+data_location <-here("presentation-exercise","Life_expectancy.csv")
+data <- read.csv(data_location)
+
+# Create the plot
+ggplot(data, aes(x = time, y = Life.expectancy)) +
+  geom_line(color = 'black') +
+ geom_ribbon(aes(ymin = 0, ymax = Life.expectancy), fill = 'black', alpha = 0.1) +
+ labs(title = 'AVERAGE LIFE EXPECTANCY FROM 1800 TO TODAY', x = 'Year', y = 'Life Expectancy') +
+ annotate("text", x = 1845, y = 30, label = "Famine", size = 4, hjust = 0) +
+ annotate("text", x = 1918, y = 26, label = "Spanish flu", size = 4, hjust = 0) +
+ annotate("text", x = 1945, y = 47, label = "World War II", size = 4, hjust = 0) +
+ geom_point(aes(x = 1800, y = 31), color = 'black', size = 3) +
+ geom_point(aes(x = 2017, y = 72), color = 'black', size = 3) +
+ annotate("text", x = 1800, y = 31, label = "1800\n31 years", hjust = -0.2, vjust = 1.5, size = 4) +
+ annotate("text", x = 2017, y = 72, label = "2017\n72 years", hjust = 1.2, vjust = -0.5, size = 4) +
+ theme_minimal()
+```
+
+# My edits
+
+The main changes:\
+- Small variables name fix\
+- Rotating annotations\
+- A few cosmetic fixes
+
+```{r}
+# Load necessary library
+library(ggplot2)
+library(here)
+library(tidyr)
+library(dplyr)
+
+# Load the data
+data <- read.csv(data_location)
+```
+
+```{r}
+#a little cleaning
+data1 = data %>% 
+  filter(time < 2018)
+```
+
+```{r}
+
+# Create the plot
+ggplot(data1, aes(x = time, y = Life.expectancy)) +
+  geom_line(color = 'black', size=.75) +
+  geom_ribbon(aes(ymin = 0, ymax = Life.expectancy), fill = 'black', alpha = 0.1) +
+  labs(title = 'AVERAGE LIFE EXPECTANCY FROM 1800 TO TODAY', x = 'Year', y = 'Life Expectancy') +
+  annotate("text", x = 1877, y = 35, label = "Famine", size = 4, hjust = 0, angle = 90) +
+  annotate("text", x = 1918, y = 40, label = "Spanish flu", size = 4, hjust = 0, angle = 90) +
+  annotate("text", x = 1941, y = 50, label = "World War II", size = 4, hjust = 0, angle = 90) +
+  geom_point(aes(x = 1800, y = 31), color = 'black', size = 3) +
+  geom_point(aes(x = 2017, y = 72), color = 'black', size = 3) +
+  annotate("text", x = 1806, y = 43, label = "1800", vjust = 1.5, size = 4) +
+  annotate("text", x = 2011, y = 75, label = "2017", hjust = 1.2, vjust = -0.5, size = 4) +
+  annotate("text", x = 2017, y = 70, label = "72 years", hjust = 1.2, vjust = -0.5, size = 6) +
+  annotate("text", x = 1817, y = 40, label = "31 years", vjust = 1.5, size = 6) +
+
+  theme_minimal()+
+  theme(panel.grid = element_blank(), axis.line = element_line(colour = "black"))
+
+
+```
+
+Attaching for final comparison ![](Life_expectancy.png)
+
+# Creating Table
+
+The prompt for this code was fairly straightforward
+
+![](table-chat1.png)
+
+### Initial Code from Chat-GPT
+
+I just changed the data reading code so it could run properly
+```{r}
+#install.packages("knitr")
+library(knitr)
+
+# Sample data
+data <- read.csv(data_location)
+
+# Create a professional-looking table
+kable(data[1:10, ], caption = "Sample Life Expectancy Data")
+
+```
+
+
+This code will not run because it using an old method
+```{r}
+#install.packages("gt")
+
+#library(gt)
+
+# Sample data
+#data_location <- here("presentation-exercise","Life_expectancy.csv")
+#data <- read.csv(data_location)
+
+
+# Create a professional-looking table with gt
+#gt_table <- gt(data[1:10, ]) %>%
+ # tab_header(
+  #  title = "Sample Life Expectancy Data",
+   # subtitle = "First 10 rows of the dataset"
+  #) %>%
+  #fmt_number(
+   # columns = vars(`Life expectancy `),
+    #decimals = 2
+#  ) %>%
+  #tab_options(
+   # table.font.names = "Arial",
+    #table.border.top.width = px(2),
+    #table.border.bottom.width = px(2)
+#  )
+
+# Display the table
+#print(gt_table)
+
+
+```
+
+
+
+
+
+
+
+# My edits
+
+```{r}
+#install.packages("gt")
+
+library(gt)
+
+# Sample data
+data <- read.csv('Life_expectancy.csv')
+
+# Create a professional-looking table with gt
+gt_table <- gt(data[1:10,3:4 ]) %>%
+   cols_label(
+    Life.expectancy = "Life Expectancy",
+    time = "Year"
+  ) %>% 
+   tab_header(
+    title = "Sample Life Expectancy Data",
+    subtitle = "First 10 rows of the dataset"
+  ) %>%
+  fmt_number(
+    columns = c("Life.expectancy"),
+    decimals = 2
+  ) %>%
+  tab_options(
+    table.font.names = "Arial",
+    table.border.top.width = px(2),
+    table.border.bottom.width = px(2)
+  )
+
+# Display the table
+gt_table
+```
