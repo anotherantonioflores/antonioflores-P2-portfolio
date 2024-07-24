@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -45,7 +79,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -54,8 +94,10 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -67,9 +109,9 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Antonio Flores - Data Analysis Portfolio</span>
     </a>
@@ -81,43 +123,51 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../aboutme.html" rel="" target="">
- <span class="menu-text">About Me</span></a>
+    <a class="nav-link" href="../aboutme.html"> 
+<span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Projects</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
-    <a class="dropdown-item" href="../starter-analysis-exercise/products/report/starter-analysis-report.html" rel="" target="">
+    <a class="dropdown-item" href="../starter-analysis-exercise/products/report/starter-analysis-report.html">
  <span class="dropdown-text">Starter Analysis Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../coding-exercise/coding-exercise.html" rel="" target="">
+    <a class="dropdown-item" href="../coding-exercise/coding-exercise.html">
  <span class="dropdown-text">R Coding Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../presentation-exercise/presentation-exercise.html" rel="" target="">
+    <a class="dropdown-item" href="../presentation-exercise/presentation-exercise.html">
  <span class="dropdown-text">Presentation Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../tidytuesday-exercise/tidytuesday-exercise.html" rel="" target="">
+    <a class="dropdown-item" href="../tidytuesday-exercise/tidytuesday-exercise.html">
  <span class="dropdown-text">Tidy Tuesday Exercise</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../synthetic-data-exercise/Synthetic_Data.html">
+ <span class="dropdown-text">Synthetic Data Exercise</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../cdcdata-exercise/code/cdcdata-exercise.html">
+ <span class="dropdown-text">Data Analysis Exercise</span></a>
   </li>  
     </ul>
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/anotherantonioflores/antonioflores-P2-portfolio" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/anotherantonioflores/antonioflores-P2-portfolio"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -144,11 +194,888 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
 
+
 <p>Placeholder file for the future Tidy Tuesday exercise.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: tidytuesdayR package </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidytuesdayR")</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytuesdayR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidytuesdayR' was built under R version 4.3.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2024</span>, <span class="at">week =</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>--- Compiling #TidyTuesday Information for 2024-07-23 ----</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>--- There are 6 files available ---</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>--- Starting Download ---</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Downloading file 1 of 6: `auditions.csv`
+    Downloading file 2 of 6: `eliminations.csv`
+    Downloading file 3 of 6: `finalists.csv`
+    Downloading file 4 of 6: `ratings.csv`
+    Downloading file 5 of 6: `seasons.csv`
+    Downloading file 6 of 6: `songs.csv`</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>--- Download complete ---</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>auditions <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>auditions</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>eliminations <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>eliminations</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>finalists <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>finalists</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>ratings <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>ratings</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>seasons <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>seasons</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>songs <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>songs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(auditions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 12
+  season audition_date_start audition_date_end audition_city      audition_venue
+   &lt;dbl&gt; &lt;date&gt;              &lt;date&gt;            &lt;chr&gt;              &lt;chr&gt;         
+1      1 2002-04-20          2002-04-22        Los Angeles, Cali… Westin Bonave…
+2      1 2002-04-23          2002-04-25        Seattle, Washingt… Hyatt Regency…
+3      1 2002-04-26          2002-04-28        Chicago, Illinois  Congress Plaz…
+4      1 2002-04-29          2002-05-01        New York City, Ne… Millenium Hil…
+5      1 2002-05-03          2002-05-05        Atlanta, Georgia   AmericasMart/…
+6      1 2002-05-05          2002-05-07        Dallas, Texas      Wyndham Anato…
+# ℹ 7 more variables: episodes &lt;chr&gt;, episode_air_date &lt;chr&gt;,
+#   callback_venue &lt;chr&gt;, callback_date_start &lt;date&gt;, callback_date_end &lt;date&gt;,
+#   tickets_to_hollywood &lt;dbl&gt;, guest_judge &lt;chr&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(eliminations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 46
+  season place gender contestant        top_36 top_36_2 top_36_3 top_36_4 top_32
+   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;             &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; 
+1      1 1     Female Kelly Clarkson    &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;  
+2      1 2     Male   Justin Guarini    &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;  
+3      1 3     Female Nikki McKibbin    &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;  
+4      1 4     Female Tamyra Gray       &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;  
+5      1 5     Male   R. J. Helton      &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;  
+6      1 6     Female Christina Christ… &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;  
+# ℹ 37 more variables: top_32_2 &lt;chr&gt;, top_32_3 &lt;chr&gt;, top_32_4 &lt;chr&gt;,
+#   top_30 &lt;chr&gt;, top_30_2 &lt;chr&gt;, top_30_3 &lt;chr&gt;, top_25 &lt;chr&gt;, top_25_2 &lt;chr&gt;,
+#   top_25_3 &lt;chr&gt;, top_24 &lt;chr&gt;, top_24_2 &lt;chr&gt;, top_24_3 &lt;chr&gt;, top_20 &lt;chr&gt;,
+#   top_20_2 &lt;chr&gt;, top_16 &lt;chr&gt;, top_14 &lt;chr&gt;, top_13 &lt;chr&gt;, top_12 &lt;chr&gt;,
+#   top_11 &lt;chr&gt;, top_11_2 &lt;chr&gt;, wildcard &lt;chr&gt;, comeback &lt;lgl&gt;, top_10 &lt;chr&gt;,
+#   top_9 &lt;chr&gt;, top_9_2 &lt;chr&gt;, top_8 &lt;chr&gt;, top_8_2 &lt;chr&gt;, top_7 &lt;chr&gt;,
+#   top_7_2 &lt;chr&gt;, top_6 &lt;chr&gt;, top_6_2 &lt;chr&gt;, top_5 &lt;chr&gt;, top_5_2 &lt;chr&gt;, …</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(finalists)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  Contestant          Birthday  Birthplace           Hometown Description Season
+  &lt;chr&gt;               &lt;chr&gt;     &lt;chr&gt;                &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;
+1 Kelly Clarkson      24-Apr-82 Fort Worth, Texas    Burleso… "She perfo…      1
+2 Justin Guarini      28-Oct-78 Columbus, Georgia    Doylest… "He perfor…      1
+3 Nikki McKibbin      28-Sep-78 Grand Prairie, Texas &lt;NA&gt;     "She had p…      1
+4 Tamyra Gray         26-Jul-79 Takoma Park, Maryla… Atlanta… "She had a…      1
+5 R. J. Helton        17-May-81 Pasadena, Texas      Cumming… "J. Helton…      1
+6 Christina Christian 21-Jun-81 Brooklyn, New York   &lt;NA&gt;     ".Christin…      1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ratings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 17
+  season show_number episode    airdate `18_49_rating_share` viewers_in_millions
+   &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;                              &lt;dbl&gt;
+1      1           1 Auditions  June 1… 4.8                                 9.85
+2      1           2 Hollywood… June 1… 5.2                                11.2 
+3      1           3 Top 30: G… June 1… 5.2                                10.3 
+4      1           4 Top 30: G… June 1… 4.7                                 9.47
+5      1           5 Top 30: G… June 2… 4.5                                 9.08
+6      1           6 Top 30: G… June 2… 4.2                                 8.53
+# ℹ 11 more variables: timeslot_et &lt;chr&gt;, dvr_18_49 &lt;chr&gt;,
+#   dvr_viewers_millions &lt;chr&gt;, total_18_49 &lt;chr&gt;,
+#   total_viewers_millions &lt;chr&gt;, weekrank &lt;chr&gt;, ref &lt;lgl&gt;, share &lt;chr&gt;,
+#   nightlyrank &lt;dbl&gt;, rating_share_households &lt;chr&gt;, rating_share &lt;chr&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(seasons)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+  season winner     runner_up original_release original_network hosted_by judges
+   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;     &lt;chr&gt; 
+1      1 Kelly Cla… Justin G… June 11&nbsp;(2002-0… Fox              Ryan Sea… Paula…
+2      2 Ruben Stu… Clay Aik… January 21&nbsp;(200… Fox              Ryan Sea… Paula…
+3      3 Fantasia … Diana De… January 19&nbsp;(200… Fox              Ryan Sea… Paula…
+4      4 Carrie Un… Bo Bice   January 18&nbsp;(200… Fox              Ryan Sea… Paula…
+5      5 Taylor Hi… Katharin… January 17&nbsp;(200… Fox              Ryan Sea… Paula…
+6      6 Jordin Sp… Blake Le… January 16&nbsp;(200… Fox              Ryan Sea… Paula…
+# ℹ 3 more variables: no_of_episodes &lt;dbl&gt;, finals_venue &lt;chr&gt;, mentor &lt;chr&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(songs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+  season    week                 order contestant song  artist song_theme result
+  &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; 
+1 Season_01 20020618_top_30_gro…     1 Tamyra Gr… And … Jenni… &lt;NA&gt;       Advan…
+2 Season_01 20020618_top_30_gro…     2 Jim Verra… When… Doris… &lt;NA&gt;       Advan…
+3 Season_01 20020618_top_30_gro…     3 Adriel He… I'll… Edwin… &lt;NA&gt;       Elimi…
+4 Season_01 20020618_top_30_gro…     4 Rodesia E… Dayd… The M… &lt;NA&gt;       Elimi…
+5 Season_01 20020618_top_30_gro…     5 Natalie B… Crazy Patsy… &lt;NA&gt;       Elimi…
+6 Season_01 20020618_top_30_gro…     6 Brad Estr… Just… James… &lt;NA&gt;       Elimi…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>clean_songs <span class="ot">=</span> songs <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">artist =</span> <span class="fu">as.factor</span>(artist)) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">result =</span> <span class="fu">as.factor</span>(result))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(clean_songs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    season              week               order         contestant       
+ Length:2429        Length:2429        Min.   : 1.000   Length:2429       
+ Class :character   Class :character   1st Qu.: 3.000   Class :character  
+ Mode  :character   Mode  :character   Median : 5.000   Mode  :character  
+                                       Mean   : 5.931                     
+                                       3rd Qu.: 8.000                     
+                                       Max.   :40.000                     
+                                                                          
+     song                       artist      song_theme       
+ Length:2429        Stevie Wonder  :  56   Length:2429       
+ Class :character   The Beatles    :  51   Class :character  
+ Mode  :character   Elton John     :  48   Mode  :character  
+                    Queen          :  34                     
+                    Whitney Houston:  32                     
+                    Billy Joel     :  26                     
+                    (Other)        :2182                     
+          result    
+ Safe        :1155  
+ Eliminated  : 476  
+ Advanced    : 217  
+ Bottom three:  96  
+ Wild Card   :  59  
+ (Other)     : 396  
+ NA's        :  30  </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(clean_songs<span class="sc">$</span>artist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tidytuesday-exercise_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="most-popular-artists" class="level3">
+<h3 class="anchored" data-anchor-id="most-popular-artists">Most popular artists</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>clean_songs<span class="sc">$</span>artist <span class="ot">=</span>  <span class="fu">fct_lump</span>(clean_songs<span class="sc">$</span>artist, <span class="dv">15</span>, <span class="at">other_level =</span> <span class="st">"Other"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(clean_songs, <span class="fu">aes</span>(artist))<span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tidytuesday-exercise_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="converting-variables-to-factors" class="level3">
+<h3 class="anchored" data-anchor-id="converting-variables-to-factors">Converting variables to factors</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>clean_auditions <span class="ot">=</span> auditions <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(audition_city, <span class="fu">c</span>(<span class="st">'city'</span>, <span class="st">'state'</span>), <span class="at">sep =</span> <span class="st">","</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">city =</span> <span class="fu">as.factor</span>(city)) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state =</span> <span class="fu">as.factor</span>(state))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Expected 2 pieces. Missing pieces filled with `NA` in 2 rows [98,
+102].</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(clean_auditions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     season      audition_date_start  audition_date_end               city    
+ Min.   : 1.00   Min.   :2002-04-20   Min.   :2002-04-22   Los Angeles  : 10  
+ 1st Qu.: 6.00   1st Qu.:2006-08-11   1st Qu.:2006-08-11   Nashville    :  7  
+ Median :10.00   Median :2010-09-05   Median :2010-09-05   New York City:  7  
+ Mean   :10.37   Mean   :2011-04-14   Mean   :2011-04-14   San Francisco:  7  
+ 3rd Qu.:15.00   3rd Qu.:2015-09-05   3rd Qu.:2015-09-05   Atlanta      :  6  
+ Max.   :18.00   Max.   :2019-09-21   Max.   :2019-09-21   Austin       :  5  
+                                                           (Other)      :100  
+         state    audition_venue       episodes         episode_air_date  
+  California:22   Length:142         Length:142         Length:142        
+  Texas     :13   Class :character   Class :character   Class :character  
+  Georgia   : 9   Mode  :character   Mode  :character   Mode  :character  
+  New York  : 9                                                           
+  Tennessee : 9                                                           
+ (Other)    :78                                                           
+ NA's       : 2                                                           
+ callback_venue     callback_date_start  callback_date_end   
+ Length:142         Min.   :2002-02-06   Min.   :2002-02-06  
+ Class :character   1st Qu.:2006-10-02   1st Qu.:2006-10-03  
+ Mode  :character   Median :2010-11-09   Median :2010-11-10  
+                    Mean   :2011-06-11   Mean   :2011-06-12  
+                    3rd Qu.:2015-09-13   3rd Qu.:2015-09-14  
+                    Max.   :2019-09-21   Max.   :2019-09-21  
+                    NA's   :13           NA's   :13          
+ tickets_to_hollywood guest_judge       
+ Min.   :  6.0        Length:142        
+ 1st Qu.: 20.0        Class :character  
+ Median : 29.0        Mode  :character  
+ Mean   : 41.8                          
+ 3rd Qu.: 37.0                          
+ Max.   :561.0                          
+ NA's   :48                             </code></pre>
+</div>
+</div>
+</section>
+<section id="trying-to-create-state-variable-for-auditions" class="level3">
+<h3 class="anchored" data-anchor-id="trying-to-create-state-variable-for-auditions">Trying to create State variable for Auditions</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>clean_auditions<span class="sc">$</span>state <span class="ot">=</span>  <span class="fu">fct_lump</span>(clean_auditions<span class="sc">$</span>state, <span class="dv">15</span>, <span class="at">other_level =</span> <span class="st">"Other"</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(clean_auditions, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(state, state, <span class="cf">function</span>(x)<span class="sc">-</span><span class="fu">length</span>(x))))<span class="sc">+</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tidytuesday-exercise_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="mean-number-of-tickets-to-hollywood-per-state" class="level3">
+<h3 class="anchored" data-anchor-id="mean-number-of-tickets-to-hollywood-per-state">Mean number of tickets to Hollywood per state</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>clean_auditions <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(tickets_to_hollywood)) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 22 × 2
+   state             mean
+   &lt;fct&gt;            &lt;dbl&gt;
+ 1 " Missouri"       35  
+ 2 " Massachusetts"  28.3
+ 3 " Alabama"        NA  
+ 4 " California"     NA  
+ 5 " Colorado"       NA  
+ 6 " Florida"        NA  
+ 7 " Georgia"        NA  
+ 8 " Illinois"       NA  
+ 9 " Louisiana"      NA  
+10 " Michigan"       NA  
+# ℹ 12 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="do">##Eliminations</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>clean_elim <span class="ot">=</span> eliminations <span class="sc">%&gt;%</span> </span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">as.factor</span>(gender)) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">as.factor</span>(place))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>bin_elim <span class="ot">=</span> eliminations</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>bin_elim <span class="ot">=</span> bin_elim <span class="sc">%&gt;%</span> </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(place, gender) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">ifelse</span>(<span class="fu">str_length</span>(place)<span class="sc">&gt;</span><span class="dv">2</span>,<span class="fu">substr</span>(place, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">stop =</span> <span class="dv">2</span>),place)) </span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>bin_elim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 456 × 2
+   place gender
+   &lt;chr&gt; &lt;chr&gt; 
+ 1 1     Female
+ 2 2     Male  
+ 3 3     Female
+ 4 4     Female
+ 5 5     Male  
+ 6 6     Female
+ 7 7     Female
+ 8 8     Male  
+ 9 9–    Male  
+10 9–    Male  
+# ℹ 446 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="attempting-to-bin-placements-into-4-categories" class="level3">
+<h3 class="anchored" data-anchor-id="attempting-to-bin-placements-into-4-categories">Attempting to bin placements into 4 categories</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>bin_elim2 <span class="ot">=</span> bin_elim <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'1-5'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'1-5'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'1-5'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">4</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'1-5'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'1-5'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">6</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'6-10'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">7</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'6-10'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">8</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'6-10'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">9</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'6-10'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">10</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'6-10'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">11</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'10-15'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">12</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'10-15'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">13</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'10-15'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">14</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'10-15'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">15</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'10-15'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">16</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'16+'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">17</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'16+'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">18</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'16+'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">recode</span>(place, <span class="st">`</span><span class="at">21</span><span class="st">`</span> <span class="ot">=</span> <span class="st">'16+'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">place =</span> <span class="fu">as.factor</span>(place))</span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>bin_elim2<span class="sc">$</span>place <span class="ot">=</span> <span class="fu">fct_lump</span>(bin_elim2<span class="sc">$</span>place, <span class="dv">4</span>,<span class="at">other_level =</span> <span class="st">"Other"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="practically-there" class="level3">
+<h3 class="anchored" data-anchor-id="practically-there">Practically there</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bin_elim2, <span class="fu">aes</span>(<span class="at">x=</span>gender))<span class="sc">+</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>place)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tidytuesday-exercise_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-the-year-variable" class="level3">
+<h3 class="anchored" data-anchor-id="creating-the-year-variable">Creating the Year variable</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>substrRight <span class="ot">&lt;-</span> <span class="cf">function</span>(x, n){</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">substr</span>(x, <span class="fu">nchar</span>(x)<span class="sc">-</span>n<span class="sc">+</span><span class="dv">1</span>, <span class="fu">nchar</span>(x))</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>year <span class="ot">=</span> <span class="fu">substrRight</span>(ratings<span class="sc">$</span>airdate, <span class="dv">4</span>)</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>ratings<span class="sc">$</span>year <span class="ot">=</span> year</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>ratings1 <span class="ot">=</span> ratings <span class="sc">%&gt;%</span> </span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">str_length</span>(airdate) <span class="sc">&gt;</span> <span class="dv">11</span>)</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>viewers_by_year <span class="ot">=</span> ratings1 <span class="sc">%&gt;%</span> </span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">substrRight</span>(ratings1<span class="sc">$</span>airdate, <span class="dv">4</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(viewers_in_millions)) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(mean))</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>viewers_by_year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 2
+   year   mean
+   &lt;chr&gt; &lt;dbl&gt;
+ 1 2006  29.5 
+ 2 2007  29.1 
+ 3 2008  26.4 
+ 4 2009  24.6 
+ 5 2011  22.8 
+ 6 2010  22.2 
+ 7 2012  17.3 
+ 8 2013  13.3 
+ 9 2002  11.9 
+10 2016   9.09
+11 2018   7.84
+12 2019   7.16
+13 2020   6.88
+14 2003  NA   
+15 2004  NA   
+16 2005  NA   </code></pre>
+</div>
+</div>
+</section>
+<section id="yikes" class="level3">
+<h3 class="anchored" data-anchor-id="yikes">Yikes</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(viewers_by_year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tidytuesday-exercise_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="hypothesisquestion" class="level1">
+<h1>Hypothesis/Question</h1>
+<p>While there are not too many clear options that I can see, I think what could be interesting is trying to predict the number of viewers based on some of the other variables in the ratings table.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>clean_ratings <span class="ot">=</span> ratings1 <span class="sc">%&gt;%</span> </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(season, show_number, weekrank, year, viewers_in_millions) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weekrank =</span> <span class="fu">as.factor</span>(weekrank)) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(clean_ratings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     season        show_number       weekrank        year     
+ Min.   : 1.000   Min.   : 1.00   2      :114   Min.   :2002  
+ 1st Qu.: 4.000   1st Qu.: 9.00   1      :100   1st Qu.:2005  
+ Median : 6.000   Median :18.00   3      : 58   Median :2007  
+ Mean   : 6.815   Mean   :19.06   4      : 52   Mean   :2008  
+ 3rd Qu.:10.000   3rd Qu.:28.00   5      : 23   3rd Qu.:2011  
+ Max.   :15.000   Max.   :44.00   6      : 19   Max.   :2016  
+                                  (Other): 61                 
+ viewers_in_millions
+ Min.   : 5.98      
+ 1st Qu.:17.34      
+ Median :23.38      
+ Mean   :22.09      
+ 3rd Qu.:26.90      
+ Max.   :38.10      
+                    </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>clean_ratings<span class="sc">$</span>weekrank <span class="ot">=</span>  <span class="fu">fct_lump</span>(clean_ratings<span class="sc">$</span>weekrank, <span class="dv">10</span>, <span class="at">other_level =</span> <span class="cn">NA</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(clean_ratings, <span class="fu">aes</span>(weekrank))<span class="sc">+</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tidytuesday-exercise_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>clean_ratings<span class="sc">$</span>weekrank <span class="ot">=</span> <span class="fu">as.numeric</span>(clean_ratings<span class="sc">$</span>weekrank)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(clean_ratings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     season        show_number       weekrank           year     
+ Min.   : 1.000   Min.   : 1.00   Min.   : 1.000   Min.   :2002  
+ 1st Qu.: 4.000   1st Qu.: 9.00   1st Qu.: 3.000   1st Qu.:2005  
+ Median : 6.000   Median :18.00   Median : 3.000   Median :2007  
+ Mean   : 6.815   Mean   :19.06   Mean   : 4.094   Mean   :2008  
+ 3rd Qu.:10.000   3rd Qu.:28.00   3rd Qu.: 5.000   3rd Qu.:2011  
+ Max.   :15.000   Max.   :44.00   Max.   :11.000   Max.   :2016  
+ viewers_in_millions
+ Min.   : 5.98      
+ 1st Qu.:17.34      
+ Median :23.38      
+ Mean   :22.09      
+ 3rd Qu.:26.90      
+ Max.   :38.10      </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(clean_ratings<span class="sc">$</span>season)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tidytuesday-exercise_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(clean_ratings<span class="sc">$</span>show_number)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tidytuesday-exercise_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(clean_ratings<span class="sc">$</span>weekrank)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tidytuesday-exercise_files/figure-html/unnamed-chunk-19-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(clean_ratings<span class="sc">$</span>year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tidytuesday-exercise_files/figure-html/unnamed-chunk-19-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="splitting-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="splitting-the-data">Splitting the Data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>clean_ratings <span class="ot">=</span> <span class="fu">as.data.frame</span>(clean_ratings)</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20</span>)</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>split1 <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="fl">0.8</span> <span class="sc">*</span> <span class="fu">nrow</span>(clean_ratings)), <span class="fu">rep</span>(<span class="dv">1</span>,<span class="fl">0.2</span><span class="sc">*</span><span class="fu">nrow</span>(clean_ratings))))</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">=</span> clean_ratings[split1 <span class="sc">==</span> <span class="dv">0</span>, ]</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">=</span> clean_ratings[split1 <span class="sc">==</span> <span class="dv">1</span>, ]</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>train_y <span class="ot">=</span> train_data<span class="sc">$</span>viewers_in_millions</span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>test_y <span class="ot">=</span> test_data<span class="sc">$</span>viewers_in_millions</span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>train_x <span class="ot">=</span> train_data <span class="sc">%&gt;%</span> </span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>viewers_in_millions)</span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a>test_x <span class="ot">=</span> test_data <span class="sc">%&gt;%</span> </span>
+<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>viewers_in_millions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="preprocessing-training-and-test-predictors" class="level2">
+<h2 class="anchored" data-anchor-id="preprocessing-training-and-test-predictors">PreProcessing Training and Test Predictors</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>TrainXPP <span class="ot">=</span> <span class="fu">preProcess</span>(train_x, <span class="at">method =</span> <span class="fu">c</span>(<span class="st">"scale"</span>,<span class="st">"center"</span>, <span class="st">"BoxCox"</span>))</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>TrainXTrans <span class="ot">=</span> <span class="fu">predict</span>(TrainXPP, train_x)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>TestXPP <span class="ot">=</span> <span class="fu">preProcess</span>(test_x, <span class="at">method =</span> <span class="fu">c</span>(<span class="st">"scale"</span>, <span class="st">"center"</span>, <span class="st">"BoxCox"</span>))</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>TestXTrans <span class="ot">=</span> <span class="fu">predict</span>(TestXPP, test_x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fitting-3-models" class="level2">
+<h2 class="anchored" data-anchor-id="fitting-3-models">Fitting 3 models</h2>
+<section id="linear-regression-model" class="level3">
+<h3 class="anchored" data-anchor-id="linear-regression-model">Linear Regression Model</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidymodels' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ────────────────────────────────────── tidymodels 1.2.0 ──</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ broom        1.0.5      ✔ rsample      1.2.1 
+✔ dials        1.2.1      ✔ tune         1.2.1 
+✔ infer        1.0.7      ✔ workflows    1.1.4 
+✔ modeldata    1.4.0      ✔ workflowsets 1.1.0 
+✔ parsnip      1.2.1      ✔ yardstick    1.3.1 
+✔ recipes      1.0.10     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dials' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'scales' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'infer' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'modeldata' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'parsnip' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'recipes' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'rsample' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tune' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'workflows' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'workflowsets' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'yardstick' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ───────────────────────────────────────── tidymodels_conflicts() ──
+✖ scales::discard()        masks purrr::discard()
+✖ dplyr::filter()          masks stats::filter()
+✖ recipes::fixed()         masks stringr::fixed()
+✖ dplyr::lag()             masks stats::lag()
+✖ caret::lift()            masks purrr::lift()
+✖ yardstick::precision()   masks caret::precision()
+✖ yardstick::recall()      masks caret::recall()
+✖ yardstick::sensitivity() masks caret::sensitivity()
+✖ yardstick::spec()        masks readr::spec()
+✖ yardstick::specificity() masks caret::specificity()
+✖ recipes::step()          masks stats::step()
+• Use suppressPackageStartupMessages() to eliminate package startup messages</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>lmmodel <span class="ot">=</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"regression"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="random-forest" class="level3">
+<h3 class="anchored" data-anchor-id="random-forest">Random Forest</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>rf_model <span class="ot">=</span> <span class="fu">rand_forest</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"randomForest"</span>, <span class="at">imporance =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"regression"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="decision-tree" class="level3">
+<h3 class="anchored" data-anchor-id="decision-tree">Decision Tree</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>dt_model <span class="ot">=</span> <span class="fu">decision_tree</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"rpart"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"regression"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="results" class="level3">
+<h3 class="anchored" data-anchor-id="results">Results</h3>
+<section id="setting-options" class="level4">
+<h4 class="anchored" data-anchor-id="setting-options">Setting options</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">556</span>)</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>folds <span class="ot">=</span> <span class="fu">vfold_cv</span>(train_data, <span class="at">v =</span> <span class="dv">5</span>)</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>formula <span class="ot">=</span> viewers_in_millions <span class="sc">~</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>lm_wf <span class="ot">=</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(lmmodel) <span class="sc">%&gt;%</span> </span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_formula</span>(formula)</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">45</span>)</span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>lm_fit_rs <span class="ot">=</span></span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>  lm_wf <span class="sc">%&gt;%</span> </span>
+<span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a><span class="fu">fit_resamples</span>(folds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>→ A | warning: prediction from rank-deficient fit; consider predict(., rankdeficient="NA")</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>There were issues with some computations   A: x1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>There were issues with some computations   A: x5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>lm_fit_rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Resampling results
+# 5-fold cross-validation 
+# A tibble: 5 × 4
+  splits           id    .metrics         .notes          
+  &lt;list&gt;           &lt;chr&gt; &lt;list&gt;           &lt;list&gt;          
+1 &lt;split [273/69]&gt; Fold1 &lt;tibble [2 × 4]&gt; &lt;tibble [1 × 3]&gt;
+2 &lt;split [273/69]&gt; Fold2 &lt;tibble [2 × 4]&gt; &lt;tibble [1 × 3]&gt;
+3 &lt;split [274/68]&gt; Fold3 &lt;tibble [2 × 4]&gt; &lt;tibble [1 × 3]&gt;
+4 &lt;split [274/68]&gt; Fold4 &lt;tibble [2 × 4]&gt; &lt;tibble [1 × 3]&gt;
+5 &lt;split [274/68]&gt; Fold5 &lt;tibble [2 × 4]&gt; &lt;tibble [1 × 3]&gt;
+
+There were issues with some computations:
+
+  - Warning(s) x5: prediction from rank-deficient fit; consider predict(., rankdefic...
+
+Run `show_notes(.Last.tune.result)` for more information.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>rf_wf <span class="ot">=</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(rf_model) <span class="sc">%&gt;%</span> </span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_formula</span>(formula)</span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">45</span>)</span>
+<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>rf_fit_rs <span class="ot">=</span></span>
+<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a>  rf_wf <span class="sc">%&gt;%</span> </span>
+<span id="cb80-10"><a href="#cb80-10" aria-hidden="true" tabindex="-1"></a><span class="fu">fit_resamples</span>(folds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'randomForest' was built under R version 4.3.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>rf_fit_rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Resampling results
+# 5-fold cross-validation 
+# A tibble: 5 × 4
+  splits           id    .metrics         .notes          
+  &lt;list&gt;           &lt;chr&gt; &lt;list&gt;           &lt;list&gt;          
+1 &lt;split [273/69]&gt; Fold1 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;
+2 &lt;split [273/69]&gt; Fold2 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;
+3 &lt;split [274/68]&gt; Fold3 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;
+4 &lt;split [274/68]&gt; Fold4 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;
+5 &lt;split [274/68]&gt; Fold5 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>dt_wf <span class="ot">=</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(dt_model) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_formula</span>(formula)</span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">45</span>)</span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>dt_fit_rs <span class="ot">=</span></span>
+<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a>  dt_wf <span class="sc">%&gt;%</span> </span>
+<span id="cb84-9"><a href="#cb84-9" aria-hidden="true" tabindex="-1"></a><span class="fu">fit_resamples</span>(folds)</span>
+<span id="cb84-10"><a href="#cb84-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-11"><a href="#cb84-11" aria-hidden="true" tabindex="-1"></a>dt_fit_rs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Resampling results
+# 5-fold cross-validation 
+# A tibble: 5 × 4
+  splits           id    .metrics         .notes          
+  &lt;list&gt;           &lt;chr&gt; &lt;list&gt;           &lt;list&gt;          
+1 &lt;split [273/69]&gt; Fold1 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;
+2 &lt;split [273/69]&gt; Fold2 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;
+3 &lt;split [274/68]&gt; Fold3 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;
+4 &lt;split [274/68]&gt; Fold4 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;
+5 &lt;split [274/68]&gt; Fold5 &lt;tibble [2 × 4]&gt; &lt;tibble [0 × 3]&gt;</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="metrics" class="level3">
+<h3 class="anchored" data-anchor-id="metrics">Metrics</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>Metrics <span class="ot">=</span> <span class="fu">rbind</span>(<span class="fu">collect_metrics</span>(lm_fit_rs),<span class="fu">collect_metrics</span>(rf_fit_rs),<span class="fu">collect_metrics</span>(dt_fit_rs))</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">model =</span> <span class="fu">c</span>(<span class="st">"LM"</span>,<span class="st">"LM"</span>, <span class="st">"RF"</span>,<span class="st">"RF"</span>,<span class="st">"DT"</span>,<span class="st">"DT"</span>), Metrics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  model .metric .estimator      mean n    std_err              .config
+1    LM    rmse   standard 4.8040789 5 0.12140591 Preprocessor1_Model1
+2    LM     rsq   standard 0.4799109 5 0.03524461 Preprocessor1_Model1
+3    RF    rmse   standard 2.2305172 5 0.16620793 Preprocessor1_Model1
+4    RF     rsq   standard 0.8967623 5 0.01307662 Preprocessor1_Model1
+5    DT    rmse   standard 3.1343732 5 0.23193623 Preprocessor1_Model1
+6    DT     rsq   standard 0.7760581 5 0.02892788 Preprocessor1_Model1</code></pre>
+</div>
+</div>
+<p>From these results we can see that the model with the best R^2 value is the RandomForest Model, thich also has the lowest mean RMSE value. Due to this accuracy, we will proceed to use this model on the test data.</p>
+</section>
+<section id="determining-the-most-important-variables" class="level3">
+<h3 class="anchored" data-anchor-id="determining-the-most-important-variables">Determining the most important variables</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vip)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>rf_recipe <span class="ot">&lt;-</span> </span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">recipe</span>(viewers_in_millions <span class="sc">~</span> ., <span class="at">data =</span> train_data) </span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>rf_workflow <span class="ot">&lt;-</span> </span>
+<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">workflow</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(rf_model) <span class="sc">%&gt;%</span> </span>
+<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_recipe</span>(rf_recipe)</span>
+<span id="cb89-8"><a href="#cb89-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-9"><a href="#cb89-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-10"><a href="#cb89-10" aria-hidden="true" tabindex="-1"></a>rf_workflow <span class="sc">%&gt;%</span> </span>
+<span id="cb89-11"><a href="#cb89-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(train_data) <span class="sc">%&gt;%</span> </span>
+<span id="cb89-12"><a href="#cb89-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fit_parsnip</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb89-13"><a href="#cb89-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vip</span>(<span class="at">num_features =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tidytuesday-exercise_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="testing-prediction-data" class="level2">
+<h2 class="anchored" data-anchor-id="testing-prediction-data">Testing Prediction Data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MLmetrics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'MLmetrics' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'MLmetrics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:caret':
+
+    MAE, RMSE</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:base':
+
+    Recall</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">24</span>)</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>rf_fit <span class="ot">=</span></span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>  rf_model <span class="sc">%&gt;%</span> </span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(viewers_in_millions <span class="sc">~</span>., <span class="at">data =</span> train_data)</span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a>rf_testing_pred <span class="ot">&lt;-</span> </span>
+<span id="cb95-9"><a href="#cb95-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(<span class="fu">predict</span>(rf_fit, test_data, <span class="at">type =</span> <span class="st">"numeric"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb95-10"><a href="#cb95-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(test_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(viewers_in_millions))</span>
+<span id="cb95-11"><a href="#cb95-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-12"><a href="#cb95-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rf_testing_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  .pred viewers_in_millions
+  &lt;dbl&gt;               &lt;dbl&gt;
+1  12.9               10.3 
+2  11.8                9.47
+3  12.1               10.3 
+4  17.3               16.9 
+5  24.4               26   
+6  19.7               20.1 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>rf_testing_pred <span class="ot">=</span> <span class="fu">as.data.frame</span>(rf_testing_pred)</span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">=</span> rf_testing_pred<span class="sc">$</span>.pred</span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a>obs <span class="ot">=</span> test_data<span class="sc">$</span>viewers_in_millions</span>
+<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(<span class="at">RMSE =</span> <span class="fu">mean</span>((obs <span class="sc">-</span> preds)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(),</span>
+<span id="cb97-10"><a href="#cb97-10" aria-hidden="true" tabindex="-1"></a><span class="at">RSQ =</span> <span class="fu">cor</span>(obs, preds) <span class="sc">^</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]
+RMSE 1.7716773
+RSQ  0.9453627</code></pre>
+</div>
+</div>
+<p>The R^2 value is actually higher on the Test dataset than the Train dataset, and the RMSE is lower as well.</p>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<ol type="1">
+<li><p>I was able to clean many different variables on several datasets that were very messy<br>
+</p></li>
+<li><p>I was able to explore several different variables and while I struggled to find a good combination of predictors/responses, I did identify my Hypothesis.<br>
+</p></li>
+<li><p>My Question/Objective was to predict the number of viewers based on the numeric variables in the Ratings table.<br>
+</p></li>
+<li><p>I split and preprocessed the data and then ran 3 different models on the training data. The RandomForest performed the best and the most important predictors were ‘Season’ and ‘Year’<br>
+</p></li>
+<li><p>I tested the chosen model (RandomForest) on the test data and uncovered favorable results.<br>
+</p></li>
+</ol>
+<p>I learned a tremendous amount about handling very messy data as well as how to use tidymodels and recipies. I had absolutely no experience with the latter and I now see why they are such a staple for many data scientists.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -230,10 +1157,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -243,8 +1187,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -256,7 +1209,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -300,6 +1376,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -325,6 +1402,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -385,6 +1488,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

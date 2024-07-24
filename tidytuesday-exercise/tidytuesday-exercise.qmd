@@ -3,3 +3,418 @@ title: "Tidy Tuesday Exercise"
 ---
 
 Placeholder file for the future Tidy Tuesday exercise.
+
+```{r}
+# Option 1: tidytuesdayR package 
+#install.packages("tidytuesdayR")
+library(tidytuesdayR)
+tuesdata <- tidytuesdayR::tt_load(2024, week = 30)
+
+auditions <- tuesdata$auditions
+eliminations <- tuesdata$eliminations
+finalists <- tuesdata$finalists
+ratings <- tuesdata$ratings
+seasons <- tuesdata$seasons
+songs <- tuesdata$songs
+
+```
+
+```{r}
+head(auditions)
+head(eliminations)
+head(finalists)
+head(ratings)
+head(seasons)
+head(songs)
+```
+
+```{r}
+#| output: false
+library(tidyverse)
+
+```
+
+```{r}
+clean_songs = songs %>% 
+  mutate(artist = as.factor(artist)) %>% 
+  mutate(result = as.factor(result))
+
+summary(clean_songs)
+```
+
+```{r}
+plot(clean_songs$artist)
+```
+
+### Most popular artists
+
+```{r}
+clean_songs$artist =  fct_lump(clean_songs$artist, 15, other_level = "Other")
+
+
+ggplot(clean_songs, aes(artist))+
+  geom_bar()+
+  coord_flip()
+
+```
+
+### Converting variables to factors
+
+```{r}
+clean_auditions = auditions %>% 
+  separate(audition_city, c('city', 'state'), sep = ",") %>% 
+    mutate(city = as.factor(city)) %>% 
+  mutate(state = as.factor(state))
+  
+summary(clean_auditions)
+```
+
+### Trying to create State variable for Auditions
+
+```{r}
+clean_auditions$state =  fct_lump(clean_auditions$state, 15, other_level = "Other")
+
+
+ggplot(clean_auditions, aes(x=reorder(state, state, function(x)-length(x))))+
+  geom_bar()+
+  coord_flip()
+
+```
+
+### Mean number of tickets to Hollywood per state
+
+```{r}
+
+clean_auditions %>% 
+  group_by(state) %>% 
+  summarise(mean = mean(tickets_to_hollywood)) %>% arrange(desc(mean))
+
+```
+
+```{r}
+##Eliminations
+
+clean_elim = eliminations %>% 
+  mutate(gender = as.factor(gender)) %>% 
+  mutate(place = as.factor(place))
+
+
+```
+
+```{r}
+library(stringr)
+
+bin_elim = eliminations
+
+bin_elim = bin_elim %>% 
+  select(place, gender) %>% 
+  mutate(place = ifelse(str_length(place)>2,substr(place, start = 1, stop = 2),place)) 
+
+
+bin_elim
+```
+
+### Attempting to bin placements into 4 categories
+
+```{r}
+bin_elim2 = bin_elim %>% 
+  mutate(place = recode(place, `1` = '1-5')) %>% 
+  mutate(place = recode(place, `2` = '1-5')) %>% 
+  mutate(place = recode(place, `3` = '1-5')) %>% 
+  mutate(place = recode(place, `4` = '1-5')) %>% 
+  mutate(place = recode(place, `5` = '1-5')) %>% 
+  mutate(place = recode(place, `6` = '6-10')) %>% 
+  mutate(place = recode(place, `7` = '6-10')) %>% 
+  mutate(place = recode(place, `8` = '6-10')) %>% 
+  mutate(place = recode(place, `9` = '6-10')) %>% 
+  mutate(place = recode(place, `10` = '6-10')) %>% 
+  mutate(place = recode(place, `11` = '10-15')) %>% 
+  mutate(place = recode(place, `12` = '10-15')) %>% 
+  mutate(place = recode(place, `13` = '10-15')) %>% 
+  mutate(place = recode(place, `14` = '10-15')) %>% 
+  mutate(place = recode(place, `15` = '10-15')) %>% 
+  mutate(place = recode(place, `16` = '16+')) %>% 
+  mutate(place = recode(place, `17` = '16+')) %>% 
+  mutate(place = recode(place, `18` = '16+')) %>% 
+  mutate(place = recode(place, `21` = '16+')) %>% 
+  mutate(place = as.factor(place))
+
+
+bin_elim2$place = fct_lump(bin_elim2$place, 4,other_level = "Other" )
+  
+```
+
+### Practically there
+
+```{r}
+ggplot(bin_elim2, aes(x=gender))+
+  geom_bar()+
+  facet_wrap(~place)
+```
+
+### Creating the Year variable
+
+```{r}
+
+substrRight <- function(x, n){
+  substr(x, nchar(x)-n+1, nchar(x))
+}
+
+
+year = substrRight(ratings$airdate, 4)
+ratings$year = year
+
+
+ratings1 = ratings %>% 
+    filter(str_length(airdate) > 11)
+
+
+viewers_by_year = ratings1 %>% 
+  mutate(year = substrRight(ratings1$airdate, 4)) %>% 
+  group_by(year) %>% 
+  summarise(mean = mean(viewers_in_millions)) %>% arrange(desc(mean))
+
+viewers_by_year
+```
+
+### Yikes
+
+```{r}
+plot(viewers_by_year)
+```
+
+# Hypothesis/Question
+
+While there are not too many clear options that I can see, I think what could be interesting is trying to predict the number of viewers based on some of the other variables in the ratings table.
+
+```{r}
+clean_ratings = ratings1 %>% 
+  select(season, show_number, weekrank, year, viewers_in_millions) %>% 
+  mutate(year = as.numeric(year)) %>% 
+  mutate(weekrank = as.factor(weekrank)) %>% 
+  drop_na()
+
+
+summary(clean_ratings)
+
+```
+
+```{r}
+clean_ratings$weekrank =  fct_lump(clean_ratings$weekrank, 10, other_level = NA)
+
+ggplot(clean_ratings, aes(weekrank))+
+  geom_bar()
+```
+
+```{r}
+clean_ratings$weekrank = as.numeric(clean_ratings$weekrank)
+
+summary(clean_ratings)
+```
+
+```{r}
+hist(clean_ratings$season)
+hist(clean_ratings$show_number)
+hist(clean_ratings$weekrank)
+hist(clean_ratings$year)
+```
+
+## Splitting the Data
+
+```{r}
+#| output: false
+library(caret)
+
+clean_ratings = as.data.frame(clean_ratings)
+
+set.seed(20)
+
+split1 = sample(c(rep(0, 0.8 * nrow(clean_ratings)), rep(1,0.2*nrow(clean_ratings))))
+
+
+train_data = clean_ratings[split1 == 0, ]
+test_data = clean_ratings[split1 == 1, ]
+
+
+train_y = train_data$viewers_in_millions
+test_y = test_data$viewers_in_millions
+
+
+train_x = train_data %>% 
+  select(!viewers_in_millions)
+
+test_x = test_data %>% 
+  select(!viewers_in_millions)
+```
+
+## PreProcessing Training and Test Predictors
+
+```{r}
+TrainXPP = preProcess(train_x, method = c("scale","center", "BoxCox"))
+TrainXTrans = predict(TrainXPP, train_x)
+TestXPP = preProcess(test_x, method = c("scale", "center", "BoxCox"))
+TestXTrans = predict(TestXPP, test_x)
+```
+
+## Fitting 3 models
+
+### Linear Regression Model
+
+```{r}
+library(tidymodels)
+library(broom)
+
+lmmodel = linear_reg() %>% 
+  set_mode("regression") %>% 
+  set_engine("lm")
+```
+
+### Random Forest
+
+```{r}
+rf_model = rand_forest() %>% 
+  set_engine("randomForest", imporance = TRUE) %>% 
+  set_mode("regression")
+```
+
+### Decision Tree
+
+```{r}
+dt_model = decision_tree() %>% 
+  set_engine("rpart") %>% 
+  set_mode("regression")
+```
+
+### Results
+
+#### Setting options
+
+```{r}
+set.seed(556)
+folds = vfold_cv(train_data, v = 5)
+formula = viewers_in_millions ~.
+```
+
+```{r}
+lm_wf = workflow() %>% 
+  add_model(lmmodel) %>% 
+  add_formula(formula)
+
+
+set.seed(45)
+
+lm_fit_rs =
+  lm_wf %>% 
+fit_resamples(folds)
+
+lm_fit_rs
+```
+
+```{r}
+rf_wf = workflow() %>% 
+  add_model(rf_model) %>% 
+  add_formula(formula)
+
+
+set.seed(45)
+
+rf_fit_rs =
+  rf_wf %>% 
+fit_resamples(folds)
+
+rf_fit_rs
+```
+
+```{r}
+dt_wf = workflow() %>% 
+  add_model(dt_model) %>% 
+  add_formula(formula)
+
+set.seed(45)
+
+dt_fit_rs =
+  dt_wf %>% 
+fit_resamples(folds)
+
+dt_fit_rs
+```
+
+### Metrics
+
+```{r}
+Metrics = rbind(collect_metrics(lm_fit_rs),collect_metrics(rf_fit_rs),collect_metrics(dt_fit_rs))
+
+cbind(model = c("LM","LM", "RF","RF","DT","DT"), Metrics)
+```
+
+From these results we can see that the model with the best R\^2 value is the RandomForest Model, thich also has the lowest mean RMSE value. Due to this accuracy, we will proceed to use this model on the test data.
+
+### Determining the most important variables
+
+```{r}
+#| output: false
+library(vip)
+```
+
+```{r}
+rf_recipe <- 
+  recipe(viewers_in_millions ~ ., data = train_data) 
+
+rf_workflow <- 
+  workflow() %>%
+  add_model(rf_model) %>% 
+  add_recipe(rf_recipe)
+
+
+rf_workflow %>% 
+  fit(train_data) %>% 
+  extract_fit_parsnip() %>% 
+  vip(num_features = 10)
+```
+
+## Testing Prediction Data
+
+```{r}
+library(MLmetrics)
+
+set.seed(24)
+rf_fit =
+  rf_model %>% 
+  fit(viewers_in_millions ~., data = train_data)
+
+
+
+rf_testing_pred <- 
+  bind_cols(predict(rf_fit, test_data, type = "numeric")) %>% 
+  bind_cols(test_data %>% select(viewers_in_millions))
+
+head(rf_testing_pred)
+
+rf_testing_pred = as.data.frame(rf_testing_pred)
+
+
+preds = rf_testing_pred$.pred
+
+obs = test_data$viewers_in_millions
+
+rbind(RMSE = mean((obs - preds)^2) %>% 
+  sqrt(),
+RSQ = cor(obs, preds) ^ 2)
+
+```
+
+The R\^2 value is actually higher on the Test dataset than the Train dataset, and the RMSE is lower as well.
+
+## Conclusions
+
+1)  I was able to clean many different variables on several datasets that were very messy\
+
+2)  I was able to explore several different variables and while I struggled to find a good combination of predictors/responses, I did identify my Hypothesis.\
+
+3)  My Question/Objective was to predict the number of viewers based on the numeric variables in the Ratings table.\
+
+4)  I split and preprocessed the data and then ran 3 different models on the training data. The RandomForest performed the best and the most important predictors were 'Season' and 'Year'\
+
+5)  I tested the chosen model (RandomForest) on the test data and uncovered favorable results.\
+
+I learned a tremendous amount about handling very messy data as well as how to use tidymodels and recipies. I had absolutely no experience with the latter and I now see why they are such a staple for many data scientists.
