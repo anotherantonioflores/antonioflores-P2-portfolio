@@ -1,0 +1,340 @@
+---
+title: "Exploratory Data Analysis script"
+output: html_document
+author: Antonio Flores
+---
+
+
+This Quarto file loads the cleaned data and does some exploring.
+
+# Setup
+Necessary libraries for this script.
+```{r}
+#| output: false
+library(here) 
+library(dplyr)
+library(skimr)
+library(ggplot2)
+library(scales)
+library(tidyr)
+library(forcats)
+library(corrplot)
+library(corrplot)
+library(knitr)
+library(kableExtra)
+```
+
+
+Loading the data.
+
+```{r}
+#If this doesn't initially work, try restarting R and then proceeding
+data_location <- here::here("data","processed-data","processeddata1.rds")
+mydata <- readRDS(data_location)
+```
+
+
+# Data exploration through tables
+
+Creating a summary table.
+
+```{r}
+summary_df = skimr::skim(mydata)
+print(summary_df)
+
+# save to file
+summarytable_file = here("results", "tables", "summarytable1.rds")
+saveRDS(summary_df, file = summarytable_file)
+```
+
+
+
+
+```{r}
+data_location <- here::here("data","processed-data","processeddata1.rds")
+mydata1 <- readRDS(data_location)
+
+mydata1 = mydata1 %>% 
+  select(age, job, marital, education, default, balance, housing, loan, contact, day, month, y_termSubscribed)
+
+str_summary <- capture.output(str(mydata1))
+
+describetbl1 = kable(str_summary, caption = "Summary of predictors") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+
+summarytable_file = here("results", "tables", "describetbl1.rds")
+saveRDS(describetbl1, file = summarytable_file)
+
+
+describetbl1
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Data exploration through figures
+
+Histogram plots for some continuous outcomes. 
+
+Age first.
+
+```{r}
+p1 <- mydata %>% ggplot(aes(x=age)) + geom_histogram()
+plot(p1)
+figure_file = here("results", "figures","age-distribution.png")
+ggsave(filename = figure_file, plot=p1) 
+```
+
+Next bank account balance.
+
+```{r}
+p2 <- mydata %>% ggplot(aes(x=balance)) + geom_histogram() + scale_x_log10(labels =label_dollar())
+plot(p2)
+figure_file = here("results", "figures","balance-distribution.png")
+ggsave(filename = figure_file, plot=p2) 
+```
+
+Now balance as function of age
+
+```{r}
+p3 <- mydata %>% ggplot(aes(x=age, y=balance)) + geom_point() + geom_smooth(method='lm')
+plot(p3)
+figure_file = here("results", "figures", "age-balance-scatter.png")
+ggsave(filename = figure_file, plot=p3) 
+```
+
+Now balance as function of age, stratified by the marital variable. 
+
+```{r}
+p4 <- mydata %>% ggplot(aes(x=age, y=balance, color = marital)) + geom_point() + geom_smooth(method='lm')
+plot(p4)
+figure_file = here("results", "figures", "age-balance-stratified.png")
+ggsave(filename = figure_file, plot=p4) 
+```
+
+
+Next, exploring balance across different job types. 
+
+```{r}
+p5 = mydata |>
+  ggplot(aes(balance, job))+
+  geom_boxplot()+
+  scale_x_log10(labels =label_dollar())
+p5
+figure_file = here("results", "figures", "job-balance-scatter.png")
+ggsave(filename = figure_file, plot=p5) 
+
+```
+
+Now, some barplots examining job types, education level, and marital status.
+
+```{r}
+p6 = mydata |>
+  ggplot(aes(x=fct_infreq(job)))+
+  geom_bar() +
+  coord_flip()
+
+p7 = mydata |>
+  ggplot(aes(education))+
+  geom_bar()
+
+p8 = mydata |>
+  ggplot(aes(marital))+
+  geom_bar()
+
+
+p6
+p7
+p8
+
+figure_file = here("results", "figures", "job-barchart.png")
+ggsave(filename = figure_file, plot=p6) 
+figure_file = here("results", "figures", "education-barchart.png")
+ggsave(filename = figure_file, plot=p7) 
+figure_file = here("results", "figures", "marital-barchart.png")
+ggsave(filename = figure_file, plot=p8) 
+```
+
+
+
+Lets see how the age demographic differs between the population that subscribed to a term (y_termsubscribed=yes) vs the general population.
+
+```{r}
+p9 = mydata |>
+  filter(y_termSubscribed == 1) |>
+  ggplot(aes(age))+
+  geom_bar()+
+  labs(title = "yes")
+
+p10 = mydata |>
+  ggplot(aes(age))+
+  geom_bar()+
+  labs(title = "yes/no")
+
+p9
+p10
+
+figure_file = here("results", "figures", "yes-age.png")
+ggsave(filename = figure_file, plot=p9) 
+
+figure_file = here("results", "figures", "yes-no-age.png")
+ggsave(filename = figure_file, plot=p10) 
+
+
+
+#Comparing how age data compares from those who subscribed to a term deposit and those
+#that did not
+ggplot(data=mydata)+
+  geom_bar(mapping =aes(x=age))+
+  facet_wrap(~y_termSubscribed, nrow=2)
+
+
+```
+
+
+Now, lets assess the highest job categories that are labeled as subscribing to a term.
+
+```{r}
+p11 = mydata |>
+  filter(y_termSubscribed == 1) |>
+  ggplot(aes(x=fct_infreq(job)))+
+  geom_bar()+
+  coord_flip()+
+  labs(title = "Term Subscribed = yes")
+
+p11
+```
+
+
+
+
+
+
+
+
+
+Taking a quick look at some of the binary variables in the dataset
+```{r}
+ggplot(data=mydata)+
+  geom_bar(mapping =aes(x=default))
+ggplot(data=mydata)+
+  geom_bar(mapping =aes(x=housing))
+ggplot(data=mydata)+
+  geom_bar(mapping =aes(x=loan))
+```
+
+
+
+Taking a look at frequency counts across different variables of interest
+```{r}
+hist(mydata$age)
+hist(mydata$balance)
+```
+
+
+Examining which days are most common for recording a positive outcome (subscribing to 
+a term deposit). Looks like later in the month has higher frequencies.
+
+```{r}
+p12= mydata |>
+  filter(y_termSubscribed == 1) |>
+  ggplot(aes(day))+
+  geom_bar()+
+  labs(title = "yes")
+
+p12
+figure_file = here("results", "figures", "days-yes.png")
+ggsave(filename = figure_file, plot=p12) 
+```
+
+
+
+We've analyzed which job types had the MOST positive outcomes, but now we want to 
+compare which job type had the greatest PERCENT of positive outcomes.
+
+```{r}
+posjob = mydata %>% 
+  filter(y_termSubscribed==1) %>% 
+  count(y_termSubscribed, job, sort=TRUE)
+
+jobtable = mydata %>% count(job)
+
+pctjob = posjob %>% 
+  left_join(jobtable, by ="job")
+
+
+colnames(pctjob)[3] <- "numofYES"
+colnames(pctjob)[4] <- "numofBOTH"
+
+```
+
+```{r}
+p13 = ggplot(pctjob, aes(x=reorder(job, numofYES), y=numofYES, fill=numofYES))+
+  geom_bar(stat="identity")+
+  coord_flip()
+  
+p14 = ggplot(pctjob, aes(x=reorder(job, (numofYES/numofBOTH)), y=(numofYES/numofBOTH), fill=numofYES))+
+  geom_bar(stat="identity")+
+  coord_flip()
+
+figure_file = here("results", "figures", "jobs-count-yes.png")
+ggsave(filename = figure_file, plot=p13) 
+figure_file = here("results", "figures", "jobs-percent-yes.png")
+ggsave(filename = figure_file, plot=p14) 
+
+
+p13
+p14
+```
+On the first figure, we can see that jobs with the most positive outcomes are management, technician, and blue-collar, but on the second chart we can see that the job-types with the
+highest percentages are 'student', 'retired', and 'unemployed.' There appears to be a noticable different between the total number of positive cases, and the job types which are most commonly recording positive cases.
+
+
+
+```{r}
+data_location <- here::here("data","processed-data","processeddata5.rds")
+mydata <- readRDS(data_location)
+
+numericonly = mydata %>% 
+  select(!y_termSubscribed)
+
+
+# Specify the file path where the image will be saved
+file_path <- here("results", "figures","corplot.png")
+
+# Open a PNG graphics device
+png(filename = file_path, width = 800, height = 600)
+
+# Create the correlation plot
+corrplot(cor(numericonly))
+
+# Close the graphics device
+dev.off()
+```
+
+
+

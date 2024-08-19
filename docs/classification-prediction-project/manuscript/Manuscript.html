@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.554">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Antonio Flores">
+<meta name="dcterms.date" content="2024-08-12">
+
+<title>Antonio Flores - Data Analysis Portfolio - Predicting Customer Behavior Using a Portuguese Financial Institution Dataset</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Antonio Flores - Data Analysis Portfolio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../aboutme.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Projects</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
+        <li>
+    <a class="dropdown-item" href="../../starter-analysis-exercise/products/report/starter-analysis-report.html">
+ <span class="dropdown-text">Starter Analysis Exercise</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../coding-exercise/coding-exercise.html">
+ <span class="dropdown-text">R Coding Exercise</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../presentation-exercise/presentation-exercise.html">
+ <span class="dropdown-text">Presentation Exercise</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../tidytuesday-exercise/tidytuesday-exercise.html">
+ <span class="dropdown-text">Tidy Tuesday Exercise</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../synthetic-data-exercise/Synthetic_Data.html">
+ <span class="dropdown-text">Synthetic Data Exercise</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../cdcdata-exercise/code/cdcdata-exercise.html">
+ <span class="dropdown-text">Data Analysis Exercise</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../classification-prediction-project/manuscript/Manuscript_Copy.html">
+ <span class="dropdown-text">Classification Prediction Project</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/anotherantonioflores/antonioflores-P2-portfolio"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Manuscript.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Predicting Customer Behavior Using a Portuguese Financial Institution Dataset</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Antonio Flores </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 12, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="abstract" class="level1">
+<h1>Abstract</h1>
+<p>Financial institutions spend billions of dollars on their marketing teams every year, with a positive trend observed in 2023 for the largest and smallest banks (<span class="citation" data-cites="akins2024">Ally Akins (<a href="#ref-akins2024" role="doc-biblioref">2024</a>)</span>). With the need for efficient marketing becoming more and more important, machine learning models are viable tools for refining marketing strategies. This project will seek to identify a model for predicting consumer financial behavior using a dataset from a Portuguese bank. Through comparing the accuracy and predictive power of four different machine learning models, this project will identify an ideal method for prediction.</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<section id="general-background-information" class="level2">
+<h2 class="anchored" data-anchor-id="general-background-information">General Background Information</h2>
+<p>In 2022, JPMorgan Chase &amp; Co.&nbsp;spent $3.9 billion (US) dollars on Marketing, leading other financial institutions in this category. Recent reports have shown that this has only grown in past years (<span class="citation" data-cites="jpmorgan2023">Co. (<a href="#ref-jpmorgan2023" role="doc-biblioref">2023</a>)</span>). Providing businesses with a model that will allow prioritization of consumers and/or demographics has great potential in improving resource management and future marketing campaigns, as well as increasing efficient spending. This particular project will utilize Classification Prediction. Unlike Regression Prediction which will attempt to predict a continuous value (e.g., x amount of dollars, x amount of cells), Classification Prediction seeks to train a model that can correctly predict a classification (e.g., True/False, Success/Failure) based on the given predictors(<span class="citation" data-cites="kuhn2018">Kuhn (<a href="#ref-kuhn2018" role="doc-biblioref">2018</a>)</span>). In our case, our y variable or response variable is a binary variable, Yes/No, answering whether or not a customer subscribed to a term deposit.</p>
+</section>
+<section id="description-of-data-and-data-source" class="level2">
+<h2 class="anchored" data-anchor-id="description-of-data-and-data-source">Description of data and data source</h2>
+<p>The data was donated on 2/13/2012. It was collected from phone call marketing campaigns performed by a Portuguese banking institution. I have accessed this data from the <a href="https://archive.ics.uci.edu/dataset/222/bank+marketing">UC Irvine Machine Learning Repository</a>.</p>
+<p>There are 45,212 records, 17 columns/variables which include: age, marital status, job, education, details related to the phone call, as well as answers related to questions about past credit history. Additionally, as mentioned, the classification variable is whether or not the person subscribed to a term deposit.</p>
+</section>
+<section id="questionshypotheses-to-be-addressed" class="level2">
+<h2 class="anchored" data-anchor-id="questionshypotheses-to-be-addressed">Questions/Hypotheses to be addressed</h2>
+<p>The research question I plan to address with my analysis is: which features or combination of features are the best predictors of consumers making a deposit? The desired output of this analysis is a model which allows a financial institution to make better decisions regarding future marketing campaigns. I plan to investigate all demographic variables, with a specific focus on job type, education and age.</p>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="methods" class="level1">
+<h1>Methods</h1>
+<section id="data-aquisition" class="level2">
+<h2 class="anchored" data-anchor-id="data-aquisition">Data aquisition</h2>
+<p>The dataset for this project was retrieved from UCI ML Repository in CSV form. Additionally, I created a codebook based on data from the same source.</p>
+</section>
+<section id="data-import-and-cleaning" class="level2">
+<h2 class="anchored" data-anchor-id="data-import-and-cleaning">Data import and cleaning</h2>
+<section id="reading-in-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="reading-in-the-data">Reading in the Data</h3>
+<div class="cell">
+<div id="tbl-summarytable1" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summarytable1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Data Snapshot of first 5 Variables
+</figcaption>
+<div aria-describedby="tbl-summarytable1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">age</th>
+<th style="text-align: left;">job</th>
+<th style="text-align: left;">marital</th>
+<th style="text-align: left;">education</th>
+<th style="text-align: left;">default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">58</td>
+<td style="text-align: left;">management</td>
+<td style="text-align: left;">married</td>
+<td style="text-align: left;">tertiary</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">44</td>
+<td style="text-align: left;">technician</td>
+<td style="text-align: left;">single</td>
+<td style="text-align: left;">secondary</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">33</td>
+<td style="text-align: left;">entrepreneur</td>
+<td style="text-align: left;">married</td>
+<td style="text-align: left;">secondary</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">47</td>
+<td style="text-align: left;">blue-collar</td>
+<td style="text-align: left;">married</td>
+<td style="text-align: left;">unknown</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">33</td>
+<td style="text-align: left;">unknown</td>
+<td style="text-align: left;">single</td>
+<td style="text-align: left;">unknown</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">35</td>
+<td style="text-align: left;">management</td>
+<td style="text-align: left;">married</td>
+<td style="text-align: left;">tertiary</td>
+<td style="text-align: left;">no</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-summarytable2" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summarytable2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Data Snapshot of next 5 Variables
+</figcaption>
+<div aria-describedby="tbl-summarytable2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">balance</th>
+<th style="text-align: left;">housing</th>
+<th style="text-align: left;">loan</th>
+<th style="text-align: left;">contact</th>
+<th style="text-align: right;">day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2143</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">unknown</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">unknown</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">unknown</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1506</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">unknown</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">unknown</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">231</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">unknown</td>
+<td style="text-align: right;">5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="dimensions" class="level3">
+<h3 class="anchored" data-anchor-id="dimensions">Dimensions:</h3>
+<p>Rows: 45, 211<br>
+Columns: 17</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="describing-data" class="level3">
+<h3 class="anchored" data-anchor-id="describing-data">Describing data</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<caption>Summary of predictors</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">x</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">'data.frame': 45211 obs. of 12 variables:</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">$ age : int 58 44 33 47 33 35 28 42 58 43 ...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">$ job : Factor w/ 12 levels "admin.","blue-collar",..: 5 10 3 2 12 5 5 3 6 10 ...</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">$ marital : Factor w/ 3 levels "divorced","married",..: 2 3 2 2 3 2 3 1 2 3 ...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">$ education : Factor w/ 4 levels "primary","secondary",..: 3 2 2 4 4 3 3 3 1 2 ...</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">$ default : Factor w/ 2 levels "no","yes": 1 1 1 1 1 1 1 2 1 1 ...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">$ balance : int 2143 29 2 1506 1 231 447 2 121 593 ...</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">$ housing : Factor w/ 2 levels "no","yes": 2 2 2 2 1 2 2 2 2 2 ...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">$ loan : Factor w/ 2 levels "no","yes": 1 1 2 1 1 1 2 1 1 1 ...</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">$ contact : Factor w/ 3 levels "cellular","telephone",..: 3 3 3 3 3 3 3 3 3 3 ...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">$ day : Factor w/ 31 levels "1","2","3","4",..: 5 5 5 5 5 5 5 5 5 5 ...</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">$ month : Factor w/ 12 levels "apr","aug","dec",..: 9 9 9 9 9 9 9 9 9 9 ...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">$ y_termSubscribed: Factor w/ 2 levels "0","1": 1 1 1 1 1 1 1 1 1 1 ...</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+</div>
+</section>
+<section id="cleaning-data" class="level3">
+<h3 class="anchored" data-anchor-id="cleaning-data">Cleaning Data</h3>
+<p>There were several different data cleaning methods that were experimented with in order to find the best way to prepare the data for modeling. First, I converted several variables to factors, as they had been read in as character variables, or strings. Next I tried to use the DummyVars tool to convert every categorical variable to a dummy value but this made modeling difficult due to a large amount of binary variables. Instead I proceeded with converting the categorical variables to numeric values while maintaining their factor status. I also created a dataset with these numeric values that were not factors. These were the two primary dataset I used for my modeling. Finally I created a dataset stripping the categorical values of their attributes, this was solely created to allow for my corrplot to work.</p>
+</section>
+<section id="removing-initial-predictors" class="level3">
+<h3 class="anchored" data-anchor-id="removing-initial-predictors">Removing Initial Predictors</h3>
+<p>I removed the ‘Duration’ variable due to a warning I discovered on the site hosting this dataset initially: “Important note: this attribute highly affects the output target (e.g., if duration=0 then y=‘no’). Yet, the duration is not known before a call is performed. Also, after the end of the call y is obviously known. Thus, this input should only be included for benchmark purposes and should be discarded if the intention is to have a realistic predictive model.”(<span class="citation" data-cites="misc_bank_marketing_222">Moro &amp; Cortez (<a href="#ref-misc_bank_marketing_222" role="doc-biblioref">2012</a>)</span>) Due to this new information I decided to remove all the variables related to this, which included ‘campaign’, ‘pdays’, ‘previous’, and ‘poutcome.’ Bringing our new total number of predictors to 11.</p>
+</section>
+</section>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<section id="exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
+<p>Peng and Matsui define EDA as “the process of exploring your data”, “[including] examining the structure and components of your dataset, the distributions of individual variables, and the relationships between two or more variables”(<span class="citation" data-cites="peng2018">Peng &amp; Matsui (<a href="#ref-peng2018" role="doc-biblioref">2018</a>)</span>).</p>
+<p>In accordance with this definition, we will be exploring the data using different charts to identify outliers, abnormalities, relationships, and the general shape and feel of different variables.</p>
+<p><a href="#fig-result1" class="quarto-xref">Figure&nbsp;1</a> shows the distribution of the ‘Age’ variable.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result1" class="quarto-figure quarto-figure-center quarto-float anchored" width="1050">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/age-distribution.png" id="fig-result1" class="img-fluid figure-img" width="1050">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-result1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>While this shows a slight skew to the right, if we account for the extreme values, this data seems to be fairly normally distributed.</p>
+<div style="page-break-after: always;"></div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/education-barchart.png" class="img-fluid figure-img" width="1050">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-result2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Education level Bar Chart
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result3" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/job-barchart.png" class="img-fluid figure-img" width="1050">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-result3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Most Common Job Types
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result4" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/age-balance-stratified.png" class="img-fluid figure-img" width="1050">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-result4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Scatterplot of Age and Balance, stratified by Marital Status.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-result5" class="quarto-xref">Figure&nbsp;5</a> shows a barplot of the most common days of the month to record a positive outcome.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result5" class="quarto-figure quarto-figure-center quarto-float anchored" width="1050">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/days-yes.png" id="fig-result5" class="img-fluid figure-img" width="1050">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-result5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>While there doesn’t appear to be a significant trend, we can clearly see that the 30th of the month stands out as being a day of interest, especially compared to other days of the months.</p>
+<p><a href="#fig-result6" class="quarto-xref">Figure&nbsp;6</a> shows potential correlation between different variables.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result6" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/corplot.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-result6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Correlation Matrix
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The biggest takeaways from our Exploratory Data Analysis is that most variables are fairly normally distributed due to the size of the data, and most variable are not correlated to each other, with one exception (‘Age’ and ‘Marital’).</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="basic-statistical-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="basic-statistical-analysis">Basic statistical analysis</h2>
+<p>Before I began with the machine learning analysis, I sought to test the variables of interest in their significance of affecting the response variable. As mentioned previously, our response variable is a binary value (Yes/No), which means that we need to use a logistic regression model instead of a linear regression model (<span class="citation" data-cites="kuhn2018">Kuhn (<a href="#ref-kuhn2018" role="doc-biblioref">2018</a>)</span>).</p>
+<p>Below are the results of the logistic model fit with all variables as predictors</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-0.8090128</td>
+<td style="text-align: right;">0.2095208</td>
+<td style="text-align: right;">-3.861252</td>
+<td style="text-align: right;">0.0001128</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">job</td>
+<td style="text-align: right;">0.0133597</td>
+<td style="text-align: right;">0.0046908</td>
+<td style="text-align: right;">2.848042</td>
+<td style="text-align: right;">0.0043989</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">marital</td>
+<td style="text-align: right;">0.2328452</td>
+<td style="text-align: right;">0.0276199</td>
+<td style="text-align: right;">8.430357</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">education</td>
+<td style="text-align: right;">0.1858218</td>
+<td style="text-align: right;">0.0198575</td>
+<td style="text-align: right;">9.357763</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">default</td>
+<td style="text-align: right;">-0.4935394</td>
+<td style="text-align: right;">0.1456864</td>
+<td style="text-align: right;">-3.387684</td>
+<td style="text-align: right;">0.0007049</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">housing</td>
+<td style="text-align: right;">-0.7963802</td>
+<td style="text-align: right;">0.0313995</td>
+<td style="text-align: right;">-25.362860</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">loan</td>
+<td style="text-align: right;">-0.5843431</td>
+<td style="text-align: right;">0.0502504</td>
+<td style="text-align: right;">-11.628624</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.0062746</td>
+<td style="text-align: right;">0.0015087</td>
+<td style="text-align: right;">4.158970</td>
+<td style="text-align: right;">0.0000320</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">balance</td>
+<td style="text-align: right;">0.0000238</td>
+<td style="text-align: right;">0.0000039</td>
+<td style="text-align: right;">6.057946</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">day</td>
+<td style="text-align: right;">-0.0119537</td>
+<td style="text-align: right;">0.0017711</td>
+<td style="text-align: right;">-6.749262</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>As expected, all predictors are very significant as determined by the very small p-values. We will proceed to the Machine Learning portion of this project.</p>
+</section>
+<section id="machine-learning-modeling" class="level2">
+<h2 class="anchored" data-anchor-id="machine-learning-modeling">Machine Learning Modeling</h2>
+<p>I chose to utilize the following models: the Multivariate Adaptive Regression Splines model (MARS), K-Nearest Neighbors model (KNN), Logistic Regression model, and RandomForest models to determine the best prediction model for this project. </p><div style="page-break-after: always;"></div><p></p>
+<section id="background-on-chosen-models" class="level3">
+<h3 class="anchored" data-anchor-id="background-on-chosen-models">Background on Chosen Models</h3>
+<p><strong>MARS:</strong><br>
+The MARS model has some similarities to both Neural Networks and the Partial Least Squares model, but the distinguishing feature is a use of multiple ‘splines’ to create a “piecewise linear model” with multiple features modeling a separate part of the data (<span class="citation" data-cites="kuhn2018">Kuhn (<a href="#ref-kuhn2018" role="doc-biblioref">2018</a>)</span>).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result7" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/images/marsexample.jpeg" class="img-fluid figure-img" width="164">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-result7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: MARS Model example from MiniTab
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>KNN:</strong><br>
+The KNN model predicts based on the closest samples or neighbors. Essentially, to predict a value, the data is broken up into samples/neighbors, and then the nearest samples (using Euclidean distance, typically) to the value of interest are examined to either classify or find a mean between the chosen samples. K represents the number of neighbors to utilize to come to this conclusion (<span class="citation" data-cites="kuhn2018">Kuhn (<a href="#ref-kuhn2018" role="doc-biblioref">2018</a>)</span>).</p>
+<p><strong>Logistic Regression:</strong><br>
+As mentioned earlier, Logistic Regression is similar to Linear Regression but the difference is that a Logistic Regression focuses on the probability of an event (p, p-1).</p>
+<p><strong>RandomForest:</strong><br>
+RandomForest models take advantage of decision trees. If we think about the scenario in our project (whether someone makes a deposit or not), we could imagine a decsion tree starting with, “after what age is someone more likely to subscribe?” This would be our first node to split the data on. We could continue asking things like, “Are those with housing loans more likely to subscribe?” or “Are those who are married more liklely to subscribe?”, and these would represent more decision nodes for us to split the data on, getting us closer to the mode accurate prediction model. The RandomForest algorithm uses different methods to create several uncorrelated “forests” of decision trees (<span class="citation" data-cites="IBM">IBM (<a href="#ref-IBM" role="doc-biblioref">n.d.</a>)</span>) .</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="background-on-performance-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="background-on-performance-metrics">Background On Performance Metrics</h3>
+<p><strong>Description of Key Metrics:</strong><br>
+<strong>Accuracy:</strong><br>
+The proportion of total correct classifications.<br>
+<strong>Recall: (Sensitivity)</strong><br>
+The proportion of Positive cases that were correctly identified. This helps us understand how well we can classify positive cases specifically.<br>
+<strong>Specificity:</strong><br>
+The proportion of Negative cases that were correctly identified.&nbsp; <strong>Precision:</strong><br>
+The proportion of Positive classifications that were actually correct.<br>
+<strong>F1:</strong><br>
+The harmonic mean of Precision and Recall. This metric helps iron out extreme values<br>
+<strong>ROC:</strong><br>
+The Receiver Operator Characteristic is a plotting technique that shows the threshold difference between Sensitivity (Recall) and Specificity. A model with good performance will have curve closer to the top left of the graph, whereas, a low-performing model will have a curve closer to the middle diagonal line.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result8" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/images/ROC_Example.jpg" class="img-fluid figure-img" width="186">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-result8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: ROC diagram from DisplayR
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="model-performance-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="model-performance-metrics">Model Performance Metrics</h3>
+<p>As highlighted in the data cleaning section, there were two data sets I was focusing on: one that had numeric factors for the categorical predictors, and one that had just numeric variables for the categorical predictors. I decided to examine both so there are a total of 8 different runs recorded below, 4 runs for each dataset.</p>
+<p><a href="#tbl-resulttable1" class="quarto-xref">Table&nbsp;3</a> displays the relevant metrics for the models runs using the predictors that are numeric and are not factors.</p>
+<div class="cell">
+<div id="tbl-resulttable1" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-resulttable1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Performance Metrics for Numeric Unfactored Model Run
+</figcaption>
+<div aria-describedby="tbl-resulttable1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Term</th>
+<th style="text-align: left;">MARS</th>
+<th style="text-align: left;">KNN</th>
+<th style="text-align: left;">LogReg</th>
+<th style="text-align: left;">RF</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">accuracy</td>
+<td style="text-align: left;">0.882</td>
+<td style="text-align: left;">0.88</td>
+<td style="text-align: left;">0.882</td>
+<td style="text-align: left;">0.887</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">kappa</td>
+<td style="text-align: left;">0.017</td>
+<td style="text-align: left;">0.018</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.126</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sensitivity</td>
+<td style="text-align: left;">0.011</td>
+<td style="text-align: left;">0.014</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0.084</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">specificity</td>
+<td style="text-align: left;">0.999</td>
+<td style="text-align: left;">0.997</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.994</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">precision</td>
+<td style="text-align: left;">0.545</td>
+<td style="text-align: left;">0.357</td>
+<td style="text-align: left;">0.882</td>
+<td style="text-align: left;">0.667</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">recall</td>
+<td style="text-align: left;">0.011</td>
+<td style="text-align: left;">0.014</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0.084</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">f1</td>
+<td style="text-align: left;">0.022</td>
+<td style="text-align: left;">0.027</td>
+<td style="text-align: left;">0.937</td>
+<td style="text-align: left;">0.149</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>While all four models performed fairly similarly, the RandomForest model reported the highest values in all major categories. What stands out very clearly is that while all models have a fairly high accuracy scores, they also have very low recall values. We can deduce that this means the models are great at predicting negative cases (no subscription) but not very adequate at predicting positive cases (subscription). In the case of the Logistic Regression Model, there were 0 positive cases predicted at all, and thus the non-accuracy scores were 0 or NA.</p>
+<p><a href="#tbl-resulttable2" class="quarto-xref">Table&nbsp;4</a> displays the relevant metrics for the models using the predictors that are factors (Age/Balance are still numeric).</p>
+<div class="cell">
+<div id="tbl-resulttable2" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-resulttable2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Performance Metrics for Factored Model Run
+</figcaption>
+<div aria-describedby="tbl-resulttable2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Term1</th>
+<th style="text-align: left;">MARS1</th>
+<th style="text-align: left;">KNN1</th>
+<th style="text-align: left;">LogReg1</th>
+<th style="text-align: left;">RF1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">accuracy</td>
+<td style="text-align: left;">0.882</td>
+<td style="text-align: left;">0.882</td>
+<td style="text-align: left;">0.881</td>
+<td style="text-align: left;">0.884</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">kappa</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.031</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.144</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sensitivity</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.021</td>
+<td style="text-align: left;">0.001</td>
+<td style="text-align: left;">0.105</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">specificity</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0.997</td>
+<td style="text-align: left;">0.999</td>
+<td style="text-align: left;">0.989</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">precision</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">0.524</td>
+<td style="text-align: left;">0.125</td>
+<td style="text-align: left;">0.554</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">recall</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.021</td>
+<td style="text-align: left;">0.001</td>
+<td style="text-align: left;">0.105</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">f1</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">0.04</td>
+<td style="text-align: left;">0.002</td>
+<td style="text-align: left;">0.176</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>With these results we can see that the RandomForest Model is still the best performing, but in this case, the KNN model is not too far behind in most metrics. The Logistic Regression model performed better under these conditions, predicting some positive classes. However, the MARS model did not fare so well. In this run, the MARS model was the model to not identify a single positive class.</p>
+<p><a href="#fig-result9" class="quarto-xref">Figure&nbsp;9</a> displays the ROC Curve for the first model run. Both ROC charts were identical, so only one is included here.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result9" class="quarto-figure quarto-figure-center quarto-float anchored" width="400">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/ROC1.png" id="fig-result9" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-result9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The ROC graph tells an even clearer story. While the RF model had a near perfect threshold trade-off between Sensitivity and Specificity, the other three models had very low ROC scores, again emphasizing poor predictive performance.</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="variables-of-importance" class="level3">
+<h3 class="anchored" data-anchor-id="variables-of-importance">Variables of Importance</h3>
+<p>Finally, we can examine which predictors specifically improved prediction the most. That is, which had the greatest weight on the final result. We will compare the difference between the two different runs of the same models. I determined it would only be helpful to include models that had more an 0 positive classes predicted.</p>
+<p><a href="#fig-result10" class="quarto-xref">Figure&nbsp;10</a> shows the Predictors that had the most impact on the Mars Model – Numeric</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result10" class="quarto-figure quarto-figure-center quarto-float anchored" width="400">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/importantM1.png" id="fig-result10" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-result10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The numeric MARS models only highlighted a single variable of importance: Age.</p>
+<div style="page-break-after: always;"></div>
+<p><a href="#fig-result11" class="quarto-xref">Figure&nbsp;11</a> shows the Predictors that had the most impact on the KNN Model–Numeric</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result11" class="quarto-figure quarto-figure-center quarto-float anchored" width="400">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/importantKNN1.png" id="fig-result11" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-result11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Both KNN model runs returned the exact same most important factors, which were: Housing (whether someone had a housing loan or not), Balance (numeric value representing the customer’s current account balance), and Education (Secondary, Tertiary, etc.).</p>
+<div style="page-break-after: always;"></div>
+<p><a href="#fig-result12" class="quarto-xref">Figure&nbsp;12</a> shows the Predictors that had the most impact on the Logistic Regression Model – Factor</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result12" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/importantLog2.png" class="img-fluid figure-img" width="748">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-result12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: KNN Variables of Importance
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Housing2 indicates that the person does have a housing loan and Loan2 indicates that the person has personal loan. Education3 indicates that the person has attained a tertiary level of education. Additionally we see different days being flagged as important in determining accuracy.</p>
+<div style="page-break-after: always;"></div>
+<p><a href="#fig-result13" class="quarto-xref">Figure&nbsp;13</a> shows the Predictors that had the most impact on the RF Model – Numeric</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result13" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/importantRF1.png" class="img-fluid figure-img" width="748">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-result13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13: RF Variables of Importance
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<p><a href="#fig-result14" class="quarto-xref">Figure&nbsp;14</a> shows the Predictors that had the most impact on the RF Model – Factor</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result14" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/importantRF2.png" class="img-fluid figure-img" width="748">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-result14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14: KNN Variables of Importance
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>For both RandomForest models, Age and Housing were the variables with most impact on the model’s prediction power. Balance and Day were next for both models in different order of importance.</p>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="downsampling-machine-learning-models" class="level2">
+<h2 class="anchored" data-anchor-id="downsampling-machine-learning-models">DownSampling Machine Learning Models</h2>
+<p>In situations involving imbalanced response variables, there are different approaches available that can improve model performance. Kuhn and Johnson describe several different options including “Up-sampling” and “Down-sampling” (<span class="citation" data-cites="kuhn2018">Kuhn (<a href="#ref-kuhn2018" role="doc-biblioref">2018</a>)</span>). Up-sampling involves generating additional synthetic data in order to bring the totals of the response classes up to an equal amount. Down-sampling involves removing random observations until the the majority class is equal to the minority class (or classes). Since this project was already utilizing a fairly large dataset, I decided to perform Down-sampling in order to assist with the response variable imbalance that was being observed. The challenge with this approach is that there is less data to train with, but could lead to a greater overall model performance.</p>
+<p>I performed Down-Sampling on the training data set but kept the test data set intact as it was. It is recommended to allow the test data set to continue representing the natural data distribution in order for the most realistic prediction analysis</p>
+<section id="downsampling-model-performance-metrics-non-factored" class="level3">
+<h3 class="anchored" data-anchor-id="downsampling-model-performance-metrics-non-factored">DownSampling Model Performance Metrics (Non-factored)</h3>
+<div id="tbl-resulttable3" class="cell anchored">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Term</th>
+<th style="text-align: left;">MARS</th>
+<th style="text-align: left;">KNN</th>
+<th style="text-align: left;">LogReg</th>
+<th style="text-align: left;">RF</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">accuracy</td>
+<td style="text-align: left;">0.648</td>
+<td style="text-align: left;">0.629</td>
+<td style="text-align: left;">0.624</td>
+<td style="text-align: left;">0.676</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">kappa</td>
+<td style="text-align: left;">0.137</td>
+<td style="text-align: left;">0.106</td>
+<td style="text-align: left;">0.113</td>
+<td style="text-align: left;">0.168</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sensitivity</td>
+<td style="text-align: left;">0.615</td>
+<td style="text-align: left;">0.574</td>
+<td style="text-align: left;">0.626</td>
+<td style="text-align: left;">0.629</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">specificity</td>
+<td style="text-align: left;">0.652</td>
+<td style="text-align: left;">0.637</td>
+<td style="text-align: left;">0.602</td>
+<td style="text-align: left;">0.683</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">precision</td>
+<td style="text-align: left;">0.192</td>
+<td style="text-align: left;">0.175</td>
+<td style="text-align: left;">0.921</td>
+<td style="text-align: left;">0.21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">recall</td>
+<td style="text-align: left;">0.615</td>
+<td style="text-align: left;">0.574</td>
+<td style="text-align: left;">0.626</td>
+<td style="text-align: left;">0.629</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">f1</td>
+<td style="text-align: left;">0.293</td>
+<td style="text-align: left;">0.269</td>
+<td style="text-align: left;">0.746</td>
+<td style="text-align: left;">0.315</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>At first glance, it appears that the performance power on these models is less than the first models, but this is not the case. While Accuracy was lower among all models, Recall and F1 scores saw tremendous improvements. The model that improved the most was clearly Logistic Regression which didn’t show any Precision or F1 power initially, but now shows better Precision and F1 than the RandomForest model, which still showed to the be the superior model after this run.</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="downsampling-model-performance-metrics-factored" class="level3">
+<h3 class="anchored" data-anchor-id="downsampling-model-performance-metrics-factored">DownSampling Model Performance Metrics (Factored)</h3>
+<div id="tbl-resulttable4" class="cell anchored">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Term1</th>
+<th style="text-align: left;">MARS1</th>
+<th style="text-align: left;">KNN1</th>
+<th style="text-align: left;">LogReg1</th>
+<th style="text-align: left;">RF1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">accuracy</td>
+<td style="text-align: left;">0.65</td>
+<td style="text-align: left;">0.618</td>
+<td style="text-align: left;">0.647</td>
+<td style="text-align: left;">0.61</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">kappa</td>
+<td style="text-align: left;">0.136</td>
+<td style="text-align: left;">0.123</td>
+<td style="text-align: left;">0.135</td>
+<td style="text-align: left;">0.13</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sensitivity</td>
+<td style="text-align: left;">0.61</td>
+<td style="text-align: left;">0.642</td>
+<td style="text-align: left;">0.612</td>
+<td style="text-align: left;">0.677</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">specificity</td>
+<td style="text-align: left;">0.655</td>
+<td style="text-align: left;">0.615</td>
+<td style="text-align: left;">0.652</td>
+<td style="text-align: left;">0.602</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">precision</td>
+<td style="text-align: left;">0.192</td>
+<td style="text-align: left;">0.183</td>
+<td style="text-align: left;">0.191</td>
+<td style="text-align: left;">0.186</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">recall</td>
+<td style="text-align: left;">0.61</td>
+<td style="text-align: left;">0.642</td>
+<td style="text-align: left;">0.612</td>
+<td style="text-align: left;">0.677</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">f1</td>
+<td style="text-align: left;">0.292</td>
+<td style="text-align: left;">0.285</td>
+<td style="text-align: left;">0.291</td>
+<td style="text-align: left;">0.292</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We can observe similar changes in the second Down-sampled run. In the Factored-Down-Sampled model runs, we also see that it is harder to identify a single model of best performance. The MARS model showed the best Accuracy and Specificity, while the RandomForest model showed the best Sensitivity and Precision. The Logistic Regression model was not far behind in these categories and managed to approximately tie three ways for the F1 metric, along with the MARS Model and RandomForest Model.</p>
+<div style="page-break-after: always;"></div>
+<p><a href="#tbl-resulttable15" class="quarto-xref">Table&nbsp;5</a> displays the ROC Curve for the Down-Sampled model runs. Again, both ROC charts were identical, so only one is included here.</p>
+<div class="cell">
+<div id="tbl-resulttable15" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-resulttable15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5
+</figcaption>
+<div aria-describedby="tbl-resulttable15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="../results/figures/ROC3.png" class="img-fluid figure-img" width="400"></p>
+</figure>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>We can see much better results on the ROC model compared to the first runs. The RandomForest again performs nearly perfectly, but all three remaining models show some promise in terms of threshold trade-off, with the MARS model leading these three.</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="variables-of-importance-for-down-sampled-models" class="level3">
+<h3 class="anchored" data-anchor-id="variables-of-importance-for-down-sampled-models">Variables of Importance for Down-Sampled Models</h3>
+<p><a href="#fig-result16" class="quarto-xref">Figure&nbsp;15</a> shows the Predictors that had the most impact on the Down-Sampled Mars Model – Factored</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result16" class="quarto-figure quarto-figure-center quarto-float anchored" width="400">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result16-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/DSimportantM2.png" id="fig-result16" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-result16-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Both MARS models highlighted essentially the same variables of importance, with added detail coming from the factored model. As mentioned previously, Housing2 indicates that the person does have a housing loan and Loan2 indicates that the person has personal loan. Education3 indicates that the person has attained a tertiary level of education. Marital 2 indicates the person is married.</p>
+<div style="page-break-after: always;"></div>
+<p><a href="#fig-result17" class="quarto-xref">Figure&nbsp;16</a> shows the Predictors that had the most impact on the Down-Sampled KNN Models (both models highlighted the same variables)</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result17" class="quarto-figure quarto-figure-center quarto-float anchored" width="400">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result17-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/DSimportantKNN1.png" id="fig-result17" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-result17-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The variables highlighted here are the same that were highlighted in the original KNN models with the only exception being the Marital variable moved up one spot on this list.</p>
+<div style="page-break-after: always;"></div>
+<p><a href="#fig-result18" class="quarto-xref">Figure&nbsp;17</a> shows the Predictors that had the most impact on the Down-Sampled Logistic Regression Model – Factored</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result18" class="quarto-figure quarto-figure-center quarto-float anchored" width="748">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result18-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/DSimportantLog2.png" id="fig-result18" class="img-fluid figure-img" width="748">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-result18-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>These are practically the same variables highlighted in the original Logistic Regression Model, except while the ‘Education3’ variable was the third most important variable on the original model, it is nowhere to be found on this new list. In contrast, the ‘Job3’ (Technician) variable makes an appearance as having a substantial impact on prediction power.</p>
+<div style="page-break-after: always;"></div>
+<p><a href="#fig-result19" class="quarto-xref">Figure&nbsp;18</a> shows the Predictors that had the most impact on the Down-Sampled Logistic Regression Model – Factored</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-result19" class="quarto-figure quarto-figure-center quarto-float anchored" width="748">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-result19-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/DSimportantRF1.png" id="fig-result19" class="img-fluid figure-img" width="748">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-result19-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>While the two Down-Sampled models were fairly close in highlighting variables, there was quite a bit of difference between these results and the original RandomForest model. Where the original highlighted, Age, Housing, Day and Balance, the new models highlighted Housing, Age, Balance, and Loan.</p>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+</section>
+<section id="discussion" class="level1">
+<h1>Discussion</h1>
+<section id="summary-and-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="summary-and-interpretation">Summary and Interpretation</h2>
+<p>Initially the metrics produced by these models were showing substantial promise, but as I investigated the different confusion matrices I realized that the metrics were incorrectly labeling the negative classification as positive. When I reversed this option, the metrics very clearly shows that there was a drop in performance for predicting positive classifications. One explanation for this is that there were too few positive classes in the data as a whole. In the full data set, about 11% of the observations were positive cases, and this was also the case in the test data set as well. Given the size of the data set (45K records), and the small proportion of positive cases, there is reason to conclude that the models were victim to lack of familiarity with the positive cases.</p>
+<p>Using a Down-Sampling approach to alleviate the imbalance issue resulted in models with greater predictive power and gave more clarity on which variables (and in some cases, sub-variables) contributed the most towards correctly predicting the response variable.</p>
+<p>All four models provided insights for this objective. The Housing variable was listed as the most important variable by every model with the exception of the Mars-Numeric model. Balance and Age were also listed as important by several different models. The variables that did not show up in the five important variables in any of the models were: Marital, Job, and Default. Education, Loan, and Day had a significant effect on some of the models and little to no effect on others.</p>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<p>Using machine learning to better define a customer base can be an incredibly effective way to create more efficient marketing campaigns, as well as provide direction for better management of marketing resources.</p>
+<p>I attempted to develop a classification model that accurately predicted whether a customer had subscribed to a term deposit or not. While the different models that were ran initially showed potential, the predictive power of the best model was not at an ideal level. With a more balanced data set with similar variables, it is probable that a more precise model could have been produced.</p>
+<p>The other goal of this project was to identify which variables could best aid in identifying customers that would subscribe to a term deposit. I found that there was quite a bit of variance among the predictors in terms of importance, with some predictors clearly standing out above the rest. This information could be used to better segment a consumer pool or adjust marketing tactics to prioritize customers displaying the variables of importance uncovered in this project.</p>
+<p>Further research would include utilizing additional models to confirm the results presented here, incorporating a more balanced data set (as mentioned above), and exploring different tuning options than were used in this project.</p>
+</section>
+</section>
+<section id="references" class="level1">
+
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-akins2024" class="csl-entry" role="listitem">
+Ally Akins, C. H. &amp;. T. F. (2024). <em><span class="nocase">What Bang Do Financial Marketers Get for Their Bucks?</span></em>
+</div>
+<div id="ref-jpmorgan2023" class="csl-entry" role="listitem">
+Co., J. C. &amp;. (2023). <em><span>Creating Possibility Annual Report 2022</span></em>.
+</div>
+<div id="ref-IBM" class="csl-entry" role="listitem">
+IBM. (n.d.). <em><span class="nocase">What is random forest?</span></em>
+</div>
+<div id="ref-kuhn2018" class="csl-entry" role="listitem">
+Kuhn, &amp;. J., M. (2018). <em><span class="nocase">Applied predictive modeling</span></em>.
+</div>
+<div id="ref-misc_bank_marketing_222" class="csl-entry" role="listitem">
+Moro, R., S., &amp; Cortez, P. (2012). <em><span>Bank Marketing</span></em>.
+</div>
+<div id="ref-peng2018" class="csl-entry" role="listitem">
+Peng, R. D., &amp; Matsui, E. (2018). <em><span class="nocase">The Art of Data Science</span></em>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

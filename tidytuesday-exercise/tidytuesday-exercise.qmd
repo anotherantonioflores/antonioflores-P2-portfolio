@@ -2,8 +2,6 @@
 title: "Tidy Tuesday Exercise"
 ---
 
-Placeholder file for the future Tidy Tuesday exercise.
-
 ```{r}
 # Option 1: tidytuesdayR package 
 #install.packages("tidytuesdayR")

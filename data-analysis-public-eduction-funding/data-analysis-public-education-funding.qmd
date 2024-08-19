@@ -1,0 +1,102 @@
+---
+title: "Data Analysis of Public Education Funding"
+author: Antonio Flores
+date: "11-1-2023"
+format: 
+  html:
+    self-contained: true 
+---
+
+```{r, echo=FALSE, message=FALSE, warning = FALSE}
+library(here)
+library(knitr)
+```
+
+# Introduction
+
+Myself and two others competed in the 2023 UTSA Rowdy Datathon competition.
+
+We were tasked with analyzing public school data to identify what areas of focus should be highlighted in order to increase educational attainment. To accomplish this, we performed lengthy data cleaning, and exploratory data analysis using SQL and R on four different datasets. 
+
+We decided to limit most of our analysis to Texas in order to provide more accurate conclusions.
+
+We then identified factors/predictors that provided a strong correlation to achieving educational attainment. Additionally, we uncovered many unique observations and trends.
+
+Upon completion of the Datathon, we presented to a panel of judges, resulting in winning 2nd Place in our category
+
+# Datasets Utilized and Tools
+
+We used SQL, Excel, Tableau, and R running on Rstudio.
+
+Our Data came from:\
+[Civil Rights Data Collection](https://civilrightsdata.ed.gov/)\
+[School District Geographic Relationship](https://nces.ed.gov/programs/edge/geographic/relationshipfiles)\
+[Small Area Income and Poverty Estimates](https://www.census.gov/programs-surveys/saipe.html)\
+[School Location and Geo Assignment](https://nces.ed.gov/programs/edge/geographic/schoollocations)\
+
+
+# Results
+
+Our first analysis was regarding the number of Students per School District vs. the number of students in poverty for all school districts in the US.
+
+```{r, out.width="120%"}
+#| echo: FALSE
+knitr::include_graphics(here("data-analysis-public-eduction-funding","IMG","population_poverty.png"))
+```
+
+
+Secondly we sought to identify key socioeconomic factors.
+```{r, out.width="120%"}
+#| echo: FALSE
+knitr::include_graphics(here("data-analysis-public-eduction-funding", "IMG","title1_status.png"))
+```
+This view shows the number of SAT test takers per LEA (school district), with blue indicating whether a LEA is listed as Title 1 (low income). 
+
+```{r, out.width="120%"}
+#| echo: FALSE
+#"data-analysis-public-education-funding-project"
+knitr::include_graphics(here("data-analysis-public-eduction-funding","IMG","txVSok.png"))
+```
+When we compare the results in Texas to a nearby state (Oklahoma), we see that the percent of low income districts in Texas is much lower. Obviously, the number of low income districts is greater in Texas due to it's massize state size.
+
+
+### Federal Funding vs SAT/ACT test takers
+
+```{r, out.width="120%"}
+#| echo: FALSE
+#"data-analysis-public-education-funding-project"
+knitr::include_graphics(here("data-analysis-public-eduction-funding","IMG","fundingVSSAT.png"))
+```
+This view shows that schools that receive more federal funding are correlated with the number of SAT/ACT test takers that come from that district.
+
+
+### LEA districts by funding sources
+```{r, out.width="120%"}
+#| echo: FALSE
+#"data-analysis-public-education-funding-project"
+knitr::include_graphics(here("data-analysis-public-eduction-funding","IMG","LEAdistricts.png"))
+```
+
+
+# Key Takeaways
+My biggest lesson learned was the importance of data cleaning. This ate up most of our time in the competition. First I hit a wall with one of the tools we were using and then, once I switched tools, I realized that there were datatype issues that needed to be sorted out. On top of that, we needed to aggregate all the data which was a task in and of itself. 
+Thankfully, a handful of hours before time was up, I created a R Script that would clean all the data, aggregate it, and then generate it in a usable format. 
+
+
+# Future Work
+We narrowed our future research goals to:\
+
+Research SAT scores across differet Race and Ethnicity groups.\
+
+Compare advanced math, AP scores, etc. to see if the relationships we discovered were consistent.\
+
+Identify which states are most effective at tackling the problems we discovered and assess what we learn from their strategies. \
+
+
+# Final Result
+```{r}
+#| echo: FALSE
+#"data-analysis-public-education-funding-project"
+knitr::include_graphics(here("data-analysis-public-eduction-funding","IMG","Winning.JPG"))
+```
+

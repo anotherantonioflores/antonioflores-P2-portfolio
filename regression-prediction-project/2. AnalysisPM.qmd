@@ -1,0 +1,277 @@
+---
+title: "AnalysisPM"
+format: html
+---
+
+```{r}
+library(ggplot2) #for plotting
+library(broom) #for cleaning up output from lm()
+library(here) #for data loading/saving
+library(earth)
+library(tidyr)
+library(dplyr)
+library(caret)
+library(knitr)
+library(randomForest)
+library(Metrics)
+```
+############# Reading in the data
+```{r}
+
+data_location <- here("regression-prediction-project","data","Processed Data","Numerical.rds")
+NumericData <- readRDS(data_location)
+
+data_location <- here("regression-prediction-project","data","Processed Data","Categorical.rds")
+CategoricalData <- readRDS(data_location)
+
+data_location <- here("regression-prediction-project","data","Processed Data","Response.rds")
+Response <- readRDS(data_location)
+
+```
+
+
+
+```{r}
+
+NUMRESP = cbind(NumericData, Response$SalePrice)
+NUMRESP = NUMRESP %>% 
+  select(!Id)
+
+CATRESP = cbind(CategoricalData, Response$SalePrice)
+CATRESP = CATRESP %>% 
+  select(!Id)
+```
+
+
+```{r}
+LMfull = glm(`Response$SalePrice`~., data = NUMRESP)
+summary(LMfull)
+```
+
+```{r}
+lntable <- broom::tidy(LMfull)
+fullmodel = here("regression-prediction-project","results","fullmodel.rds")
+saveRDS(lntable, file = fullmodel)
+
+```
+
+
+
+```{r}
+LMfull2 = glm(`Response$SalePrice`~., data = CATRESP)
+summary(LMfull)
+```
+
+
+
+
+# Preprocessing
+
+
+```{r}
+set.seed(24)
+numdatapp = preProcess(NumericData[2:37], method= c("scale", "center", "BoxCox"))
+TransNumeric = predict(numdatapp, NumericData[2:37])
+```
+
+
+
+```{r}
+Fulldata1 = cbind(TransNumeric, CategoricalData, "Price" = Response$SalePrice)
+
+Fulldata1 = Fulldata1 %>% 
+  select(!Id) 
+```
+
+
+# Splitting
+```{r}
+set.seed(24)
+split1 = sample(c(rep(0, 0.8 * nrow(Fulldata1)), rep(1, 0.2*nrow(Fulldata1))))
+
+train_data = Fulldata1[split1 == 0, ]
+test_data = Fulldata1[split1 == 1, ]
+```
+
+
+
+# Ctrl options
+```{r}
+ctrl <- trainControl(method = "cv")
+```
+
+
+
+
+# Modeling
+
+## LN model
+
+```{r}
+LNmodel = glm(Price~., data = train_data)
+
+
+LNmodel
+
+lnIMP = varImp(LNmodel)
+lnIMP$Names = row.names(lnIMP)
+
+
+lnIMP %>% 
+  top_n(10, Overall) %>% 
+  ggplot()+
+  geom_bar(mapping= aes(x = reorder(Names, Overall), y = Overall), stat = "identity")+ 
+  coord_flip()+
+  labs(x = "Predictors", y = "Importance")
+
+
+ggsave(here("regression-prediction-project","results","importantLN.png"))
+
+```
+
+
+## KNN 
+```{r}
+knnModel = train(Price~., data=train_data, 
+                 method = "knn",
+                 tuneGrid = data.frame(k=1:20),
+                 trControl= ctrl)
+
+
+knnModel
+
+KNNIMP = varImp(knnModel, , scale = FALSE)
+
+KNNIMPGraph = KNNIMP$importance
+KNNIMPGraph$Names = row.names(KNNIMPGraph)
+
+KNNIMPGraph %>% 
+  top_n(10, Overall) %>% 
+  ggplot()+
+  geom_bar(mapping= aes(x = reorder(Names, Overall), y = Overall), stat = "identity")+ 
+  coord_flip()+
+  labs(x = "Predictors", y = "Importance")
+
+ggsave(here("regression-prediction-project","results","importantKNN.png"))
+
+
+```
+
+
+## RandomForest
+```{r}
+set.seed(222)
+
+rfmodel = randomForest(Price~., data = train_data,
+                importance = TRUE,
+                trControl = ctrl)
+
+rfmodel
+
+
+rfIMP = varImp(rfmodel)
+
+rfIMP$Names = row.names(rfIMP)
+
+rfIMP %>% 
+  top_n(10, Overall) %>% 
+  ggplot()+
+  geom_bar(mapping= aes(x = reorder(Names, Overall), y = Overall), stat = "identity")+ 
+  coord_flip() +
+  labs(x = "Predictors", y = "Importance")
+ggsave(here("regression-prediction-project","results","importantRF.png"))
+
+
+```
+
+
+# Results
+```{r}
+test_results = data.frame(OBS = test_data$Price, 
+                          LNM = predict(LNmodel, test_data[1:61]),
+                          KNN = predict(knnModel, test_data[1:61]),
+                          RFM = predict(rfmodel, test_data[1:61]))
+
+
+options(scipen = 999.99)
+
+
+Perf_results = data.frame(
+  LNM = round(postResample(pred = test_results$LNM, obs = test_data$Price), 3),
+  KNN = round(postResample(pred = test_results$KNN, obs = test_data$Price), 3),
+  RFM = round(postResample(pred = test_results$RFM, obs = test_data$Price), 3)
+  )
+
+Perf_results
+
+```
+
+```{r}
+table_file1 = here("regression-prediction-project","results","resultstbl1.rds")
+saveRDS(Perf_results, file = table_file1)
+```
+
+
+
+```{r}
+test_results = data.frame(OBS = test_data$Price, 
+                          LNM = predict(LNmodel, test_data[1:61]),
+                          KNN = predict(knnModel, test_data[1:61]),
+                          RFM = predict(rfmodel, test_data[1:61]))
+
+
+OBS = data.frame(VALUE = test_data$Price, OBBS = test_data$Price, TYPE = "OBS") 
+LNM = data.frame(VALUE = predict(LNmodel, test_data[1:61]), OBBS = test_data$Price, TYPE = "LNM")
+KNN = data.frame(VALUE = predict(knnModel, test_data[1:61]), OBBS = test_data$Price, TYPE = "KNN")
+RFM = data.frame(VALUE = predict(rfmodel, test_data[1:61]), OBBS = test_data$Price, TYPE = "RFM")
+
+OBS = OBS %>% 
+  mutate(ID = row_number())
+
+LNM = LNM %>% 
+  mutate(ID = row_number())
+
+KNN = KNN %>% 
+  mutate(ID = row_number())
+
+RFM = RFM %>% 
+  mutate(ID = row_number())
+
+forGraph = rbind(OBS, LNM, KNN, RFM)
+
+forGraph = forGraph %>% 
+  mutate(TYPE = as.factor(TYPE))
+
+```
+
+
+```{r}
+forGraph %>% 
+  ggplot(aes(x=ID, y=VALUE, color = TYPE)) + geom_point()
+
+ggsave(here("regression-prediction-project","results","predictions.png"))
+
+```
+
+
+```{r}
+Perf_results$Row = row.names(Perf_results)
+
+ResultGraph = Perf_results %>% 
+    pivot_longer(!Row, names_to = "Models", values_to = "values")
+
+
+ResultGraph %>% 
+  filter(Row == "RMSE") %>%
+  ggplot(aes(x=Models, y=values, fill = Models)) + geom_bar(stat = "identity")
+ggsave(here("regression-prediction-project","results","RMSE.png"))
+
+
+ResultGraph %>% 
+  filter(Row == "MAE") %>%
+  ggplot(aes(x=Models, y=values, fill = Models)) + geom_bar(stat = "identity")
+ggsave(here("regression-prediction-project","results","MAE.png"))
+
+```
+
+

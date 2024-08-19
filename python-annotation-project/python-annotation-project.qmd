@@ -1,0 +1,95 @@
+---
+title: "Python Annotation and Modeling Project"
+author: Antonio Flores
+date: "5-7-2024"
+format: 
+  html:
+    self-contained: true
+---
+
+```{r, echo=FALSE, message=FALSE, warning = FALSE}
+library(here)
+library(knitr)
+```
+
+I worked on this project with 3 of my colleagues from my Graduate Program.
+
+# Introduction  
+The goal of this project was to create different machine learning models trained on data annotations of a reddit comment dataset. The two topics of interest that were chosen to train our models with were ‘technology-related' and 'transportation-related.' 
+
+# Annotation Collection
+The team created guidelines for our two annotation groups to use in determining the correct labels to place on each comment. After allowing our groups to annotate the first 50 comments, we assessed how well they understood our requirements, and then allowed them to proceed with the remaining 950 comments.
+
+# Agreement Analysis
+Once all our comments had been annotated by both groups, we need to measure how well the two groups ‘agreed’ on the comment's classifications, using Cohen's Kappa. 
+
+```{r, out.width="120%"}
+#| echo: FALSE
+knitr::include_graphics(here("python-annotation-project","IMG","p0agreement.png"))
+```
+
+```{r, out.width="120%"}
+#| echo: FALSE
+knitr::include_graphics(here("python-annotation-project","IMG","techcokap.png"))
+```
+```{r, out.width="120%"}
+#| echo: FALSE
+knitr::include_graphics(here("python-annotation-project","IMG","transcokapp.png"))
+```
+
+In order to adjust for the variances in our two annotation groups, we created a ‘gold standard’ label set for our comments and proceeded with the machine learning modeling process.
+
+
+
+
+# Feature Selection
+After finalizing our annotation dataset for both topics of interest, we began constructing our models. All our models are trained using a Linear SVC algorithm with c values of .01, .1, and 1. We decided to implement the following additional features for both topics:\
+
+1)	CAPS – Does this comment have at least one word written in all Capital Letters?\
+•	We used simple string methods and Boolean logic to identify words that met this criterion.\
+•	Technology: Targeting strong emphasis words related to internet, connectivity, web activity.\
+•	Transportation: Targeting road names, or strong emphasis words related to traffic, transportation systems, etc.\
+
+2)	Digits – Does this comment have at least one “word” that contains both letters and numbers?\
+•	We used regex expressions to only flag words that matched the above criteria\
+•	Technology: Targeting tech related terms such as ‘100GB’, ‘1080p’, etc.\
+•	Transportation: Targeting highways and vehicle models such as ‘IH-10’, ‘F150,’ etc.\
+
+3)	Lexicon—Does this comment contain a word found in our (transportation/technology) lexicon?\
+•	We web scraped a list of technology related terms from 2 websites:\
+o	Tech: [ageUK](https://www.ageuk.org.uk/information-advice/work-learning/technology-internet/online-terms/)\
+o	Transportation: [Wikipedia](https://en.wikipedia.org/wiki/Glossary_of_road_transport_terms)\
+•	Once we established the html structure, we then cleaned the results to produce our lexicons for each topic.\
+
+
+```{r, out.width="120%"}
+#| echo: FALSE
+knitr::include_graphics(here("python-annotation-project","IMG","Techmodel.png"))
+```
+
+```{r, out.width="120%"}
+#| echo: FALSE
+knitr::include_graphics(here("python-annotation-project","IMG","transmodel.png"))
+```
+
+# Technology Task Model Assessment
+Results: Three different models had the exact same micro scores, indicating that this was not the best metric to use to identify the best model. There was more variance among the macro scores, which led to the conclusion that the best performing model was our CAPS model, with macro scores of .64 in all three categories. 
+
+
+
+# Transportation Task Model Assessment
+Results: All these models had identical f1-scores of .95, indicating that our additional features were less effective at improving the transportation models than they were with the technology models. These models also had identical macro values when compared to each other, but individually, these metrics varied considerably. Precision was much higher than recall, meaning that when these models predicted something as positive, they were correct almost all of the time. However, recall was much lower, indicating that there were many positive cases that were missed by the models.
+
+
+
+
+
+
+
+
+
+
+# Appendix
+Technology Lexicon: ['DOWNLOAD', 'FACEBOOK', 'ICON', 'PAYPAL', 'WHATSAPP', 'PHISHING', 'SMARTPHONE', 'SOFTWARE', 'ZOOM', 'LINK', 'SKYPE', 'ROUTER', 'INSTAGRAM', 'APPLE', 'BANDWIDTH', 'APPS', '4G', 'URL', 'WEBPAGE', 'CATFISHING', 'CLOUD STORAGE', 'DATA ALLOWANCE', 'HYPERLINK', '5G', 'HARDWARE', 'OPERATING SYSTEM', 'IOS', 'MALWARE', 'HACK', 'EMAIL', 'APPLICATIONS', 'PROFILE', 'ANDROID', 'SPAM', 'WIRELESS NETWORK', 'SECURITY CERTIFICATE', 'TABS', 'WEBSITE', 'COOKIES', 'PROGRAM', 'DEVICE', 'GOOGLE', 'POP-UP', '3G', 'TABLET', 'UPLOAD', 'ENCRYPTED', 'HTTP', 'TWITTER', 'MOBILE DATA', 'SPYWARE', 'WEBCAM', 'ADDRESS BAR', 'ANTI-VIRUS', 'ATTACHMENT', 'ONLINE', 'BLUETOOTH', 'VIRUSES', 'BROADBAND', 'BROWSER', 'SIM CARD', 'YOUTUBE', 'INBOX', 'LOG IN', 'SOCIAL MEDIA', 'SEARCH ENGINE', 'HTTPS', 'SECURE WEBSITE']\
+
+Transportation Lexicon: ['Street hierarchy', 'Concrete step barrier', 'Unused highway', 'Fog', 'Brick', 'Ford', 'Reinforced concrete', 'Dual carriageway Divided highway Expressway', 'business route', 'Road slipperiness', '2+2 road', "Botts' dots", 'Street running railway', 'Storm drain', 'Seat belts', 'Country lane', 'Aquaplaning', 'Wide outside lane', 'Superstreet', 'Vehicles', 'Traffic signal preemption', 'Constant-slope barrier', 'Road train', 'Rumble strip', 'Sett', 'High-occupancy toll lane', 'Traffic barrier', 'Raised pavement marker', 'Backroad', 'Traffic island', 'Lane', 'Traffic directionality', 'Toll road', 'Parkway', 'Kassel kerb', 'Asphalt concrete', 'Split intersection', 'Jughandle', 'Dirt', 'Hairpin turn', 'Turnaround', 'Other terms', 'Chipseal', 'Rubberized asphalt', 'Guard rail', 'Road surface marking', 'Present serviceability index', 'Seagull intersection', 'Route number', 'Directional T', 'Road andenvironment', 'Pedestrian zone', 'Ring road', 'Frontage road', 'Gravel', 'Traffic cone', 'Road types by features', 'Passing lane', 'Black ice', 'Bowtie', 'Plank', 'Link road', 'Bicycle boulevard', 'Box junction', 'Protected intersection', 'Single carriageway', 'Runaway truck ramp', 'Complete streets', 'Road', 'Quadrant roadway', 'Primitive road', 'Shared space', 'Glossary of road transport terms', 'Sidewalk Pavement', 'Concrete', 'Alley', 'Texas U-turn', 'Bridge', 'Median Central reservation', 'Sunken lane', 'Diamond grinding of pavement', 'Single-point urban ', 'Climbing lane', 'Collector road', 'Tarmac', 'Private highway', 'Traffic lanes', 'Single-vehicle crash', 'Overpass Flyover', 'SPUI', 'Speed bump', 'Woonerf', 'Crosswind', 'Texture', 'Diamond', 'Roundabout', 'Snowsquall', 'Crushed stone', 'Cloverleaf', "Driver's education", 'Pavement condition index', 'Hook turn', 'Rut', 'Two-lane expressway', 'Glassphalt', 'Road verge', 'Barrier transfer machine', 'High-occupancy vehicle lane', 'Whiteout', 'Freeway Motorway', 'Causeway', "Dead Man's Curve", 'Manhole cover', 'Curb', 'Washout', 'Intersections', 'road transport', 'Expansion joint', 'Main street', 'Single-track road', 'Diverging diamond', '2+1 road', 'Bleeding', 'Level crossing', 'Living street', 'Avenue', 'Truck bypass', 'Pavement milling', 'Stamped asphalt', 'Permeable', 'Express-collector setup', 'Highway systems by country', 'Motorcycle lane', 'Right-in/right-out ', 'Washboarding', 'Macadam', 'Bicycle lane', 'Three-level diamond', 'Automotive safety', 'F-Shape barrier', "Cat's eye ", 'Human factors', 'grade-separated', 'Bike freeway', 'Oversize load', 'Reversible lane', 'Full depth recycling', 'Cobblestone', 'Driving under the influence', 'Stack', 'Drowsy driving', 'at-grade', 'road', 'Green lane', 'Airbag', 'special route', 'Super two', 'Concurrency', 'Elevated highway', 'Jersey barrier', 'Pavement performance modeling', 'Managed lane', 'Trunk road', 'Parclo', 'Limited-access', 'Pothole', 'Road rage', 'Free-flow', 'Farm-to-market road', 'Corduroy', 'Bioasphalt', 'International roughness index', 'Roadkill', '3-way junction', 'Traffic calming', 'Underride guard', 'Local roads', 'Ice', 'Crocodile cracking', 'Arterial road', 'Stroad', 'Shoulder', 'Noise barrier', 'Winter road', 'Hierarchy of roads', 'Pedestrian crossing', 'Driveway', 'Boulevard', 'Risk compensation ', 'Contraflow lane reversal', 'Refuge island', 'Main roads', 'Bollard', 'Channelization', 'Highway', 'Continuous flow', 'Plastic', 'Trumpet', 'Granular base equivalency', 'County highway', 'Road diet', 'Sealcoat', 'Interchanges', 'Michigan left', 'Rockfall', 'Oil spill', 'Street', 'Cable barrier', 'Road debris', 'Offset T-intersection', 'RIRO', 'Dead end', 'Contraflow lane', 'Underpass Tunnel', 'Raindrop', 'Side road', 'Avalanche', 'Detour']\

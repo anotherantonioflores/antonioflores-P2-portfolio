@@ -1,0 +1,177 @@
+---
+title: "Preparing data for analysis"
+author: "Antonio Flores"
+output: html_document
+---
+
+# Setup
+
+The following packages are needed for this data processing
+
+```{r}
+#| output: false
+library(readxl) 
+library(dplyr) 
+library(tidyr) 
+library(skimr) 
+library(here) 
+library(caret)
+```
+
+# Data loading
+
+```{r}
+data_location <- here::here("data","raw-data","bank-full.csv")
+rawdata <- read.csv(data_location, header = TRUE, sep=";")
+```
+
+# Check data
+
+Examining metadata by accessing the codebook. This codebook was taken directly from the data repository housing the chosen dataset. The decision was made to keep this in a separate xlsx file from the dataset so that the dataset could remain in the identical form in which it was sourced (CSV format).
+
+```{r}
+codebook_location <- 
+here::here("data","raw-data","codebook.xlsx")
+
+codebook <- readxl::read_excel(codebook_location, sheet ="Codebook")
+print(codebook)
+```
+
+Various ways of looking at the data
+
+```{r}
+dplyr::glimpse(rawdata)
+summary(rawdata)
+head(rawdata)
+skimr::skim(rawdata)
+```
+
+# Cleaning the data
+
+We are mainly converting character variables into factors so we can do some categorical analysis. I had initially included converting months to a numeric variable but realized that it was fine as a factor variable.
+
+```{r}
+d1 = rawdata |> 
+  mutate(job = as.factor(job)) |>
+  mutate(marital = as.factor(marital)) |>
+  mutate(education = as.factor(education)) |>
+  mutate(default = as.factor(default)) |>
+  mutate(housing = as.factor(housing)) |>
+  mutate(loan = as.factor(loan)) |>
+  mutate(education = as.factor(education)) |>
+  mutate(contact = as.factor(contact)) |>
+  mutate(month = as.factor(month)) |>
+  mutate(y = ifelse(y == "yes", 1, 0)) |>
+  mutate(y = as.factor(y)) |>
+  mutate(poutcome = as.factor(poutcome)) |>
+  mutate(day = as.factor(day)) |>
+  mutate(y = as.factor(y)) %>% 
+  select(!duration)
+ 
+
+colnames(d1)[16] <- "y_termSubscribed"
+
+
+summary(d1)
+```
+
+All done, data is clean now.
+
+# Save data
+
+```{r}
+processeddata1 <- d1
+
+save_data_location <- here::here("data","processed-data","processeddata1.rds")
+saveRDS(processeddata1, file = save_data_location)
+```
+
+
+# Data set 2: Attempting to convert categorical variables to dummy
+
+```{r}
+testing_dummy = processeddata1 %>% 
+  select(job, marital, education, default, housing, loan, contact) %>% 
+  mutate(ID = row_number())
+
+
+dummy <- dummyVars("~.", data=testing_dummy)
+df1 <- predict(dummy, newdata = testing_dummy)
+
+df1 = as.data.frame(df1)
+
+numeric_vars = processeddata1 %>% 
+  select(age, balance, day, y_termSubscribed) %>% 
+  mutate(ID = row_number())
+
+d2 <- merge(df1,numeric_vars, by = "ID")
+```
+
+
+```{r}
+save_data_location <- here::here("data","processed-data","processeddata2.rds")
+saveRDS(d2, file = save_data_location)
+```
+
+
+# Dataset 3: Converting categorical variables to numeric factors
+
+```{r}
+d3 = processeddata1 |>
+  select(job, marital, education, default, housing, loan, age, balance, day, y_termSubscribed) |>
+  mutate(job = as.factor(unclass(job))) |>
+  mutate(marital = as.factor(unclass(marital))) |>
+  mutate(education = as.factor(unclass(education))) |>
+  mutate(default = as.factor(unclass(default))) |>
+  mutate(housing = as.factor(unclass(housing))) |>
+  mutate(loan = as.factor(unclass(loan)))
+  
+```
+
+
+```{r}
+save_data_location <- here::here("data","processed-data","processeddata3.rds")
+saveRDS(d3, file = save_data_location)
+```
+
+
+# Dataset 4: Converting categorical variables to true numeric values
+
+```{r}
+d4 = processeddata1 |>
+  select(job, marital, education, default, housing, loan, age, balance, day, y_termSubscribed) |>
+  mutate(job = unclass(job)) |>
+  mutate(marital = unclass(marital)) |>
+  mutate(education = unclass(education)) |>
+  mutate(default = unclass(default)) |>
+  mutate(housing = unclass(housing)) |>
+  mutate(loan = unclass(loan))|>
+  mutate(day = unclass(day))
+```
+
+
+```{r}
+save_data_location <- here::here("data","processed-data","processeddata4.rds")
+saveRDS(d4, file = save_data_location)
+```
+
+
+# Dataset 5: Remving "Attributes" from numeric factor variables (for Corrplot)
+
+```{r}
+d5 = processeddata1 |>
+  select(job, marital, education, default, housing, loan, age, balance, day, y_termSubscribed) |>
+  mutate(job = as.numeric(job)) |>
+  mutate(marital = as.numeric(marital)) |>
+  mutate(education = as.numeric(education)) |>
+  mutate(default = as.numeric(default)) |>
+  mutate(housing = as.numeric(housing)) |>
+  mutate(loan = as.numeric(loan))|>
+  mutate(day = as.numeric(day))
+```
+
+
+```{r}
+save_data_location <- here::here("data","processed-data","processeddata5.rds")
+saveRDS(d5, file = save_data_location)
+```

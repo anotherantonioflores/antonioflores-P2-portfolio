@@ -1,10 +1,13 @@
----
-title: "Antonio Flores - Data Analysis Portfolio"
----
 
 # Hello there!
 
-Welcome to **my website** and **data analysis portfolio.**
-
 -   Please use the `Menu Bar` above to look around.
--   Have fun!
+-   My Resume and Bio can be found on the `About Me` page.
+-   My Data Analysis Projects can be found in the `Projects` menu.
+-   Data Exercises that I performed for a Graduate Class can be observed in the `Exercises` menu.
+
+# Contact 
+Email: antoniogeo0@gmail.com\
+Phone: (830)-245-4748\
+LinkedIn: [Ricardo Antonio Flores III](https://linkedin.com/in/ricardo-antonio-floresiii)
+

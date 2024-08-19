@@ -1,0 +1,186 @@
+---
+title: "ProcessingPM"
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(here)
+
+data_location1 = here("regression-prediction-project","data", "train.csv")
+
+train_data = read.csv(data_location1)
+```
+
+
+```{r}
+str(train_data)
+colSums(is.na(train_data))
+```
+
+
+Removing all variables with > 80% missing values
+
+```{r}
+clean_data = train_data %>% 
+  select(!Alley) %>% 
+  select(!PoolQC) %>% 
+  select(!Fence) %>% 
+  select(!MiscFeature) %>% 
+  select(!FireplaceQu)
+```
+
+
+```{r}
+clean_data$MasVnrType[is.na(clean_data$MasVnrType)] = "None"
+clean_data$BsmtQual[is.na(clean_data$BsmtQual)] = "None"
+clean_data$BsmtCond[is.na(clean_data$BsmtCond)] = "None"
+clean_data$BsmtExposure[is.na(clean_data$BsmtExposure)] = "None"
+clean_data$BsmtFinType2[is.na(clean_data$BsmtFinType2)] = "None"
+clean_data$Electrical[is.na(clean_data$Electrical)] = "None"
+clean_data$GarageType[is.na(clean_data$GarageType)] = "None"
+clean_data$GarageFinish[is.na(clean_data$GarageFinish)] = "None"
+clean_data$GarageQual[is.na(clean_data$GarageQual)] = "None"
+clean_data$GarageCond[is.na(clean_data$GarageCond)] = "None"
+clean_data$BsmtFinType1[is.na(clean_data$BsmtFinType1)] = "None"
+```
+
+
+
+```{r}
+clean_data = clean_data %>% 
+  mutate(MSZoning = as.factor(MSZoning)) %>% 
+  mutate(Street = as.factor(Street)) %>% 
+  mutate(LotShape = as.factor(LotShape)) %>% 
+  mutate(LandContour = as.factor(LandContour)) %>% 
+  mutate(Utilities = as.factor(Utilities)) %>% 
+  mutate(LotConfig = as.factor(LotConfig)) %>% 
+  mutate(LandSlope = as.factor(LandSlope)) %>% 
+  mutate(Neighborhood = as.factor(Neighborhood)) %>% 
+  mutate(Condition1 = as.factor(Condition1)) %>% 
+  mutate(Condition2 = as.factor(Condition2)) %>% 
+  mutate(BldgType = as.factor(BldgType)) %>% 
+  mutate(HouseStyle = as.factor(HouseStyle)) %>% 
+  mutate(RoofStyle = as.factor(RoofStyle)) %>% 
+  mutate(RoofMatl = as.factor(RoofMatl)) %>% 
+  mutate(Exterior1st = as.factor(Exterior1st)) %>% 
+  mutate(Exterior2nd = as.factor(Exterior2nd)) %>% 
+  mutate(MasVnrType = as.factor(MasVnrType)) %>% 
+  mutate(ExterQual = as.factor(ExterQual)) %>% 
+  mutate(ExterCond = as.factor(ExterCond)) %>% 
+  mutate(Foundation = as.factor(Foundation)) %>% 
+  mutate(BsmtQual = as.factor(BsmtQual)) %>% 
+  mutate(BsmtCond = as.factor(BsmtCond)) %>% 
+  mutate(BsmtExposure = as.factor(BsmtExposure)) %>% 
+  mutate(BsmtFinType1 = as.factor(BsmtFinType1)) %>% 
+  mutate(BsmtFinType2 = as.factor(BsmtFinType2)) %>% 
+  mutate(Heating = as.factor(Heating)) %>% 
+  mutate(HeatingQC = as.factor(HeatingQC)) %>% 
+  mutate(CentralAir = as.factor(CentralAir)) %>% 
+  mutate(Electrical = as.factor(Electrical)) %>% 
+  mutate(KitchenQual = as.factor(KitchenQual)) %>% 
+  mutate(Functional = as.factor(Functional)) %>% 
+  mutate(GarageType = as.factor(GarageType)) %>% 
+  mutate(GarageFinish = as.factor(GarageFinish)) %>% 
+  mutate(GarageQual = as.factor(GarageQual)) %>% 
+  mutate(GarageCond = as.factor(GarageCond)) %>% 
+  mutate(PavedDrive = as.factor(PavedDrive)) %>% 
+  mutate(SaleType = as.factor(SaleType)) %>% 
+  mutate(SaleCondition = as.factor(SaleCondition))
+  
+  
+```
+
+```{r}
+#summary(categoricalVAR)
+```
+
+
+
+
+Removing variables with severely unbalanced classes.
+Classes with >80% are removed
+```{r}
+clean_data = clean_data %>% 
+  select(!Street) %>% 
+  select(!Utilities) %>% 
+  select(!RoofMatl) %>% 
+  select(!Condition2) %>% 
+  select(!ExterCond) %>% 
+  select(!BsmtCond) %>% 
+  select(!Heating) %>% 
+  select(!Electrical) %>% 
+  select(!Functional) %>% 
+  select(!GarageCond) %>% 
+  select(!GarageQual)
+  
+#Condition1
+#BldgType
+#Bsmtfintype2
+#centralair
+#Functional
+#GarageQual
+#GarageCond
+#PavedDrive
+#SaleType
+```
+
+
+
+```{r}
+categoricalVAR = clean_data %>% 
+  select(Id, MSZoning, LotShape, LandContour, LotConfig, LandSlope, Neighborhood, Condition1, BldgType, HouseStyle, RoofStyle, Exterior2nd, MasVnrType, ExterQual, Foundation, BsmtQual, BsmtExposure,
+         BsmtFinType1, BsmtFinType2, CentralAir, KitchenQual, GarageType, GarageFinish, PavedDrive, SaleType, SaleCondition)
+```
+
+
+```{r}
+numericalVAR = clean_data %>% 
+  select(Id, MSSubClass, LotFrontage, LotArea, OverallQual, OverallCond, YearBuilt, YearRemodAdd, MasVnrArea, BsmtFinSF1, BsmtFinSF2, BsmtUnfSF, TotalBsmtSF, X1stFlrSF, X2ndFlrSF, LowQualFinSF, GrLivArea, BsmtFullBath, BsmtHalfBath, FullBath, HalfBath, BedroomAbvGr, KitchenAbvGr, TotRmsAbvGrd, Fireplaces, GarageYrBlt, GarageCars, GarageArea, WoodDeckSF, OpenPorchSF, EnclosedPorch, X3SsnPorch, ScreenPorch, PoolArea, MiscVal, MoSold, YrSold)
+```
+
+
+
+```{r}
+summary(categoricalVAR)
+
+nlevels(categoricalVAR$Neighborhood)
+nlevels(categoricalVAR$Condition1)
+nlevels(categoricalVAR$Condition2)
+nlevels(categoricalVAR$HouseStyle)
+nlevels(categoricalVAR$RoofMatl)
+nlevels(categoricalVAR$Exterior1st)
+nlevels(categoricalVAR$Exterior2nd)
+nlevels(categoricalVAR$SaleType)
+nlevels(categoricalVAR$BsmtFinType1)
+```
+
+
+```{r}
+numericalVAR$LotFrontage[is.na(numericalVAR$LotFrontage)] = 70 #Median Value
+numericalVAR$GarageYrBlt[is.na(numericalVAR$GarageYrBlt)] = 1980 #Median Value
+numericalVAR$MasVnrArea[is.na(numericalVAR$MasVnrArea)] = 0 #Median Value
+```
+
+
+
+
+
+
+```{r}
+Response = clean_data %>% 
+  select(Id, SalePrice)
+```
+
+
+```{r}
+save_data_location <- here("regression-prediction-project", "data","Processed Data","Numerical.rds")
+saveRDS(numericalVAR, file = save_data_location)
+
+save_data_location <- here("regression-prediction-project","data","Processed Data","Categorical.rds")
+saveRDS(categoricalVAR, file = save_data_location)
+
+save_data_location <- here("regression-prediction-project","data","Processed Data","Response.rds")
+saveRDS(Response, file = save_data_location)
+```
+

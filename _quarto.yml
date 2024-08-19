@@ -10,8 +10,20 @@ website:
         file: aboutme.qmd
       - text: "Projects"
         menu:
-          - text: "Starter Analysis Exercise"
-            file: starter-analysis-exercise/products/report/starter-analysis-report.qmd
+          - text: "Financial Data Classification Prediction Project"
+            file: classification-prediction-project/manuscript/Manuscript_Copy.qmd
+          - text: "Housing Prices Regression Prediction Project"
+            file: regression-prediction-project/regression-prediction-project.qmd
+          - text: "Basketball Data Visualization Project"
+            file: data-visualization-project/data-visualization-project.qmd
+          - text: "Data Analysis of Public Education Funding"
+            file: "data-analysis-public-eduction-funding/data-analysis-public-education-funding.qmd"
+          - text: "Market Segmentation Project"
+            file: "market-segmentation-project/market-segmentation-project.qmd"
+          - text: "Python Data Annotation Project"
+            file: "python-annotation-project/python-annotation-project.qmd"
+      - text: "Exercises"
+        menu:
           - text: "R Coding Exercise"
             file: coding-exercise/coding-exercise.qmd
           - text: "Presentation Exercise"

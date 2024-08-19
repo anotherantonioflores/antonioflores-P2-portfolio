@@ -1,0 +1,168 @@
+---
+title: "Market Segmentation Project"
+author: Antonio Flores
+date: "5-6-2024"
+format: 
+  html:
+    self-contained: true 
+---
+
+```{r, echo=FALSE, message=FALSE, warning = FALSE}
+library(here)
+library(knitr)
+```
+
+
+To view the presentation of this project in video form, please click below.
+
+{{< video https://www.youtube.com/watch?v=HGdXHlnXqXk >}}
+
+
+# Project Overview
+The goal of this project was to create segmented groups of consumers (clusters), in order to more precisely target different audiences. 
+
+# Dataset and Methods
+The data comes from the [MRI-Simmons' National Consumer Study 2015](https://www.mrisimmons.com/our-data/national-studies/national-consumer-study/)\
+
+My Methods and Tools included:\
+SAS Cluster Software.\
+Principal Components Analysis.\
+K-means Clustering.\
+Gap Analysis Clustering. \
+
+
+## Identifying Variables
+
+My Target variable was Gatorade. More specifically, the question labeled, "Gatorade - 'Do you drink it?'"\
+
+Single Driver Variables are what we will initially use to build out or define our clusters. I primarily used psychographic  or sentiment variables.\
+
+My Single Driver Variables were: \
+"I'm very happy with my life as it is"\
+"I often snack between meals"\
+"I often go on long car rides for vacation"\
+
+
+Abstract Constructs or Factors are different ways to break the data into groups. We want to measure how much each person relates to two or more concepts, ideas, or sentiments.\
+
+I had two Abstract Constructs.\
+
+Abstract Construct 1.\
+
+*Is our consumer health conscious?*\
+This construct was based on the answers to the following questions:\
+“I think about the calories in what I eat”\
+“I think fast food is all junk”\
+“I try to eat healthier food these days”\
+“I like to know about the ingredients before I buy food”
+
+
+Abstract Construct 2.\
+
+*Is our consumer brand sensitive?*\
+This construct was based on the answers to the following questions:\
+“I often buy on the spur of the moment”\
+“I change brands for variety/novelty”\
+“I always look for brand name”\
+
+
+Once we have created our clusters, we want to be able to describe those groups and help create some distinction between them. To accomplish this, I identified some Descriptor Variables that included:\
+
+Income\
+Age\
+Gender\
+ESPN – Time Spent Viewing in the last 7 days\
+“How effective is email advertising?”\
+Powerade – “Do you drink it?”\
+“Have you used Netflix in the last 7 days?”\
+“Have you exercised regularly in the past 12 months ?”\
+
+
+
+# Analysis
+First I began with Principle Components Analysis. 
+PCA is a data reduction technique. In our example we start with the seven variables and essentially reduce that information into our two factors. This allows us to take advantage of the *information* provided by all 7 variables while only using the 2 factors that represent that information.
+```{r, out.width="120%"}
+#| echo: FALSE
+#"market-segmentation-project"
+knitr::include_graphics(here("market-segmentation-project","IMG","Slide6.PNG"))
+```
+Once we get to this solution, we need verify which of our factor represents which of our abstract constructs.
+
+```{r, out.width="120%"}
+#| echo: FALSE
+#"market-segmentation-project"
+knitr::include_graphics(here("market-segmentation-project","IMG","Slide7.PNG"))
+```
+
+Now we will take those 2 factors, combine those with our Single Driver variables and determine our ideal number of clusters or consumer groups. I used two different methods for this, starting with K-means analysis. 
+
+
+```{r, out.width="120%"}
+#| echo: FALSE
+#"market-segmentation-project"
+knitr::include_graphics(here("market-segmentation-project","IMG","Slide8.PNG"))
+```
+
+```{r, out.width="120%"}
+#| echo: FALSE
+#"market-segmentation-project"
+knitr::include_graphics(here("market-segmentation-project","IMG","Slide9.PNG"))
+```
+The K-means analysis recommends 5 clusters. Another way to identify this result is by analyzing the means between groups. Ideally we want very distinct means.
+
+
+```{r, out.width="120%"}
+#| echo: FALSE
+#"market-segmentation-project"
+knitr::include_graphics(here("market-segmentation-project","IMG","Slide10.PNG"))
+```
+
+On to our second method, Gap Analysis.
+```{r, out.width="120%"}
+#| echo: FALSE
+#"market-segmentation-project"
+knitr::include_graphics(here("market-segmentation-project","IMG","Slide11.PNG"))
+```
+How do we determine the correct number of clusters? Two different methods of clustering are recommending different numbers of clusters. I ultimately chose to go with 5 clusters because the K-means clustering had better mean distinction and because 5 was a more useful number of clusters given the goal of this project.
+
+
+Now that we have our clusters, we can use the descriptor variables to learn more about the differences of each cluster.
+
+```{r, out.width="120%"}
+#| echo: FALSE
+#"market-segmentation-project"
+knitr::include_graphics(here("market-segmentation-project","IMG","Slide13.PNG"))
+```
+
+# Results
+Using the outputs from above, I identified five key consumer clusters and described them below: 
+
+Cluster 1 Couch Potatoes\
+This cluster was the youngest group of the five clusters and ranked low in life satisfaction and income levels. They watch Netflix, do not work out much, and ranked highest in Powerade and Gatorade consumption.\
+
+Cluster 2 Mid-life Slumps\
+These consumers ranked lowest in happiness, income, and physical fitness, and seemed to be ambivalent regarding grocery ‘extras’ (sports drinks, snacks, Netflix). With an average age of 55, these consumers seem to be in a frustrating life situation. This cluster is least likely to be male in comparison to other groups (59% male).\
+
+Cluster 3 Satisfied & Settled\
+While this group of consumers find themselves in the middle of the pack in many categories (Netflix, income, fitness) they are among the happiest of the bunch. They are not really into sports drinks or road trips but are most likely to be snacking while watching ESPN.\
+
+Cluster 4 Happy Campers\
+These consumers enjoy going all in with their activities, ranking first in the categories of Netflix, sports drinks, going on long road trips, and snacking between meals. They are the happiest group of the five and email advertising is fairly effective with them. They skew on the younger side (in comparison with other clusters) and are the group most likely to be male.\
+
+Cluster 5 No frills\
+This older cluster doesn’t take part in anything deemed as extra, ranking lowest in ESPN/Netflix watching, sports drinks and snacks. They are the wealthiest of the clusters and are moderately satisfied with where they’re at in life. They know what they want and are not likely to be persuaded by email advertising.\
+
+
+This is the final deliverable. A marketing specialist can take this data and use it accordingly to create specific marketing strategies towards specific groups of consumers, instead of broadly targeting the entire population. This is just one use of clustering that can lead to better efficiency, more focused strategies, and an overall increase in effectiveness.
+
+
+
+
+
+
+
+
+
+
+

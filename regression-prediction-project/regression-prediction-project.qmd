@@ -1,0 +1,223 @@
+---
+title: "Predicting Housing Prices with Machine Learning Models "
+subtitle: ""
+author: Antonio Flores
+date: "8-7-2024"
+format: 
+  html:
+    self-contained: true 
+---
+
+```{r, echo=FALSE, message=FALSE, warning = FALSE}
+#BEFORE RENDERING DOCUMENT, RUN ALL CODE
+library(here)
+library(knitr)
+```
+
+# Abstract
+
+There are many different variables that affect housing prices which can vary drastically. In order to make the best decisions about housing prices, it is useful to be able to predict the sales price of a house given a set of descriptors. This project will seek to identify a model for predicting housing prices using a dataset provided by Kaggle. This will be achieved by comparing the accuracy and predictive power of different machine learning models.
+
+
+{{< pagebreak >}}
+
+# Introduction
+
+## General Background Information
+
+
+
+Machine learning models provide a massive opportunity for real estate investors to identify housing prices by using a set of predictors. This project will utilize Regression Prediction. Unlike Classification Prediction, which attempts to predict a classifier based on given predictors, Regression Prediction seeks to identify a continuous value (e.g., x amount of dollars, x amount of cells). In our case, our response variable is a continuous variable, the sales price of a house.
+
+## Description of data
+
+
+There are 1,460 records, 81 columns/variables. There is an ID column, as well as a response value, meaning there are 79 predictors, which include descriptors of the house in question. These include both categorical predictors as well as numerical predictors. Areas described by the predictors include, Basements, Garages, Bathrooms, Location, Age, and many, many others. Additionally, as mentioned, the response variable is the sales price of the house.
+
+## Questions/Hypotheses to be addressed
+
+The research question I plan to address with my analysis is: which features are the best predictors of housing prices? Additionally, the desired output of this analysis is a machine learning model which allows real estate investors or other interested stakeholders to better make decisions regarding future real estate purchases. 
+
+{{< pagebreak >}}
+
+# Methods
+
+## Data import and cleaning
+
+### Reading in the Data
+
+```{r}
+#| label: tbl-summarytable1
+#| tbl-cap: "Data Snapshot of first 7 Variables"
+#| echo: FALSE
+data_location1 = here("regression-prediction-project", "data", "train.csv")
+raw = read.csv(data_location1)
+kable(head(raw[1:8]))
+```
+
+
+### Cleaning Data
+
+There were several different data cleaning methods that were experimented with in order to find the best way to prepare the data for modeling. First I removed all variables that had more than 80% NA values. Then for those categorical predictors with some missing values, I replaced those with a "None" value. Next, I converted all the categorical variables to factors (they were initially read in as character values). Once the variables were recognized as factors, I could evaluate which predictors were victims of class imbalance. I removed the predictors with around 80% of observations in one class of a variable. Finally, I replaced the NA values in the numeric predictors with the median value of that variable. When I was finished with the data cleaning portion of this project, I had reduced the data set down from 79 to 63 predictors, 26 categorical and 37 numeric variables.
+
+
+
+
+
+### Background on Chosen Models
+I chose to utilize the following models: the K-Nearest Neighbors model (KNN), Linear Regression model, and RandomForest models to determine the best prediction model for this project.
+
+**KNN:**\
+The KNN model predicts based on the closest samples or neighbors. Essentially, to predict a value, the data is broken up into samples/neighbors, and then the nearest samples (using Euclidean distance, typically)to the value of interest are examined to either classify or find a mean between the chosen samples. K represents the number of neighbors to utilize to come to this conclusion (Kuhn).
+
+**Linear Regression:**\
+Linear Regression focuses on minimizing the SSE (Sum of squared errors) between the predicted and original response value.
+
+**RandomForest:**\
+RandomForest models take advantage of decision trees. If we think about the scenario in our project (the price of a house), we could imagine a decision tree starting with, "does having two bathrooms cause a house to be priced at over 400K?" This would be our first node to split the data on. We could continue asking things like, "Are houses with larger basements priced at more or less than 400K?" Questions like these would represent more decision nodes for us to split the data on, getting us closer to the most accurate prediction model. The RandomForest algorithm uses different methods to create several uncorrelated "forests" of decision trees (IBM).
+
+### Background Regarding Performance Metrics
+
+**R-Squared (R^2):**\
+The R^2 value explains what percent (proportion) of the total variance in the data is explained by the model.\
+**RMSE (Root Mean Squared Error):**\
+Represents the average size of the difference between real values and the predicted values, then \
+**MAE (Mean Absolute Error):**\
+Similar to RMSE, but the absolute value of the difference between real and predicted is used.
+
+
+
+{{< pagebreak >}}
+
+# Results
+
+## Basic statistical analysis
+
+Before I began with the machine learning analysis, I sought to test the variables of interest in their significance of affecting the response variable. 
+
+Below are the results of the linear model fit with all variables as predictors
+
+```{r}
+#| label: basicmodel1
+#| echo: FALSE
+data_location <- here::here("regression-prediction-project", "results","fullmodel.rds")
+full1 <- readRDS(data_location)
+kable(full1)
+```
+
+In both the numeric and categorical linear regression tests, not all variables were significant. I decided to keep all variables in to see if those variables had any affect on the final results.
+
+
+{{< pagebreak >}}
+
+## Machine Learning Modeling
+
+### Model Performance Metrics
+@tbl-resulttable1 displays the relevant metrics for the regression models runs.
+
+```{r}
+#| label: tbl-resulttable1
+#| tbl-cap: "Performance Metrics for Machine Learning Models"
+#| echo: FALSE
+resulttable1 = readRDS(here("regression-prediction-project", "results","resultstbl1.rds"))
+knitr::kable(resulttable1)
+```
+
+The RandomForest model performed the best of the three models, outputting the best results by a fairly considerable margin, in all three categories. The KNN model performed the second best of the three, but was closer to the Linear Model's results than to the RandomForest model.
+
+@fig-result1 shows the distribution of predicted values for each model, overlayed with the real observed values (OBS).
+
+```{r}
+#| label: fig-result1
+#| fig-cap: "Predicted Values Compared to Observed Values"
+#| echo: FALSE
+knitr::include_graphics(here("regression-prediction-project", "results","predictions.png"))
+
+```
+{{< pagebreak >}}
+
+@fig-result2 and @fig-result3 provide additional views comparing RMSE and MAE across the different models
+
+
+```{r}
+#| label: fig-result2
+#| fig-cap: "Root Mean Squared Error Barplot"
+#| echo: FALSE
+knitr::include_graphics(here("regression-prediction-project", "results","RMSE.png"))
+```
+
+```{r}
+#| label: fig-result3
+#| fig-cap: "Mean Absolute Error Barplot"
+#| echo: FALSE
+knitr::include_graphics(here("regression-prediction-project","results","MAE.png"))
+```
+
+
+{{< pagebreak >}}
+
+### Variables of Importance
+
+Finally, we can examine which predictors specifically improved prediction the most. That is, which had the greatest weight on the final result. 
+
+@fig-result4 shows the Predictors that had the most impact on the Linear Regression Model
+
+```{r}
+#| label: fig-result4
+#| fig-cap: "Linear Model Variables of Importance"
+#| echo: FALSE
+knitr::include_graphics(here("regression-prediction-project","results","importantLN.png"))
+```
+
+X2ndFlrSF indicates the variable Second floor square feet (X is added prefix to align with R naming conventions).
+BsmtFinSF1 represents the variable for Basement finished area square feet.
+BsmtUnfSF represents the variable for Basement unfinished area square feet.
+
+
+{{< pagebreak >}}
+
+@fig-result5 shows the Predictors that had the most impact on the KNN Model
+
+```{r}
+#| label: fig-result5
+#| fig-cap: "KNN Model Variables of Importance"
+#| echo: FALSE
+knitr::include_graphics(here("regression-prediction-project","results","importantKNN.png"))
+```
+OverallQual is a categorical variable that rates the overall material and finish of the house in terms of "Excellent", "Poor", etc. GrLivArea represents the total square feet of the above ground living area. TotalBsmtSF is the total basement square footage.
+
+
+{{< pagebreak >}}
+@fig-result6 shows the Predictors that had the most impact on the RF Model
+
+```{r}
+#| label: fig-result6
+#| fig-cap: "RF Variables of Importance"
+#| echo: FALSE
+knitr::include_graphics(here("regression-prediction-project","results","importantRF.png"))
+```
+We can observe similar values to those highlighted by the KNN model, with the Neighborhood value appearing higher for the RandomForest model. 
+
+{{< pagebreak >}}
+
+# Discussion
+
+## Summary and Interpretation
+The results generated in this project indicate that there is some quality predictive power attributed to the chosen machine learning models. While the performance metrics were not quite as impressive as would be desired, given the relatively small size of the training data, these results are substantial. In addition to these findings, the models were able to produce which variables provided the most weight towards the prediction power. The Overall Quality and General Living Area Square Footage were the two predictors that were listed in all three models. Total square footage for Basements was also a variable common in both the RandomForest and KNN models.
+
+## Conclusions
+
+  I attempted to develop different regression models that accurately predicted the prices of houses with minimal error. The three models that I ran all showed substantial predictive power for determining the correct sales price of a house, however, the performance metrics showed some room for future improvement.
+  
+  The other goal of this project was to identify which variables could best aid in identifying correct housing prices. While there was some variance among the predictors in terms of importance, some predictors clearly stood out above the rest. This information could be used as a items of focus in future analysis of housing prices as well as features of importance for real estate firms to prioritize. 
+  
+  Further research would include utilizing different datasets to determine if these results are reproducible. Specifically, using a larger dataset with more observations could provide additional insights as well as improve predictability. Using housing data for a different general location could also be useful in determining whether the results presented here are indicative of most areas or if they are subject to localized bias.
+  
+
+{{< pagebreak >}}
+
+# References
+*IBM. (n.d.). What is random forest?*\
+*Kuhn, &. J., M. (2018). Applied predictive modeling.*\
+
+

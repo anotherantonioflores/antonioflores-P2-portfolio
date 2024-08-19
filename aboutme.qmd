@@ -1,42 +1,121 @@
 ---
 title: "About me"
+format: 
+  html:
+    code-fold: true
+engine: knitr
 ---
 
+
+
+
+:::: {.columns}
+
+::: {.column width="55%"}
 ![](most_recent_profile.jpg)
+:::
 
-# Education
+::: {.column width="45%"}
+**Ricardo Antonio Flores III, CSM**
 
--   Graduated from Texas Lutheran University in 2022 with a B.S. in Information Systems and a minor in Business
+I am a passionate problem solver and leader. Throughout my academic and professional career, I have sought to lead by example, go above and beyond, and push the boundaries of success. Whether I'm testing different machine learning models, leading a team of developers on an Agile project, or continuing to expand my knowledge through constant learning, I will always give 100%.
 
--   Started UTSA MSDA in Fall 2023
+With a background in public speaking, as well as a wealth of diverse leadership experiences, I bring an adaptable set of skills that allow me to perform at my best no matter the circumstance. Currently, I am seeking to bring these skills into the world of Data Analytics. I want to be a leader in the world of Data who brings up those around me while communicating clearly to my stakeholders.
+:::
 
-# Career
+::::
 
--   Hired as an IT intern for WellMed Medical Management in 2021
--   Promoted to Senior IT project Coordinator in 2022 upon graduation from undergraduate program.
+# Resume
 
-# Technical Experience
+## Education
+**Master of Science in Data Analytics**\	
+Expected Graduation: May 2025\
+University of Texas at San Antonio\
+GPA: 4.0\
 
-#### Some familiarity
+**Bachelor of Science in Information Systems**\
+Graduated May 2022\
+Texas Lutheran University\
+GPA: 4.0, Minor in Business Administration\
+Summa Cum Laude, 2022 Student of the year.\
 
--   R, Rstudio, Quarto
--   SAS
--   Gretl
+## Experience
+**Senior It Project Coordinator - WellMed Medical Management**, San Antonio, TX\
+June 2022 - Present\
+•	Performs scrum master responsibilities (Sprint Planning, Retrospectives, etc.) daily for a cloud application agile development team since November 2022.\
+•	Compiles weekly status reports for 5 different development projects to present to business sponsors.\
+•	Monitors and reports on financial variances within a $7M+ project portfolio. Prepares quarterly budgetary reports to send to executive leadership.\
+•	Guides team through portfolio-wide initiatives such as demand planning, resource planning, and timecard management. Provides support for 8 scrum masters regarding these items.\
+•	Creates reports, dashboards, and charts for leadership to aid in capital planning, budget adjustments, and demand capacity, including portfolio monthly burn rates.\
+•	Contributes to demand/capacity data analysis with respect to resource hour planning.\
+ 
+**Information Technology Intern - WellMed Medical Management**, San Antonio, TX\
+June 2021 - May 2022\
+•	Collaborated with a technology project management team responsible for developing and maintaining systems and applications supporting WellMed clinics through 10+ different capital projects.\
+•	Designed, created, and maintained a program dashboard project to assist a team of 8 senior project managers in planning, budgeting, and financial reconciliation.\
+•	Managed and updated weekly program status reports for project managers to present to executives.\
 
-#### More Experienced
+## Activities 
+**President - Black and Gold President's Council**\
+Texas Lutheran University.\
+December 2019 - May 2022\
+•	Nominated by faculty, and after an application and interview process was accepted into an honorary organization limited to only 12 students per year.\
+•	Represented TLU at 8 different donor, outreach, and community events.\
+•	Advised the President of TLU on changes within policy, including student engagement and student health.\
+•	Guided group as President of council, was tasked with setting vision, goal, and leading key events.\
+ 
+**President - Habitat for Humanity**\
+Texas Lutheran University.\
+August 2020 - May 2022\
+•	Founded Habitat for Humanity club on campus and served as first President.\
+•	Spearheaded student groups in assisting local Habitat for Humanity chapter in constructing 5 new houses for the Seguin community.\
+•	Served as a point of contact for over 80 different students interested in volunteering with Habitat.\
 
--   Excel
--   Python
--   Tableau
+## Awards & Certifications
+•	Won Second Place at UTSA’s 2023 Rowdy Datathon\
+•	Selected as [TLU 2022 Student of the Year by Faculty and Student body](https://youtu.be/9IoTcrgbzjQ).\
+•	Received the TLU Math, CSCI, and IS Departmental Scholarship Award for 2021 and 2022.\
+• Received the 2024 UTSA Cyber & Analytics Board of Advisors Annual Scholarship in Data Analytics.\
+•	Awarded the Newman Civic Fellowship and named TLU Distinguished Student Leader in 2021.\
+•	Selected for IT 2020 Summer Research at TLU.\
+•	Led TLU to winning the Nationally recognized NSLS Distinguished Chapter award while President.\
+•	Certified Scrum Master (CSM) on 10/31/23 by Scrum Alliance.\ 
 
-# Random facts about me
 
--   Broke a Guinness World Record (Longest Selfie Chain, May 2015. I was the person who actually broke the old record), but it was broken again before the next book came out. ![2015 World Record](WR.PNG)
 
--   I was voted the TLU 2022 Student of the Year by the student body, staff, & faculty and delivered the [commencement address](https://youtu.be/9IoTcrgbzjQ).
 
-# Research Interest:
+## Projects
 
-[NHTSA Drunk Driving Statistics](https://www.nhtsa.gov/risky-driving/drunk-driving)
+**2023 Data Vis Project – Exploration of Winning Factors among NBA teams and players**\
+UTSA Graduate School\
+Fall 2023\
+Identified data sources and performed data cleaning with R for the team to analyze. Once trends were identified, created many different visualizations including line graphs, bar graphs, correlation charts, shot heat maps, scatterplots and multiple facet charts. Presented our findings through Tableau, using data storytelling techniques and provided conclusions to our fictional client (new NBA team owner).\
 
-This is a public health issue that has been on my mind most of my life, especially since it's such a large issue in San Antonio. I'm interested in researching more effective solutions for targeting this societal harm.
+**2023 Rowdy Datathon – Analysis of Funding Level Among School Districts**\
+UTSA\
+October 2023\
+(Within a 24-hour time limit) Team performed lengthy data cleaning, and exploratory data analysis using SQL and R on four different public-school datasets to identify factors/predictors to focus resources on to increase educational attainment. uncovered many unique observations and trends which we displayed using tableau, and presented to a panel of judges, resulting in winning 2nd Place in our category.\
+
+**Group Leader - NBA Player Selector Data Lake**\
+Texas Lutheran University\
+Spring 2022\
+Created a primitive data lake on Google Cloud Platform with a partner, to determine optimal NBA player sponsors for a mock sports drink company. Extracted data from several sources including NBA Player Stats and game attendance datasets, demographic datasets, live Twitter data, and Wikipedia data. Leveraged BigQuery and Google Cloud Storage Buckets to store and analyze data, Python and Cloud Functions to pull in data, and utilized Google Data Studio to present data.\
+ 
+**Senior Project - Cloud Based Covid-19 Resource and Information Website**\
+Texas Lutheran University\
+Fall 2021\
+Developed a website to provide information and resources to combat the Covid-19 pandemic in Texas. Displayed real-time covid data, testing and vaccination sites based on user location, and provided latest news articles about Covid-19. Used JavaScript (JS), JSON, Wix, Wix-Velo, Application Programming Interfaces (APIs), Tableau, and Human Centered Design (HCD). Was selected to present project for TLU's Spring 2022 Academic Symposium.\
+
+
+## Skills
+•	Computer Proficiency: Word, Excel, PowerPoint, Outlook, Google Services.\
+•	Computer System Experience: ServiceNow, Rally, Quickbase.\
+•	Foundational Knowledge: R, SQL, Python, Wix, Tableau, GCP, Google Data Studio.\
+•	Graduate Coursework: Tableau, R, SAS, Statistical Modeling, Data Visualization techniques.\
+•	Extensive Public Speaking experience.\
+•	Numerous leadership opportunities throughout academic and professional career.\
+
+
+
+
+
