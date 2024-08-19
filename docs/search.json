@@ -1139,5 +1139,40 @@
     "title": "About me",
     "section": "Skills",
     "text": "Skills\n• Computer Proficiency: Word, Excel, PowerPoint, Outlook, Google Services.\n• Computer System Experience: ServiceNow, Rally, Quickbase.\n• Foundational Knowledge: R, SQL, Python, Wix, Tableau, GCP, Google Data Studio.\n• Graduate Coursework: Tableau, R, SAS, Statistical Modeling, Data Visualization techniques.\n• Extensive Public Speaking experience.\n• Numerous leadership opportunities throughout academic and professional career."
+  },
+  {
+    "objectID": "SAS-data-analysis/SAS-data-analysis.html",
+    "href": "SAS-data-analysis/SAS-data-analysis.html",
+    "title": "Access to Health Resources: Analysis Across Various Levels of Social Demographics",
+    "section": "",
+    "text": "Myself and a team performed data analysis using SAS on a Cancer resources survey dataset.\nThis was during my second semester of my Graduate Studies at UTSA in the Spring of 2024.\nMy largest contribution was the data cleaning process, including converting the data into numeric ranges as discussed below."
+  },
+  {
+    "objectID": "SAS-data-analysis/SAS-data-analysis.html#established-source",
+    "href": "SAS-data-analysis/SAS-data-analysis.html#established-source",
+    "title": "Access to Health Resources: Analysis Across Various Levels of Social Demographics",
+    "section": "Established Source",
+    "text": "Established Source\nAs stated in the background of the dataset in the Data Section, the HINTS 6 survey (2023) is a nationally conducted survey by the National Cancer Institute. The dataset was prepared for use by analysts in the healthcare industry to use as a source to identify patterns in the general public trends in health and cancer. The validity of the data is supported by the publication and real-world use of the data by government entities and healthcare-analytic professionals. The team preformed the following steps to clean and filter the data relevant to the study conducted."
+  },
+  {
+    "objectID": "SAS-data-analysis/SAS-data-analysis.html#custom-data-formats",
+    "href": "SAS-data-analysis/SAS-data-analysis.html#custom-data-formats",
+    "title": "Access to Health Resources: Analysis Across Various Levels of Social Demographics",
+    "section": "Custom Data Formats",
+    "text": "Custom Data Formats\nThe HINTS dataset utilized a numeric range to encode the survey responses, however; the ranges were not identical across all questions.\nThe team built a custom SAS script to categorize responses based on the question type using answer options of A lot, Some, A little, or None (including negative values that would be missing or errors). Another script was created, titled, “yesnodontknow”,which only presented 3 options of Yes, No, and Don’t Know/NA (including negative values that would be missing or errors). In total, the team developed 16 custom SAS formats to categorize each question used in the study to evaluate the survey responses. This made the process of standardizing the responses in the analysis phase for comparisons easier."
+  },
+  {
+    "objectID": "SAS-data-analysis/SAS-data-analysis.html#remove-high-missing-reponses",
+    "href": "SAS-data-analysis/SAS-data-analysis.html#remove-high-missing-reponses",
+    "title": "Access to Health Resources: Analysis Across Various Levels of Social Demographics",
+    "section": "Remove High Missing Reponses",
+    "text": "Remove High Missing Reponses\nThe HINTS dataset encodes responses with negative numbers with both missing, multiple selection, and other errors. Where the survey had high percentages of negative values for the total responses, the team avoided using those questions in the study. For example, question L3 asks on average how many drinks someone had in the last 30 days, because it relies on the previous questions qualifying if someone drank alcohol in the last 30 days. This question had roughly 56% of responses that were missing or errors, and so like several other HINTS survey questions pulled for its potential use in the survey, was ultimately not considered."
+  },
+  {
+    "objectID": "SAS-data-analysis/SAS-data-analysis.html#advanced-sql-queries",
+    "href": "SAS-data-analysis/SAS-data-analysis.html#advanced-sql-queries",
+    "title": "Access to Health Resources: Analysis Across Various Levels of Social Demographics",
+    "section": "Advanced SQL Queries",
+    "text": "Advanced SQL Queries\nIn investigating the survey data, the team employed advanced SQL query techniques to connect the data into tables. One example of the advanced SQL query was used in the analysis into individual’s physical and mental health status, which created a table that forecasted the average delay a patient might experience based on their income and health condition. The result of this query produced a predictive insight that could be used to proactively send notifications to patients regarding their upcoming doctor appointments, enhancing the efficiency of healthcare delivery."
   }
 ]

@@ -22,6 +22,8 @@ website:
             file: "market-segmentation-project/market-segmentation-project.qmd"
           - text: "Python Data Annotation Project"
             file: "python-annotation-project/python-annotation-project.qmd"
+          - text: "SAS Data Analysis Project"
+            file: "SAS-data-analysis/SAS-data-analysis.qmd"
       - text: "Exercises"
         menu:
           - text: "R Coding Exercise"

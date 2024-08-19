@@ -1,0 +1,110 @@
+---
+title: "Access to Health Resources: Analysis Across Various Levels of Social Demographics"
+author: Antonio Flores
+date: "5-6-2024"
+format: 
+  html:
+    self-contained: true
+---
+
+```{r, echo=FALSE, message=FALSE, warning = FALSE}
+library(here)
+library(knitr)
+```
+# Background
+
+Myself and a team performed data analysis using SAS on a Cancer resources survey dataset.
+
+This was during my second semester of my Graduate Studies at UTSA in the Spring  of 2024.
+
+My largest contribution was the data cleaning process, including converting the data into numeric ranges as discussed below. 
+
+# Introduction
+The objective of this study is to utilize a statistical software suite (SAS) and to perform data processing and initial analytical research, investigating healthcare access across the United States. The priority of the investigation will be to break down how the data was cleaned, processed, and queried to generate statistics and metrics. The team then used a variety of statistical and data analytical methods to provide a focused study on some of the factors that may lead to degraded access to healthcare resources, information, and communication.
+
+# Data
+Health Information National Trends Survey\
+
+The Heath Information National Trends Survey (HINTS) regularly collects information on the “public’s knowledge of, attitude towards, and use of cancer- and health- related information” (HINTS), nationally across the United States. Utilizing the data collected through HINTS, strategies for addressing the rapid changes in health communication and health information technology are monitored for changes across populations.\
+
+HINTS is sponsored by the National Cancer Institute (NCI), one of eleven agencies that comprise the Department of Health and Human Services. Funded by Congress, NCI is the leading agency in cancer research in the world, managing the research, training, and information dissemination across national borders and demographics.\ 
+This study utilizes the HINTS 6 dataset, dated April 2023. The survey has 18 sections that group by category such as “Your Overall Health”, “Tobacco Products”, “Telehealth”, etc. The questions contain various formats for respondents to answer, but the survey encodes all classification question options into a numeric categorical data type. Missing answers that are not applicable or responses that would be considered errors are given negative values for easier filtering. For the protection of respondents, there are no names or personal information associated with responses or demographic data, instead unique responses are uniquely indexed by household and member number inside the household.\
+
+# Problem
+The National Institute of Health (NIH) study, Access to Health Care in America (1993), establishes the requirement to monitor the general public’s access to resources, information, and communications due to shifting government policies, globalization, and internet infrastructure impacting socio-economic and regional demographic distributions across the United States. 
+This study takes an initial look at the latest data from the HINTS 6 (2023) dataset regarding questions that may impact the general public’s access to healthcare from a financial, mental health, and social media perspective.\
+
+# Data Cleaning & Validation
+## Established Source
+As stated in the background of the dataset in the Data Section, the HINTS 6 survey (2023) is a nationally conducted survey by the National Cancer Institute. The dataset was prepared for use by analysts in the healthcare industry to use as a source to identify patterns in the general public trends in health and cancer. The validity of the data is supported by the publication and real-world use of the data by government entities and healthcare-analytic professionals. The team preformed the following steps to clean and filter the data relevant to the study conducted.\
+
+## Custom Data Formats
+The HINTS dataset utilized a numeric range to encode the survey responses, however; the ranges were not identical across all questions. 
+
+
+The team built a custom SAS script to categorize responses based on the question type using answer options of A lot, Some, A little, or None (including negative values that would be missing or errors). Another script was created, titled, "yesnodontknow",which only presented 3 options of Yes, No, and Don’t Know/NA (including negative values that would be missing or errors). In total, the team developed 16 custom SAS formats to categorize each question used in the study to evaluate the survey responses. This made the process of standardizing the responses in the analysis phase for comparisons easier.
+```{r, out.width="120%"}
+#| echo: FALSE
+knitr::include_graphics(here("SAS-data-analysis", "IMG","Picture1.PNG"))
+```
+
+
+## Remove High Missing Reponses
+The HINTS dataset encodes responses with negative numbers with both missing, multiple selection, and other errors. Where the survey had high percentages of negative values for the total responses, the team avoided using those questions in the study. For example, question L3 asks on average how many drinks someone had in the last 30 days, because it relies on the previous questions qualifying if someone drank alcohol in the last 30 days. This question had roughly 56% of responses that were missing or errors, and so like several other HINTS survey questions pulled for its potential use in the survey, was ultimately not considered.
+
+## Advanced SQL Queries
+In investigating the survey data, the team employed advanced SQL query techniques to connect the data into tables. One example of the advanced SQL query was used in the analysis into individual’s physical and mental health status, which created a table that forecasted the average delay a patient might experience based on their income and health condition. The result of this query produced a predictive insight that could be used to proactively send notifications to patients regarding their upcoming doctor appointments, enhancing the efficiency of healthcare delivery. 
+
+# Analysis & Results
+The objective of the study was to compare all possible variables and factors against the target variables extracted from the HINTS 6, the team selected these variables based on their relevance to healthcare access. The first question was C2: QualityCare: Overall, how would you rate the quality of health care you received in the past 12 months? The second question was C5: DelayCare: In the past 12 months, did you delay or not get medical care you felt you needed - such as seeing a doctor, a specialist, or other health professional? In combination, the study is evaluating both the recent quality and those who encountered obstacles to accessing their healthcare. 
+
+# Social Media
+There were two Social Media variables the team analyzed: 1) B12a. In the last 12 months, how often did you visit a social media site? and 2) B14a. How much do you agree or disagree - I use information from social media to make decisions about my health. Plotting our first social media variable against our age variable resulted in a strong negative correlation, indicating that social media usage declined with age. Due to this strong correlation, we pivoted to our second variable to determine what affect social media had on health care.  There was not a clear correlation between the social media decision variable and quality/delay of care variable, indicating a minimal effect between these variables. We concluded that we could not identify or quantify any effect that social media had on health care quality with the variables that we had chosen.
+```{r, out.width="120%"}
+#| echo: FALSE
+knitr::include_graphics(here("SAS-data-analysis","IMG","Picture3.PNG"))
+```
+
+
+# Income
+Income generally had a positive relationship with perceived health. The distribution of Income level was found to be different across health levels, evidenced by observations in contingency table (see Appendix). The relationship between Income and the frequency someone responded saying they would delay care was less evident, but this may be the result of other variables, such as age.
+```{r, out.width="120%"}
+#| echo: FALSE
+knitr::include_graphics(here("SAS-data-analysis", "IMG","Picture4.PNG"))
+```
+```{r, out.width="120%"}
+#| echo: FALSE
+knitr::include_graphics(here("SAS-data-analysis", "IMG","Picture5.PNG"))
+```
+
+# Depression
+Depression diagnosis was associated with a person answering 'Yes' to the Delay Care question. Using a diagnosis question may have led to bias. PCA was performed to capture a Depression proxy, regardless of whether it was diagnosed or undiagnosed. Logistic Regression was performed with this PCA variable to confirm its relationship with the diagnosis itself. The PCA Depression factor was then used to build another logistic regression model predicting how often someone would answer 'Yes' to the Delay Care question.
+
+```{r, out.width="120%"}
+#| echo: FALSE
+knitr::include_graphics(here("SAS-data-analysis", "IMG","Picture6.PNG"))
+```
+
+
+# Future Studies
+The team devised several other avenues for follow-on studies to investigate. The following suggestions are based on either broadening out to include more social demographics and causes or scoping down to focus on finding patterns specifically for cancer research.\ 
+
+The first future study suggestion is the investigation to see not only how these factors, such as income, depression, and social media affect access to health care, but also several others not included in this study. Some suggestions the team devised would be tobacco usage, alcohol usage, or nutrition may also show trends among patients who struggle or are inhibited to their access.\
+
+The second suggestion is to include more social demographics. The HINTS 6 survey (2023) includes additional demographics such as age, gender, race, and region of the household that can be used to measure the responses against to find trends among the greater population.\
+
+Finally, while the data is initially funded for cancer research, the survey includes a broad range of questions and demographics to support studies investigating other information, such as general healthcare access. This study could be further developed to scope down to patients diagnosed with cancer to narrow the results and find trends among those types of patients.\
+
+# Conclusions
+The team successfully investigated a health dataset and used data cleaning techniques to prepare it for analysis. Through SQL queries, data description tasks, and statistical methods, the team assessed different social demographics regarding their effect on health quality, and provided analysis on which variables could be further researched to determine greater correlation with access to health resources.\ 
+
+ In conclusion, the study’s approach to investigate the HINTS 6 data with a broad scope to identify possible impacts in access to healthcare found a range of initial results. Overall, the investigation into Social Media did not find significant barriers to accessing healthcare based on their usage or intent but did find that as individuals aged their usage of social media declined. The team found preliminary confirmation that Income is directly related to self-reported health status. Finally, the results from the PCA Analysis suggest that individuals are do not have indications/diagnosis of depression are less likely to delay or seek healthcare. 
+
+# Sources
+- “About NCI - Overview and Mission.” National Cancer Institute, Cancer.gov, 6 Apr. 2018, www.cancer.gov/about-nci/overview.\ 
+- Cameron, Kenzie A., et al. “Gender Disparities in Health and Healthcare Use among Older Adults.” Journal of Women’s Health, vol. 19, no. 9, Sept. 2010, pp. 1643–1650, www.ncbi.nlm.nih.gov/pmc/articles/PMC2965695/, https://doi.org/10.1089/jwh.2009.1701.\
+- “Depression (Major Depressive Disorder) - Symptoms and Causes.” Mayo Clinic, www.mayoclinic.org/diseases-conditions/depression/symptoms-causes/syc-20356007#:~:text=Unfortunately%2C%20depression%20often%20goes%20undiagnosed.\
+- “Health Information National Trends Survey | HINTS.” Hints.cancer.gov, hints.cancer.gov/.\
+- “HINTS 6 Public Codebook.” National Cancer Institute, 16 May 2023.\
+- Institute of Medicine (US) Committee on Monitoring Access to Personal Health Care Services, and Michael Millman. “Introduction - Access to Healthcare in America” Nih.gov, National Academies Press (US), 1993, www.ncbi.nlm.nih.gov/books/NBK235885/.\
+- Mayo Clinic Staff. “Women’s Increased Risk of Depression.” Mayo Clinic, 29 Jan. 2019, www.mayoclinic.org/diseases-conditions/depression/in-depth/depression/art-20047725#:~:text=Women%20are%20nearly%20twice%20as.
