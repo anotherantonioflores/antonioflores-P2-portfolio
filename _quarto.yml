@@ -24,6 +24,8 @@ website:
             file: "python-annotation-project/python-annotation-project.qmd"
           - text: "SAS Data Analysis Project"
             file: "SAS-data-analysis/SAS-data-analysis.qmd"
+          - text: "E-Commerce Consumer Analysis Project"
+            file: "ecommerce-data-project/ecommerce-data-project.qmd"
       - text: "Exercises"
         menu:
           - text: "R Coding Exercise"

@@ -1174,5 +1174,19 @@
     "title": "Access to Health Resources: Analysis Across Various Levels of Social Demographics",
     "section": "Advanced SQL Queries",
     "text": "Advanced SQL Queries\nIn investigating the survey data, the team employed advanced SQL query techniques to connect the data into tables. One example of the advanced SQL query was used in the analysis into individual’s physical and mental health status, which created a table that forecasted the average delay a patient might experience based on their income and health condition. The result of this query produced a predictive insight that could be used to proactively send notifications to patients regarding their upcoming doctor appointments, enhancing the efficiency of healthcare delivery."
+  },
+  {
+    "objectID": "ecommerce-data-project/ecommerce-data-project.html",
+    "href": "ecommerce-data-project/ecommerce-data-project.html",
+    "title": "E-Commerce Data Project",
+    "section": "",
+    "text": "To view the presentation of this project in video form, please click below."
+  },
+  {
+    "objectID": "ecommerce-data-project/ecommerce-data-project.html#identifying-variables",
+    "href": "ecommerce-data-project/ecommerce-data-project.html#identifying-variables",
+    "title": "E-Commerce Data Project",
+    "section": "Identifying Variables",
+    "text": "Identifying Variables\nMy Target variable was Gatorade. More specifically, the question labeled, “Gatorade - ‘Do you drink it?’”\n\nSingle Driver Variables are what we will initially use to build out or define our clusters. I primarily used psychographic or sentiment variables.\n\nMy Single Driver Variables were:\n“I’m very happy with my life as it is”\n“I often snack between meals”\n“I often go on long car rides for vacation”\n\nAbstract Constructs or Factors are different ways to break the data into groups. We want to measure how much each person relates to two or more concepts, ideas, or sentiments.\n\nI had two Abstract Constructs.\n\nAbstract Construct 1.\n\nIs our consumer health conscious?\nThis construct was based on the answers to the following questions:\n“I think about the calories in what I eat”\n“I think fast food is all junk”\n“I try to eat healthier food these days”\n“I like to know about the ingredients before I buy food”\nAbstract Construct 2.\n\nIs our consumer brand sensitive?\nThis construct was based on the answers to the following questions:\n“I often buy on the spur of the moment”\n“I change brands for variety/novelty”\n“I always look for brand name”\n\nOnce we have created our clusters, we want to be able to describe those groups and help create some distinction between them. To accomplish this, I identified some Descriptor Variables that included:\n\nIncome\nAge\nGender\nESPN – Time Spent Viewing in the last 7 days\n“How effective is email advertising?”\nPowerade – “Do you drink it?”\n“Have you used Netflix in the last 7 days?”\n“Have you exercised regularly in the past 12 months ?”"
   }
 ]

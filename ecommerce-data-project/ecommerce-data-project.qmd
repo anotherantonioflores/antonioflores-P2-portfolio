@@ -1,0 +1,19 @@
+---
+title: "E-Commerce Data Project"
+author: Antonio Flores
+date: "12-6-2024"
+format: 
+  html:
+    self-contained: true 
+---
+
+```{r, echo=FALSE, message=FALSE, warning = FALSE}
+library(here)
+library(knitr)
+```
+
+
+To view the presentation of this project in video form, please click below.
+
+{{< video https://www.youtube.com/watch?v=jpV0U-FiKTE >}}
+
